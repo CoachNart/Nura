@@ -46,18 +46,7 @@ function Landing({goApp}){
       <div className="data-divider"/>
       <div className="data-card-item"><div className="mini-label"><Moon size={12}/> Sleep</div><strong>{value(sleep)} <small>{unit(sleep)}</small></strong><span>{recorded(sleep)}</span></div>
      </div>
-     <div className="phone-hero reference-phone">
-      <div className="phone-camera"/>
-      <div className="phone-topbar"><span>9:41</span><span>●●●</span></div>
-      <div className="phone-title"><span>‹</span><b>AI Doctor</b><span>•••</span></div>
-      <div className="organ-grid">
-       <span className="organ-chip organ-a">🧠 Brain</span><span className="organ-chip organ-b">🦋 Thyroid</span>
-       <span className="organ-chip organ-c">◉ Stomach</span><span className="organ-chip organ-d active">♥ Heart</span><span className="organ-chip organ-e">◉ Lungs</span>
-       <span className="organ-chip organ-f">◉ Kidneys</span><span className="organ-chip organ-g">◉ Liver</span>
-       <div className="health-core"><div className="core-orb"/></div>
-      </div>
-     </div>
-     <div className="float-card emergency-card reference-emergency"><div className="emergency-icon"><AlertTriangle size={14}/></div><div><strong>Emergency Call</strong><span>Call now for urgent medical help</span></div><span className="emergency-call">↗</span></div>
+     <img className="reference-phone-art" src="/hero-phone-hand.svg" alt="" aria-hidden="true"/>     <div className="float-card emergency-card reference-emergency"><div className="emergency-icon"><AlertTriangle size={14}/></div><div><strong>Emergency Call</strong><span>Call now for urgent medical help</span></div><span className="emergency-call">↗</span></div>
      <div className="glow-base"/>
     </div>
    </section>
