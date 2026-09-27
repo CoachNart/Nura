@@ -89,6 +89,47 @@ async function connectWalletConnect(){
  return data;
 }
 
+async function restoreInjected(saved){
+ const available=providers();
+ for(const item of available){
+  try{
+   const accounts=await item.provider.request({method:"eth_accounts"});
+   const chain=await item.provider.request({method:"eth_chainId"});
+   if(accounts?.[0]&&chain?.toLowerCase()===CHAIN_HEX.toLowerCase()){
+    activeProvider=item.provider;activeConnector=item.name;
+    const data={address:accounts[0],connector:item.name,chainId:CHAIN_ID};save(data);return data;
+   }
+  }catch{}
+ }
+ return null;
+}
+async function restoreWalletConnect(saved){
+ if(!saved||saved.connector!=="WalletConnect") return null;
+ const projectId=import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
+ if(!projectId) return null;
+ try{
+  const mod=await import("@walletconnect/ethereum-provider");
+  const EthereumProvider=mod.default||mod.EthereumProvider;
+  const provider=await EthereumProvider.init({projectId,optionalChains:[CHAIN_ID],rpcMap:{[CHAIN_ID]:"https://rpc.mainnet.chain.robinhood.com"},showQrModal:false,metadata:{name:"Nura AI",description:"AI health companion for onchain users",url:window.location.origin,icons:[window.location.origin+"/favicon.svg"]}});
+  if(!provider.session) return null;
+  await provider.enable();
+  const accounts=await provider.request({method:"eth_accounts"});
+  if(!accounts?.[0]) return null;
+  activeProvider=provider;activeConnector="WalletConnect";
+  const data={address:accounts[0],connector:"WalletConnect",chainId:CHAIN_ID};save(data);return data;
+ }catch{return null}
+}
+export async function restoreWallet(){
+ if(typeof window==="undefined") return null;
+ const saved=getSavedWallet();
+ const injected=await restoreInjected(saved);
+ if(injected) return injected;
+ const wc=await restoreWalletConnect(saved);
+ if(wc) return wc;
+ try{localStorage.removeItem(STORAGE_KEY)}catch{}
+ return null;
+}
+
 export async function connectWallet(){
  try{
    const injected=await connectInjected();
