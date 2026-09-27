@@ -1,31 +1,48 @@
-Nura AI
+# Nura AI
 
-A wallet-native health companion concept for onchain users, built from the provided visual references.
+Nura is a wallet-native health companion for onchain users. The product now includes a responsive landing page, Robinhood Chain wallet connection, a server-side AI Doctor boundary, local health memory, care-plan management, medication tracking, privacy controls and an installable PWA shell.
 
-UI routes
-- / — premium AI-health landing page inspired by the supplied first reference.
-- /app — responsive health dashboard inspired by the supplied second reference.
-- AI Doctor, Health, Appointments and Profile are included in the first UI pass.
+## Product routes
+- `/` — premium Nura landing page.
+- `/app` — responsive health dashboard.
+- **AI Doctor** — real server-backed AI conversation when `OPENAI_API_KEY` is configured.
+- **Health** — user-entered health signals and daily check-ins.
+- **Appointments** — appointment records stored on the device.
+- **Profile** — wallet identity, consent controls, export and local data deletion.
 
-Robinhood Chain
-- Mainnet chain ID: 4663
-- Native gas: ETH
-- Wallet interaction in this pass is UI-only; production RPC and wallet wiring should be added behind environment variables.
+## Robinhood Chain
+- Mainnet chain ID: **4663** (`0x1237`).
+- Native gas: **ETH**.
+- RPC: `https://rpc.mainnet.chain.robinhood.com`.
+- Explorer: `https://robinhoodchain.blockscout.com`.
+- Wallets use EIP-1193 injection when available and WalletConnect for supported mobile flows.
 
-Safety
-Nura is presented as educational health support, not a diagnosis or replacement for professional care. Production health features should add authenticated data storage, consent controls, audit logging, clinical safety review and a server-side AI layer.
+## AI Doctor
+The browser sends the current conversation plus user-controlled health context to `/api/ai/health`. The server keeps the OpenAI API key private and calls the Responses API. The endpoint has a health-safety system prompt, urgent-symptom escalation and input redaction for obvious wallet-secret phrases.
 
-Local development
-1. Create a Reown/WalletConnect project and copy its project ID.
-2. Set `VITE_WALLETCONNECT_PROJECT_ID` in Vercel (and locally in `.env`).
-3. `npm install`
-4. `npm run dev`
-5. `npm run build`
+Set:
+- `OPENAI_API_KEY` — **server-side only** in Vercel.
+- `NURA_AI_MODEL` — optional; defaults to `gpt-5.6-luna`.
 
-Wallet support
-- Desktop browser wallets use injected EIP-1193 providers (including EIP-6963-style provider lists where exposed).
-- Mobile browsers without an injected wallet open the WalletConnect modal, allowing supported mobile wallets to deep-link back into Nura.
-- Nura requests/switches to Robinhood Chain (chain ID 4663) and adds the network when the wallet does not have it.
-- Robinhood Chain's public RPC is used only as the chain endpoint; production app infrastructure can move to a dedicated provider such as Alchemy.
+Never expose `OPENAI_API_KEY` through a `VITE_` variable.
 
-The WalletConnect Project ID is public application configuration, not a wallet secret. Never place private keys or seed phrases in the repository.
+## Health data and privacy
+The current browser app stores the health profile locally in `localStorage` so the UI can work without a database. Users can export or clear that local data.
+
+Sensitive health information is intentionally **not put on Robinhood Chain**. The wallet is an identity/permission layer; health records should remain offchain. For a production clinical deployment, replace the browser-only store with an encrypted, authenticated health-data service, add durable consent/audit storage and complete a clinical/privacy review before launch.
+
+## PWA
+Nura includes a web manifest and service worker. On supported mobile browsers it can be installed as an app. The service worker caches the shell only; it does not cache AI responses.
+
+## Development
+1. Create a Reown/WalletConnect project and set `VITE_WALLETCONNECT_PROJECT_ID`.
+2. Set `OPENAI_API_KEY` in the Vercel/server environment.
+3. Optionally set `NURA_AI_MODEL`.
+4. Run `npm install`.
+5. Run `npm run dev`.
+6. Run `npm run build`.
+
+## Safety
+Nura provides educational health information, not diagnosis or emergency care. The UI explicitly directs users with severe or rapidly worsening symptoms to urgent professional care. AI output should be treated as informational and reviewed by an appropriate clinician when needed.
+
+Never place private keys, seed phrases or passwords in the repository or in Nura's health records.
