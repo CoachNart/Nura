@@ -46,7 +46,7 @@ function Landing({goApp}){
       <div className="data-divider"/>
       <div className="data-card-item"><div className="mini-label"><Moon size={12}/> Sleep</div><strong>{value(sleep)} <small>{unit(sleep)}</small></strong><span>{recorded(sleep)}</span></div>
      </div>
-     <img className="reference-phone-art" src="/hero-phone-hand.svg" alt="" aria-hidden="true"/>     <div className="float-card emergency-card reference-emergency"><div className="emergency-icon"><AlertTriangle size={14}/></div><div><strong>Emergency Call</strong><span>Call now for urgent medical help</span></div><span className="emergency-call">↗</span></div>
+     <img className="reference-phone-art" src="/hero-phone-hand-final.webp" alt="" aria-hidden="true"/>     <div className="float-card emergency-card reference-emergency"><div className="emergency-icon"><AlertTriangle size={14}/></div><div><strong>Emergency Call</strong><span>Call now for urgent medical help</span></div><span className="emergency-call">↗</span></div>
      <div className="glow-base"/>
     </div>
    </section>
