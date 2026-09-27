@@ -22,14 +22,45 @@ function Brand({compact=false,onClick}){return <button className={"brand "+(comp
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
 function Landing({goApp}){
+ const[data,setData]=useState(()=>getHealthData());
+ React.useEffect(()=>{const sync=()=>setData(getHealthData());window.addEventListener("storage",sync);const id=setInterval(sync,1000);return()=>{window.removeEventListener("storage",sync);clearInterval(id)}},[]);
+ const metrics=data.metrics||[];
+ const latest=key=>metrics.filter(m=>(m.label||"").toLowerCase().includes(key)).sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||""))[0];
+ const hr=latest("heart");
+ const sleep=latest("sleep");
+ const value=(item)=>item?String(item.value??"—"):"—";
+ const unit=(item)=>item?.unit||"";
+ const recorded=(item)=>item?"Recorded":"Not recorded";
  return <div className="site-shell landing">
   <header className="nav"><Brand/><nav className="nav-links"><button className="active">Home</button><button onClick={goApp}>AI Doctor</button><button onClick={goApp}>Health</button><button onClick={goApp}>Care Plan</button><button onClick={goApp}>Library</button><button onClick={goApp}>About</button></nav><div className="nav-actions"><button className="nav-ghost" onClick={goApp}>Sign in</button><button className={"ca-button "+(!CONTRACT_ADDRESS?"is-disabled":"")} onClick={async()=>{if(!CONTRACT_ADDRESS)return;try{await navigator.clipboard.writeText(CONTRACT_ADDRESS)}catch{}}} disabled={!CONTRACT_ADDRESS} aria-label="Copy contract address">Copy CA</button></div></header>
   <main>
-   <section className="hero"><div className="hero-orb orb-one"/><div className="hero-orb orb-two"/><div className="hero-copy"><Pill><ShieldCheck size={12}/> Private health companion</Pill><h1><span>AI Health,</span> powered by <em>Nura</em><br/>Understand <strong>your body.</strong></h1><p>Personal health guidance, symptom conversations, care plans, and health tracking — designed for people who live onchain.</p><div className="hero-actions"><button className="button button-primary" onClick={goApp}>Open Nura <ArrowRight size={17}/></button><button className="button button-soft" onClick={goApp}>Meet AI Doctor <ChevronRight size={16}/></button></div><div className="trust-row"><span><ShieldCheck size={15}/> Private by design</span><span><LockKeyhole size={14}/> You control your data</span><span><Wallet size={14}/> Robinhood Chain ready</span></div></div>
-    <div className="hero-stage"><div className="float-card stat-card left"><div className="mini-label"><HeartPulse size={13}/> Heart rate</div><strong>— <small>BPM</small></strong><span className="good">● Add your first reading</span></div><div className="float-card stat-card left lower"><div className="mini-label"><Moon size={13}/> Sleep</div><strong>—</strong><span className="good">● Add your first reading</span></div>
-     <div className="phone-hero"><div className="phone-camera"/><div className="phone-topbar"><span>9:41</span><span>●●●</span></div><div className="phone-title"><span>‹</span> AI Doctor <MoreHorizontal size={16}/></div><div className="health-orbit"><div className="health-core"><HeartPulse size={34}/></div><div className="ecg-line"><span/></div></div><div className="phone-chat"><div className="bubble">Hi, I’m Nura. What’s going on today?</div><div className="quick-row"><span>Headache</span><span>Sleep</span><span>Medication</span></div></div></div>
-     <div className="float-card emergency-card"><div className="emergency-icon">↗</div><div><strong>Emergency support</strong><span>Get urgent help when you need it</span></div><ArrowRight size={17}/></div><div className="glow-base"/>
-    </div></section>
+   <section className="hero reference-hero">
+    <div className="hero-copy reference-copy">
+     <h1><span>AI Health Powered</span> by Nura<br/>Understand <strong>Symptoms</strong></h1>
+     <p>Get personalized health insights with AI-powered symptom assessment, health tracking, medication management, and smart guidance.</p>
+     <div className="hero-actions"><button className="button button-primary" onClick={goApp}>Open Nura <ArrowRight size={17}/></button><button className="button button-soft" onClick={goApp}>Try AI Doctor <ChevronRight size={16}/></button></div>
+    </div>
+    <div className="hero-stage reference-stage">
+     <div className="float-card data-card">
+      <div className="data-card-item"><div className="mini-label"><HeartPulse size={12}/> Heart Rate</div><strong>{value(hr)} <small>{unit(hr)}</small></strong><span>{recorded(hr)}</span></div>
+      <div className="data-divider"/>
+      <div className="data-card-item"><div className="mini-label"><Moon size={12}/> Sleep</div><strong>{value(sleep)} <small>{unit(sleep)}</small></strong><span>{recorded(sleep)}</span></div>
+     </div>
+     <div className="phone-hero reference-phone">
+      <div className="phone-camera"/>
+      <div className="phone-topbar"><span>9:41</span><span>●●●</span></div>
+      <div className="phone-title"><span>‹</span><b>AI Doctor</b><span>•••</span></div>
+      <div className="organ-grid">
+       <span className="organ-chip organ-a">🧠 Brain</span><span className="organ-chip organ-b">🦋 Thyroid</span>
+       <span className="organ-chip organ-c">◉ Stomach</span><span className="organ-chip organ-d active">♥ Heart</span><span className="organ-chip organ-e">◉ Lungs</span>
+       <span className="organ-chip organ-f">◉ Kidneys</span><span className="organ-chip organ-g">◉ Liver</span>
+       <div className="health-core"><div className="core-orb"/></div>
+      </div>
+     </div>
+     <div className="float-card emergency-card reference-emergency"><div className="emergency-icon"><AlertTriangle size={14}/></div><div><strong>Emergency Call</strong><span>Call now for urgent medical help</span></div><span className="emergency-call">↗</span></div>
+     <div className="glow-base"/>
+    </div>
+   </section>
    <section className="feature-strip"><div><div className="feature-icon"><MessageCircle/></div><span><b>AI Doctor</b><small>Talk through symptoms</small></span></div><div><div className="feature-icon"><Activity/></div><span><b>Health overview</b><small>See your trends at a glance</small></span></div><div><div className="feature-icon"><CalendarDays/></div><span><b>Care plans</b><small>Appointments & medication</small></span></div><div><div className="feature-icon"><Wallet/></div><span><b>Onchain identity</b><small>Portable health permissions</small></span></div></section>
    <section className="section"><div className="section-heading"><Pill tone="lavender"><HeartPulse size={12}/> Built for your everyday</Pill><h2>A calmer way to understand your health.</h2><p>Nura turns scattered health moments into one clear, private place to ask questions, track signals, and plan your next step.</p></div><div className="feature-grid"><FeatureCard icon={<Brain/>} title="AI Doctor" text="Have a natural conversation about symptoms and health questions before deciding what to do next."/><FeatureCard icon={<HeartPulse/>} title="Health signals" text="Bring together the basics — heart rate, sleep, hydration, medications and more."/><FeatureCard icon={<ClipboardCheck/>} title="Care plan" text="Keep appointments, medications and follow-ups in one simple, readable timeline."/></div></section>
    <section className="chain-section"><div><Pill tone="dark"><Wallet size={12}/> Onchain-ready</Pill><h2>Your health identity.<br/><span>Under your control.</span></h2><p>Nura is designed for wallet-native experiences on Robinhood Chain. Connect when you want portable permissions and onchain experiences — never because your care depends on it.</p><button className="button button-dark" onClick={goApp}>Explore the Nura app <ArrowRight size={16}/></button></div><div className="chain-card"><div className="chain-top"><span className="chain-dot"/>ROBINHOOD CHAIN<span className="chain-live">READY</span></div><div className="wallet-visual"><Wallet size={30}/><span>Wallet not connected</span></div><div className="permission"><ShieldCheck size={17}/><div><b>Health permissions</b><small>Private · user controlled</small></div><ChevronRight size={16}/></div><div className="permission"><LockKeyhole size={17}/><div><b>Encrypted records</b><small>Access can be revoked</small></div><ChevronRight size={16}/></div></div></section>
