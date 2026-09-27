@@ -66,8 +66,8 @@ async function connectWalletConnect(){
  const EthereumProvider=mod.default||mod.EthereumProvider;
  const provider=await EthereumProvider.init({
    projectId,
-   chains:[CHAIN_ID],
    optionalChains:[CHAIN_ID],
+   rpcMap:{[CHAIN_ID]:"https://rpc.mainnet.chain.robinhood.com"},
    showQrModal:true,
    metadata:{
      name:"Nura AI",
