@@ -150,28 +150,29 @@
  .reference-emergency .emergency-icon{width:26px;height:26px}
 }
 
-/* Exact reference hero visual: static phone/hand + blue surrounding wash */
+/* Reference-matched hero: large static phone + hand integrated into the hero background */
 .reference-stage{
- height:450px;
- margin-top:8px;
+ height:500px;
+ margin-top:6px;
  position:relative;
  display:flex;
  align-items:flex-end;
  justify-content:center;
  isolation:isolate;
+ overflow:visible;
 }
 .reference-stage::before{
  content:"";
  position:absolute;
  z-index:-2;
  left:50%;
- top:0;
- width:min(980px,100vw);
- height:100%;
+ top:-80px;
+ width:min(1180px,100vw);
+ height:620px;
  transform:translateX(-50%);
  background:
-  radial-gradient(ellipse at 50% 70%,rgba(104,193,255,.48) 0%,rgba(104,193,255,.28) 25%,rgba(191,229,255,.18) 48%,rgba(255,255,255,0) 74%),
-  linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(218,242,255,.72) 58%,rgba(234,248,255,.94) 100%);
+  radial-gradient(ellipse at 50% 76%,rgba(76,184,248,.55) 0%,rgba(109,199,255,.34) 26%,rgba(191,229,255,.22) 48%,rgba(255,255,255,0) 74%),
+  linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(218,242,255,.5) 48%,rgba(234,248,255,.94) 100%);
  pointer-events:none;
 }
 .reference-stage::after{
@@ -179,55 +180,74 @@
  position:absolute;
  z-index:-1;
  left:50%;
- bottom:-35px;
- width:600px;
- height:170px;
+ bottom:-90px;
+ width:760px;
+ height:230px;
  transform:translateX(-50%);
- background:radial-gradient(ellipse,rgba(75,176,241,.34) 0%,rgba(116,201,255,.17) 42%,rgba(255,255,255,0) 75%);
- filter:blur(16px);
+ background:radial-gradient(ellipse,rgba(64,174,241,.38) 0%,rgba(116,201,255,.18) 43%,rgba(255,255,255,0) 75%);
+ filter:blur(18px);
  pointer-events:none;
 }
 .reference-phone-art{
  position:absolute;
  z-index:2;
  left:50%;
- bottom:-1px;
- width:430px;
+ bottom:-82px;
+ width:570px;
  height:auto;
  transform:translateX(-50%);
  display:block;
  pointer-events:none;
  user-select:none;
  animation:none!important;
- filter:drop-shadow(0 24px 34px rgba(26,111,166,.10));
+ filter:drop-shadow(0 30px 42px rgba(26,111,166,.12));
 }
 .reference-phone,.reference-stage .hero-orb{display:none!important}
-.reference-stage .data-card{position:absolute;left:4px;top:18px;z-index:5}
-.reference-stage .reference-emergency{position:absolute;right:0;top:20px;z-index:5}
-.reference-stage .glow-base{z-index:0;bottom:-8px;width:600px;height:150px;background:radial-gradient(ellipse,rgba(74,179,244,.18),rgba(255,255,255,0) 72%)}
+.reference-stage .data-card{
+ position:absolute;
+ left:4px;
+ top:105px;
+ z-index:5;
+ animation:none!important;
+}
+.reference-stage .reference-emergency{
+ position:absolute;
+ right:0;
+ top:112px;
+ z-index:5;
+ animation:none!important;
+}
+.reference-stage .glow-base{
+ z-index:0;
+ bottom:-20px;
+ width:700px;
+ height:175px;
+ background:radial-gradient(ellipse,rgba(74,179,244,.20),rgba(255,255,255,0) 72%);
+}
 .reference-core,.core-orb{animation:none!important}
 @media(max-width:1050px){
- .reference-phone-art{width:390px}
- .reference-stage .data-card{left:0}
- .reference-stage .reference-emergency{right:0}
+ .reference-phone-art{width:520px;bottom:-72px}
+ .reference-stage .data-card{left:0;top:100px}
+ .reference-stage .reference-emergency{right:0;top:108px}
 }
 @media(max-width:780px){
- .reference-stage{height:420px;margin-top:10px}
- .reference-phone-art{width:360px}
- .reference-stage .data-card{left:-5px;top:18px}
- .reference-stage .reference-emergency{right:-5px;top:20px}
- .reference-stage::before{width:100vw}
+ .reference-stage{height:430px;margin-top:8px}
+ .reference-stage::before{width:100vw;top:-60px;height:540px}
+ .reference-phone-art{width:455px;bottom:-62px}
+ .reference-stage .data-card{left:-4px;top:72px}
+ .reference-stage .reference-emergency{right:-4px;top:78px}
+ .reference-stage::after{width:620px;height:190px;bottom:-70px}
 }
 @media(max-width:520px){
- .reference-hero{min-height:650px}
- .reference-stage{height:385px}
- .reference-phone-art{width:330px}
- .reference-stage .data-card{left:-13px;top:18px;transform:scale(.88);transform-origin:top left}
- .reference-stage .reference-emergency{right:-18px;top:22px;transform:scale(.82);transform-origin:top right}
+ .reference-hero{min-height:660px}
+ .reference-stage{height:400px}
+ .reference-phone-art{width:425px;bottom:-54px}
+ .reference-stage .data-card{left:-14px;top:62px;transform:scale(.82);transform-origin:top left}
+ .reference-stage .reference-emergency{right:-20px;top:68px;transform:scale(.78);transform-origin:top right}
 }
 @media(max-width:400px){
- .reference-stage{height:355px}
- .reference-phone-art{width:300px}
- .reference-stage .data-card{left:-18px;transform:scale(.78);transform-origin:top left}
- .reference-stage .reference-emergency{right:-23px;transform:scale(.72);transform-origin:top right}
+ .reference-stage{height:375px}
+ .reference-phone-art{width:390px;bottom:-48px}
+ .reference-stage .data-card{left:-20px;top:55px;transform:scale(.72);transform-origin:top left}
+ .reference-stage .reference-emergency{right:-25px;top:61px;transform:scale(.68);transform-origin:top right}
 }
