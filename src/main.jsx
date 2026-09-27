@@ -1,7 +1,7 @@
 import React,{useState}from"react";
 import { connectWallet, disconnectWallet, getSavedWallet, restoreWallet, shortenAddress } from "./wallet.js";
 import { askNura } from "./api.js";
-import { getHealthData, addConversation, addMetric, addAppointment, addMedication, toggleMedication, addCheckin, updateHealthData, clearHealthData, exportHealthData } from "./healthStore.js";
+import { getHealthData, addConversation, addMetric, deleteMetric, addAppointment, updateAppointment, deleteAppointment, addMedication, toggleMedication, deleteMedication, addCheckin, updateHealthData, clearHealthData, exportHealthData } from "./healthStore.js";
 import{createRoot}from"react-dom/client";
 import{Activity,ArrowRight,Bell,Brain,CalendarDays,ChevronRight,CircleHelp,ClipboardCheck,Droplets,HeartPulse,Home,LockKeyhole,Menu,MessageCircle,Moon,MoreHorizontal,Pill as PillIcon,ShieldCheck,Sparkles,SunMedium,UserRound,Wallet,X,Plus,Download,Trash2,AlertTriangle,Settings2,Check}from"lucide-react";
 import"./styles.css";
