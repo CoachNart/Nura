@@ -9,7 +9,7 @@ import"./styles.css";
 const chain={id:4663};
 const CONTRACT_ADDRESS=(import.meta.env.VITE_CONTRACT_ADDRESS||"").trim();
 
-/* visual stability */\nfunction App(){\n React.useEffect(()=>{document.documentElement.scrollTop=0;document.body.scrollTop=0},[]);
+/* visual stability */\nfunction applyNuraDark(){document.documentElement.style.setProperty("background","#06020f","important");document.body.style.setProperty("background","#06020f","important")}\nfunction App(){\n React.useEffect(()=>{document.documentElement.scrollTop=0;document.body.scrollTop=0},[]);
  const[route,setRoute]=useState(window.location.pathname==="/app"?"app":"home");
  const[wallet,setWallet]=useState(()=>getSavedWallet());
  const go=next=>{const target=next==="app"?"/app":"/";window.history.pushState({}, "",target);setRoute(next);window.scrollTo({top:0,behavior:"smooth"})};
