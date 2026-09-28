@@ -23,94 +23,99 @@ function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}
 
 function Landing({goApp}){
  React.useEffect(()=>{
-  const root=document.querySelector(".ref-home"); if(!root)return;
-  const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add("is-in")),{threshold:.18});
-  root.querySelectorAll(".ref-reveal").forEach(x=>io.observe(x));
-  let raf=0;
-  const update=()=>{
-   if(raf)return; raf=requestAnimationFrame(()=>{
-    const y=window.scrollY||0,max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
-    root.style.setProperty("--scroll",Math.min(1,y/max));
-    root.style.setProperty("--sy",y);
-    raf=0;
-   });
+  const root=document.querySelector(".nura-editorial");
+  if(!root)return;
+  const onMove=e=>{
+   root.style.setProperty("--mx",((e.clientX/innerWidth-.5)*2).toFixed(3));
+   root.style.setProperty("--my",((e.clientY/innerHeight-.5)*2).toFixed(3));
   };
-  const pointer=e=>{
-   root.style.setProperty("--px",((e.clientX/innerWidth-.5)*2).toFixed(3));
-   root.style.setProperty("--py",((e.clientY/innerHeight-.5)*2).toFixed(3));
-  };
-  addEventListener("scroll",update,{passive:true});addEventListener("pointermove",pointer,{passive:true});update();
-  return()=>{io.disconnect();removeEventListener("scroll",update);removeEventListener("pointermove",pointer);if(raf)cancelAnimationFrame(raf)}
+  addEventListener("pointermove",onMove,{passive:true});
+  return()=>removeEventListener("pointermove",onMove);
  },[]);
- return <div className="ref-home">
-  <div className="ref-progress"/><div className="ref-grain"/>
-  <header className="ref-nav">
+ return <div className="nura-editorial">
+  <header className="editorial-nav">
    <Brand/>
-   <nav><a href="#vision">Vision</a><a href="#intelligence">AI Doctor</a><a href="#health">Health</a><a href="#network">Network</a><a href="#about">About</a></nav>
-   <div className="ref-nav-actions"><button className="ref-ca" disabled={!CONTRACT_ADDRESS} onClick={async()=>{if(CONTRACT_ADDRESS)try{await navigator.clipboard.writeText(CONTRACT_ADDRESS)}catch{}}>Copy CA</button><button className="ref-open" onClick={goApp}>Open Nura <ArrowRight size={14}/></button></div>
+   <nav>
+    <a href="#approach">Approach</a><a href="#intelligence">AI Doctor</a><a href="#health">Health</a><a href="#privacy">Privacy</a>
+   </nav>
+   <button className="editorial-start" onClick={goApp}>Get started <ArrowRight size={14}/></button>
   </header>
 
   <main>
-   <section className="ref-hero" id="vision">
-    <div className="ref-hero-light"/><div className="ref-hero-grid"/>
-    <div className="ref-hero-copy">
-     <div className="ref-kicker ref-reveal"><i/> NURA AI · ROBINHOOD CHAIN</div>
-     <h1 className="ref-reveal">Health<br/><span>at your edge.</span></h1>
-     <p className="ref-reveal">A private intelligence layer for understanding your health, asking better questions, and moving with more clarity.</p>
-     <div className="ref-hero-cta ref-reveal"><button className="ref-pill-primary" onClick={goApp}>Enter Nura <ArrowRight size={15}/></button><a href="#intelligence">Explore the system <ChevronRight size={14}/></a></div>
+   <section className="editorial-hero">
+    <div className="hero-noise"/>
+    <div className="hero-grid"/>
+    <div className="hero-glow hero-glow-a"/>
+    <div className="hero-glow hero-glow-b"/>
+    <div className="hero-ribbon ribbon-a"/>
+    <div className="hero-ribbon ribbon-b"/>
+    <div className="hero-platform">
+      <div className="platform-top"/>
+      <div className="platform-edge"/>
+      <div className="hero-coin"><span>N</span></div>
     </div>
-    <div className="ref-chip-art" aria-hidden="true">
-      <div className="ref-chip"><span>NURA</span><b>AI</b><i/><i/><i/><i/></div>
-      <div className="ref-ray ray-a"/><div className="ref-ray ray-b"/><div className="ref-ray ray-c"/>
-    </div>
-    <div className="ref-hero-foot"><span>01 / NURA</span><span>PRIVATE HEALTH INTELLIGENCE</span><span>SCROLL TO EXPLORE ↓</span></div>
-   </section>
-
-   <section className="ref-light-section ref-intro">
-    <div className="ref-centered ref-reveal"><small>01 / A DIFFERENT KIND OF HEALTH APP</small><h2>Understand more.<br/><em>Carry less.</em></h2><p>Nura turns the information you choose to keep into a focused, intelligent health experience — without filling your screen with noise.</p></div>
-   </section>
-
-   <section className="ref-dark-section" id="intelligence">
-    <div className="ref-section-head ref-reveal"><small>02 / AI DOCTOR</small><h2>Unleash your<br/><em>health intelligence.</em></h2><p>Ask in your own words. Get context that helps you decide what to explore next.</p></div>
-    <div className="ref-ai-visual ref-reveal">
-      <div className="ref-ai-orbit"/><div className="ref-ai-core">AI<span>NURA</span></div>
-      <div className="ref-ai-line l1">ASK NATURALLY</div><div className="ref-ai-line l2">PRIVATE CONTEXT</div><div className="ref-ai-line l3">CLEAR NEXT STEPS</div>
-    </div>
-   </section>
-
-   <section className="ref-light-section ref-product" id="health">
-    <div className="ref-section-head ref-reveal"><small>03 / YOUR HEALTH SPACE</small><h2>One calm place<br/>for <em>what matters.</em></h2></div>
-    <div className="ref-window ref-reveal">
-      <div className="ref-window-bar"><span>NURA / HEALTH</span><span>PRIVATE · PERSONAL · CONNECTED</span></div>
-      <div className="ref-window-body">
-       <div className="ref-window-word">NURA</div>
-       <div className="ref-window-copy"><small>HEALTH CONTEXT</small><h3>See the picture.<br/><em>Not the noise.</em></h3><p>Health records, conversations, medications and appointments — organized around you.</p><button onClick={goApp}>Open your health space <ArrowRight size={14}/></button></div>
-       <div className="ref-data-lines"><span>AI DOCTOR</span><span>HEALTH</span><span>CARE</span><span>PROFILE</span></div>
+    <div className="hero-copy-editorial">
+      <span className="editorial-kicker"><i/> NURA · PERSONAL HEALTH INTELLIGENCE</span>
+      <h1>The smarter,<br/>AI powered<br/><em>health companion.</em></h1>
+      <p>Understand your health with a calm, private AI experience built around the information that matters to you.</p>
+      <div className="hero-actions-editorial">
+       <button onClick={goApp}>Open Nura <ArrowRight size={15}/></button>
+       <a href="#approach">Explore Nura <ChevronRight size={15}/></a>
       </div>
     </div>
+    <div className="hero-foot-editorial"><span>01 / NURA</span><span>PRIVATE HEALTH INTELLIGENCE</span><span>SCROLL TO EXPLORE ↓</span></div>
    </section>
 
-   <section className="ref-dark-section ref-network" id="network">
-    <div className="ref-section-head ref-reveal"><small>04 / CONNECTED</small><h2>A truly connected<br/><em>health network.</em></h2><p>Built for the next generation of onchain users — with Nura at the center of the experience.</p></div>
-    <div className="ref-globe ref-reveal"><div className="ref-globe-grid"/><div className="ref-globe-ring"/><div className="ref-globe-core">NURA</div><i/><i/><i/><i/></div>
-   </section>
-
-   <section className="ref-light-section ref-architecture">
-    <div className="ref-section-head ref-reveal"><small>05 / THE NURA SYSTEM</small><h2>Everything you need.<br/><em>Nothing you don't.</em></h2></div>
-    <div className="ref-system ref-reveal">
-      <div><b>AI DOCTOR</b><span>Conversations built around your health context.</span></div>
-      <div><b>HEALTH</b><span>Signals and records you choose to track.</span></div>
-      <div><b>CARE</b><span>Appointments, medications and check-ins in rhythm.</span></div>
-      <div><b>IDENTITY</b><span>Wallet-native access when you choose to connect.</span></div>
+   <section className="editorial-intro" id="approach">
+    <div className="editorial-copy">
+      <span>02 / A CALMER HEALTH EXPERIENCE</span>
+      <h2>Less noise.<br/><em>More understanding.</em></h2>
+      <p>Nura brings conversations, health context, medications and appointments into one focused space — designed to feel considered rather than clinical.</p>
+    </div>
+    <div className="editorial-image editorial-image-doctor">
+      <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1400&q=85" alt="Doctor using a tablet in a bright clinical setting"/>
     </div>
    </section>
 
-   <section className="ref-dark-section ref-cta" id="about">
-    <div className="ref-cta-glow"/>
-    <div className="ref-centered ref-reveal"><small>06 / START WITH NURA</small><h2>Move through health<br/><em>with clarity.</em></h2><p>Your health context. Your conversations. Your control.</p><button className="ref-pill-primary" onClick={goApp}>Open Nura <ArrowRight size={15}/></button></div>
+   <section className="editorial-feature" id="intelligence">
+    <div className="editorial-feature-image">
+      <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=85" alt="Healthcare professional working with digital health information"/>
+      <span className="image-caption">AI DOCTOR / CONTEXTUAL CONVERSATIONS</span>
+    </div>
+    <div className="editorial-feature-copy">
+      <span>03 / AI DOCTOR</span>
+      <h2>Ask naturally.<br/><em>Understand clearly.</em></h2>
+      <p>Talk through symptoms, questions and health information in plain language, with your chosen context available when it helps.</p>
+      <button onClick={goApp}>Enter AI Doctor <ArrowRight size={14}/></button>
+    </div>
+   </section>
+
+   <section className="editorial-split" id="health">
+    <div className="editorial-split-copy">
+      <span>04 / YOUR HEALTH SPACE</span>
+      <h2>Your health,<br/><em>beautifully organised.</em></h2>
+      <p>Keep the details that matter close without turning your everyday health into a dashboard full of noise.</p>
+      <div className="editorial-list"><div><b>Health records</b><span>One clear personal context.</span></div><div><b>Appointments</b><span>Stay ready for what comes next.</span></div><div><b>Medications</b><span>Simple, visible and easy to manage.</span></div></div>
+    </div>
+    <div className="editorial-image editorial-image-care">
+      <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1400&q=85" alt="Calm healthcare consultation"/>
+    </div>
+   </section>
+
+   <section className="editorial-privacy" id="privacy">
+    <div className="privacy-image"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=85" alt="Healthcare professional in a modern clinical environment"/></div>
+    <div className="privacy-copy"><span>05 / PRIVATE BY DESIGN</span><h2>Health is<br/><em>personal.</em></h2><p>Nura is designed around control, clarity and a quieter relationship with your health information.</p><button onClick={goApp}>Get started with Nura <ArrowRight size={14}/></button></div>
+   </section>
+
+   <section className="editorial-final">
+    <div className="final-light"/>
+    <span>06 / START WITH NURA</span>
+    <h2>Understand more.<br/><em>Carry less.</em></h2>
+    <p>Your health context. Your conversations. Your control.</p>
+    <button onClick={goApp}>Open Nura <ArrowRight size={15}/></button>
    </section>
   </main>
-  <footer className="ref-footer"><Brand compact/><div><a href="#vision">Vision</a><a href="#intelligence">AI Doctor</a><a href="#health">Health</a><a href="#network">Network</a><button onClick={goApp}>App</button></div><span>© 2026 Nura AI · Educational health support, not a diagnosis.</span></footer>
+  <footer className="editorial-footer"><Brand compact/><div><a href="#approach">Approach</a><a href="#intelligence">AI Doctor</a><a href="#health">Health</a><a href="#privacy">Privacy</a><button onClick={goApp}>App</button></div><span>© 2026 Nura AI · Educational health support, not a diagnosis.</span></footer>
  </div>
 }
 function FeatureCard({icon,title,text}){return <article className="feature-card"><div className="feature-card-icon">{icon}</div><h3>{title}</h3><p>{text}</p><ChevronRight size={17}/></article>}
