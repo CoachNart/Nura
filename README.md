@@ -1,10 +1,9 @@
 # Nura AI
 
-Nura is a wallet-native health companion for onchain users. The product now includes a responsive landing page, Robinhood Chain wallet connection, a server-side AI Doctor boundary, local health memory, care-plan management, medication tracking, privacy controls and an installable PWA shell.
+Nura is a wallet-native health companion for onchain users. The product now includes a responsive health dashboard, Robinhood Chain wallet connection, a server-side AI Doctor boundary, local health memory, care-plan management, medication tracking, privacy controls and an installable PWA shell.
 
 ## Product routes
-- `/` — premium Nura landing page.
-- `/app` — responsive health dashboard.
+- `/` and `/app` — responsive health dashboard.
 - **AI Doctor** — real server-backed AI conversation when `OPENAI_API_KEY` is configured.
 - **Health** — user-entered health signals and daily check-ins.
 - **Appointments** — appointment records stored on the device.
