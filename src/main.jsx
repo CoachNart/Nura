@@ -26,24 +26,6 @@ function Landing({goApp}){
  const copyCA=async()=>{if(!CONTRACT_ADDRESS){return;}try{await navigator.clipboard.writeText(CONTRACT_ADDRESS);setCaCopied(true);setTimeout(()=>setCaCopied(false),1800);}catch{setCaCopied(false)}};
  const[open,setOpen]=useState(false);
  React.useEffect(()=>{
-  const letters=[...document.querySelectorAll(".hero-letter")];
-  if(!letters.length)return;
-  const started=performance.now();
-  let raf=0;
-  const tick=now=>{
-   let pending=false;
-   letters.forEach((el,index)=>{
-    const elapsed=now-started-index*105;
-    if(elapsed<0){pending=true;return}
-    el.textContent=el.dataset.final||"";
-    el.classList.add("is-settled");
-   });
-   if(pending)raf=requestAnimationFrame(tick);
-  };
-  raf=requestAnimationFrame(tick);
-  return()=>cancelAnimationFrame(raf);
- },[]);
- React.useEffect(()=>{
   const nodes=[...document.querySelectorAll("[data-motion-reveal]")];
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(reduced){nodes.forEach(n=>n.classList.add("motion-visible"));return}
