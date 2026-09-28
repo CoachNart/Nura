@@ -43,72 +43,37 @@ function Landing({goApp}){
     </section>
 
     <section className="nura-ref-content" id="doctor">
-     <div className="nura-stat-row">
-      <div className="nura-stat"><strong>50K+</strong><span>Patients Served</span></div>
-      <div className="nura-stat"><strong>500+</strong><span>Healthcare Providers</span></div>
-      <div className="nura-stat"><strong>98%</strong><span>Patient Satisfaction</span></div>
-      <div className="nura-stat"><strong>24/7</strong><span>Care Availability</span></div>
+     <div className="nura-ref-stats">
+      <article><strong>50K+</strong><span>Patients Served</span></article>
+      <article><strong>500+</strong><span>Healthcare Providers</span></article>
+      <article><strong>98%</strong><span>Patient Satisfaction</span></article>
+      <article><strong>24/7</strong><span>Care Availability</span></article>
      </div>
-
-     <section className="nura-platform">
-      <div className="nura-center-heading">
-       <div className="nura-pill-label">✦ NURA HEALTH</div>
-       <h2>Healthcare Designed<br/><span>Around Patients</span></h2>
-      </div>
-      <div className="nura-feature-grid">
-       <article className="nura-feature-card">
-        <div className="nura-card-title"><h3>Health Records</h3><p>Access your complete health history anytime</p></div>
-        <div className="record-art"><div className="record-bars"><i/><i/><i/><i/><i/><i/></div><b>Patient health trends</b></div>
-       </article>
-       <article className="nura-feature-card">
-        <div className="nura-card-title"><h3>Digital Prescriptions</h3><p>Receive prescriptions securely and instantly.</p></div>
-        <div className="prescription-art"><div className="rx-orbit"><span>✦</span><i>⌂</i><i>×</i><i>♧</i><i>▣</i></div></div>
-       </article>
-       <article className="nura-feature-card">
-        <div className="nura-card-title"><h3>Secure Messaging</h3><p>Stay connected with your healthcare team</p></div>
-        <div className="message-art"><span>Patient updates</span><span>Condition Mapping</span><span>Resource Allocation</span></div>
-       </article>
-       <article className="nura-wide-card">
-        <div className="nura-card-title"><h3>Virtual Doctor Visits</h3><p>Analyze treatment outcomes and forecast disease progression to improve care efficiency</p></div>
-        <div className="visit-art"><i/><i/><i/><i/><i/></div>
-        <div className="visit-axis"><span>100</span><span>60</span><span>30</span><span>0</span></div>
-       </article>
-       <article className="nura-wide-card symptom-card">
-        <div className="nura-card-title"><h3>AI Symptom Checker</h3><p>Get instant health guidance before scheduling.</p></div>
-        <div className="symptom-list">
-         <div><span>This week's High-Risk Loads<small>View Critical Alerts for 15 Patients</small></span><b>See Data</b></div>
-         <div><span>This week's High-Risk Loads<small>View Critical Alerts for 15 Patients</small></span><b>See Data</b></div>
-        </div>
-       </article>
+     <section className="nura-ref-care">
+      <div className="nura-ref-heading"><span className="nura-ref-badge">✦ OUR PATIENTS</span><h2>Healthcare Designed<br/>Around Patients</h2></div>
+      <div className="nura-ref-cards">
+       <article className="nura-ref-card nura-record-card"><header><h3>Health Records</h3><p>Access your complete medical history anytime</p></header><div className="records-visual"><span className="records-tag">♡ Patient health trends</span><div className="records-bars"><i/><i/><i/><i/><i/><i/></div></div></article>
+       <article className="nura-ref-card nura-rx-card"><header><h3>Digital Prescriptions</h3><p>Receive prescriptions securely and instantly.</p></header><div className="rx-visual"><div className="rx-arc"/><i>⌂</i><i>×</i><i>♧</i><i>▣</i><b>✦</b></div></article>
+       <article className="nura-ref-card nura-message-card"><header><h3>Secure Messaging</h3><p>Stay connected with your healthcare team</p></header><div className="message-visual"><span>Patient updates</span><span>Condition Mapping</span><span>Resource Allocation</span></div></article>
+       <article className="nura-ref-card nura-visits-card"><header><h3>Virtual Doctor Visits</h3><p>Analyze treatment outcomes and forecast disease progression to improve care efficiency</p></header><div className="visits-chart"><div className="chart-grid"/><div className="chart-labels"><span>100</span><span>60</span><span>30</span><span>0</span></div><div className="chart-row r1"/><div className="chart-row r2"/><div className="chart-row r3"/><div className="chart-row r4"/></div></article>
+       <article className="nura-ref-card nura-symptom-card"><header><h3>AI Symptom Checker</h3><p>Get instant health guidance before scheduling.</p></header><div className="symptom-visual"><div><span>This week's High-Risk Loads<small>View Critical Alerts for 15 Patients</small></span><button>See Data</button></div><div><span>This week's High-Risk Loads<small>View Critical Alerts for 15 Patients</small></span><button>See Data</button></div></div></article>
       </div>
      </section>
-
-     <section className="nura-guide" id="care">
-      <div className="nura-center-heading guide-heading">
-       <div className="nura-pill-label">✦ PATIENT GUIDE</div>
-       <h2>Transforming care with<br/><span>patient-centric ai</span></h2>
-      </div>
-      <div className="guide-orbit"><i/></div>
-      <div className="guide-list">
-       <article><b>01</b><div><h3>Identify Patient Risk</h3><p>Instantly screen for critical conditions using AI-driven predictive modeling and patient data analysis.</p></div><span>♡</span></article>
-       <article><b>02</b><div><h3>Optimize Care Plans</h3><p>Integrate individualized therapy regimens, lab results and real-time monitoring insights effortlessly.</p></div><span>◈</span></article>
-       <article><b>03</b><div><h3>Accelerate Health Outcomes</h3><p>AI enhances early diagnosis and predicts treatment efficacy for better recovery rates and disease management.</p></div><span>♧</span></article>
+     <section className="nura-ref-guide" id="care">
+      <div className="nura-ref-heading guide-title"><span className="nura-ref-badge">✦ PATIENT GUIDE</span><h2>Transforming care with<br/>patient-centric ai</h2></div>
+      <div className="guide-arc"><i/></div>
+      <div className="guide-steps">
+       <article><em>01</em><div><h3>Identify Patient Risk</h3><p>Instantly screen for critical conditions using AI-driven predictive modeling and patient data analysis.</p></div><b>♡</b></article>
+       <article><em>02</em><div><h3>Optimize Care Plans</h3><p>Integrate individualized therapy regimens, lab results and real-time monitoring insights effortlessly.</p></div><b>◈</b></article>
+       <article><em>03</em><div><h3>Accelerate Health Outcomes</h3><p>AI enhances early diagnosis and predicts treatment efficacy for better recovery rates and disease management.</p></div><b>♧</b></article>
       </div>
      </section>
-
-     <section className="nura-assistant" id="privacy">
-      <div className="nura-center-heading">
-       <div className="nura-pill-label">✦ FOR PATIENTS</div>
-       <h2>Your Personal Health Assistant,<br/><span>Available 24/7</span></h2>
-      </div>
-      <div className="assistant-ref-grid">
-       <article className="assistant-ref-chat">
-        <div className="assistant-ref-top"><span>●</span><b>AI Health Assistant</b><small>● Online · Answering</small><em>•••</em></div>
-        <div className="assistant-ref-message">I have been having headaches, fatigue and trouble sleeping for the past week.</div>
-        <div className="assistant-ref-input">Tell Nura what you're experiencing… <ArrowRight size={10}/></div>
-       </article>
-       <article className="assistant-ref-tile"><span>◉</span><h3>Symptom Analysis</h3><div><b>Headache</b><b>Fatigue</b><b>Sleep Issues</b></div></article>
-       <article className="assistant-ref-tile"><span>◌</span><h3>Health Risk Score</h3><strong>Low risk</strong><div className="risk-line"><i/></div></article>
+     <section className="nura-ref-assistant" id="privacy">
+      <div className="nura-ref-heading assistant-title"><span className="nura-ref-badge">✦ FOR PATIENTS</span><h2>Your Personal Health Assistant,<br/>Available 24/7</h2></div>
+      <div className="assistant-ref-layout">
+       <article className="assistant-main-card"><div className="assistant-bar"><span className="assistant-avatar">✦</span><div><b>AI Health Assistant</b><small>● Online · Answering</small></div><strong>•••</strong></div><div className="assistant-bubble">I have been having headaches, fatigue and trouble sleeping for the past week.</div><div className="assistant-composer">Tell Nura what you're experiencing… <ArrowRight size={10}/></div></article>
+       <article className="assistant-side-card"><span className="side-icon">◉</span><h3>Symptom Analysis</h3><div className="tag-row"><b>Headache</b><b>Fatigue</b><b>Sleep Issues</b></div></article>
+       <article className="assistant-side-card risk-card"><span className="side-icon">◌</span><h3>Health Risk Score</h3><strong>Low risk</strong><div className="risk-meter"><i/></div></article>
       </div>
      </section>
     </section>
