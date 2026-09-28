@@ -62,8 +62,10 @@ function Landing({goApp}){
  const metricValue=m=>m?String(m.value??"—"):"—";
  const metricUnit=m=>m?.unit||"";
  const copyCA=async()=>{if(!CONTRACT_ADDRESS)return;try{await navigator.clipboard.writeText(CONTRACT_ADDRESS)}catch{}};
- return <div className="motion-site motion-v2">
+ return <div className="motion-site motion-v2 motion-v3">
+  <div className="motion-splash" aria-hidden="true"><div className="motion-splash-mark"><span/><span/></div><b>NURA</b></div>
   <header className="motion-nav">
+  <div className="motion-nav-glow" aria-hidden="true"/>
    <Brand/>
    <nav><button className="is-active">Home</button><button onClick={goApp}>AI Doctor</button><button onClick={goApp}>Health</button><button onClick={goApp}>Care</button><button onClick={goApp}>About</button></nav>
    <div className="motion-nav-actions"><button className="motion-signin" onClick={goApp}>Sign in</button><button className="motion-ca-button" onClick={copyCA} disabled={!CONTRACT_ADDRESS}>Copy CA</button></div>
@@ -73,6 +75,7 @@ function Landing({goApp}){
    <section className="motion-hero motion-dark">
     <div className="motion-hero-grid"/>
     <div className="motion-hero-orbit"/>
+    <div className="motion-hero-beam" aria-hidden="true"/>
     <div className="motion-kicker motion-reveal"><span/>AI HEALTH COMPANION</div>
     <h1 className="motion-reveal motion-delay-1">Understand your health.<br/><em>Act with clarity.</em></h1>
     <p className="motion-reveal motion-delay-2">One intelligent place for symptoms, health signals, medications and everyday care — built around the information you actually record.</p>
