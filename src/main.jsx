@@ -20,7 +20,7 @@ function App(){
 function Brand({compact=false,onClick}){return <button className={"brand "+(compact?"brand-compact":"")} onClick={onClick} aria-label="Nura home"><img className="brand-logo" src="/nura-logo.png" alt="Nura"/></button>}
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
-function heroLetters(text){return [...text].map((char,i)=><span className="hero-letter" key={text+"-"+i} style={{"--letter-delay":`${i*0.028}s`}}>{char===" "?"\\u00a0":char}</span>)}
+function heroLetters(text){return [...text].map((char,i)=><span className="hero-letter" key={text+"-"+i} style={{"--letter-delay":`${i*0.028}s`}}>{char===" "?"\u00a0":char}</span>)}
 function Landing({goApp}){
  const[caCopied,setCaCopied]=useState(false);
  const copyCA=async()=>{if(!CONTRACT_ADDRESS){return;}try{await navigator.clipboard.writeText(CONTRACT_ADDRESS);setCaCopied(true);setTimeout(()=>setCaCopied(false),1800);}catch{setCaCopied(false)}};
