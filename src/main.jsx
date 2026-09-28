@@ -21,28 +21,46 @@ function App(){
 function Brand({compact=false,onClick}){return <button className={"brand "+(compact?"brand-compact":"")} onClick={onClick}><span className="brand-mark"><i/><i/></span><span>NURA</span></button>}
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
+function useReveal(){
+ const ref=React.useRef(null);
+ const[visible,setVisible]=React.useState(false);
+ React.useEffect(()=>{const node=ref.current;if(!node)return;
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){setVisible(true);return}
+  const io=new IntersectionObserver(([entry])=>{if(entry.isIntersecting){setVisible(true);io.disconnect()}},{threshold:.14,rootMargin:"0px 0px -8% 0px"});
+  io.observe(node);return()=>io.disconnect();
+ },[]);
+ return [ref,visible];
+}
 function Landing({goApp}){
+ const[heroRef,heroVisible]=useReveal();
+ const[introRef,introVisible]=useReveal();
+ const[doctorRef,doctorVisible]=useReveal();
+ const[dataRef,dataVisible]=useReveal();
+ const[ownershipRef,ownershipVisible]=useReveal();
+ const[finalRef,finalVisible]=useReveal();
  return <div className="nura-site">
   <header className="nura-nav">
    <Brand onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}/>
-   <nav className="nura-nav-links">
-    <a href="#doctor">AI Doctor</a><a href="#health">Health</a><a href="#care">Care</a><a href="#privacy">Privacy</a><a href="#about">About</a>
-   </nav>
+   <nav className="nura-nav-links"><a href="#doctor">AI Doctor</a><a href="#health">Health</a><a href="#ownership">Ownership</a><a href="#privacy">Privacy</a><a href="#about">About</a></nav>
    <button className="nura-nav-cta" onClick={goApp}>Open Nura <ArrowRight size={14}/></button>
   </header>
 
   <main>
-   <section className="nura-hero">
+   <section ref={heroRef} className={"nura-hero "+(heroVisible?"is-visible":"")}>
     <div className="nura-hero-copy">
-     <div className="nura-kicker"><span>✦</span> AI-powered health companion</div>
-     <h1><span>Understand</span><br/>your health.<br/><em>Live better.</em></h1>
-     <p>Nura brings intelligent health guidance, personal health information, and everyday care into one calm, private experience.</p>
-     <div className="nura-hero-actions"><button className="nura-primary" onClick={goApp}>Start with Nura <ArrowRight size={15}/></button><a href="#doctor" className="nura-quiet">See how it works <ArrowRight size={14}/></a></div>
+     <div className="nura-kicker nura-reveal-eyebrow"><span>✦</span> AI-POWERED HEALTH × WEB3</div>
+     <h1 className="nura-hero-title" aria-label="Understand your health. Live better.">
+      <span className="nura-mask"><span>Understand</span></span>
+      <span className="nura-mask"><span>your health.</span></span>
+      <span className="nura-mask"><span className="nura-blue">Live better.</span></span>
+     </h1>
+     <p className="nura-hero-description">Intelligent health guidance, personal health data, and everyday care — brought together in one calm, private experience.</p>
+     <div className="nura-hero-actions"><button className="nura-primary" onClick={goApp}>Start with Nura <ArrowRight size={15}/></button><a href="#doctor" className="nura-quiet">Explore the intelligence <ArrowRight size={14}/></a></div>
     </div>
     <div className="nura-hero-scene" aria-hidden="true">
       <div className="nura-blue-haze"/>
-      <div className="nura-photo-card"><img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1200&q=85" alt="Doctor using a phone for digital health"/></div>
-      <div className="nura-phone-shadow"/>
+      <div className="nura-data-flow flow-one"><i/><i/><i/><i/></div>
+      <div className="nura-data-flow flow-two"><i/><i/><i/></div>
       <div className="nura-device">
        <div className="nura-device-notch"/>
        <div className="nura-device-status">9:41 <span>••• ▰</span></div>
@@ -55,43 +73,69 @@ function Landing({goApp}){
       <div className="nura-float nura-heart"><b>72</b><small>HEART RATE</small><i>Normal</i></div>
       <div className="nura-float nura-sleep"><b>7h 45m</b><small>SLEEP</small><i>Good</i></div>
       <div className="nura-float nura-call"><span><MessageCircle size={15}/></span><div><b>Care when you need it</b><small>Connected health support</small></div></div>
-     </div>
-   </section>
-
-   <section className="nura-intro" id="about">
-    <div className="nura-overline">HEALTH SHOULD FEEL HUMAN</div>
-    <div><h2>Less noise.<br/><em>More understanding.</em></h2><p>From a question you can't quite answer to the information you wish you had before an appointment, Nura helps turn scattered health moments into something you can actually understand.</p></div>
-   </section>
-
-   <section className="nura-feature" id="doctor">
-    <div className="nura-feature-image"><img src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=1400&q=85" alt="Healthcare professional holding a smartphone"/></div>
-    <div className="nura-feature-copy"><span>01 / AI DOCTOR</span><h2>A conversation<br/><em>that listens.</em></h2><p>Ask questions in plain language. Describe symptoms, medications, or concerns and get structured guidance without having to translate yourself into medical jargon.</p><button onClick={goApp}>Meet AI Doctor <ArrowRight size={14}/></button></div>
-   </section>
-
-   <section className="nura-health" id="health">
-    <div className="nura-health-copy"><span>02 / YOUR HEALTH</span><h2>See the whole<br/><em>picture.</em></h2><p>Keep the details that matter close — vital signs, activity, sleep, medications, appointments, and your own health notes — in one focused place.</p>
-      <div className="nura-stat-row"><div><b>72</b><small>BPM</small><i>Heart rate</i></div><div><b>7h 45m</b><small>SLEEP</small><i>Last night</i></div><div><b>8,420</b><small>STEPS</small><i>Today</i></div></div>
+      <div className="nura-ai-signal"><span>AI</span><i/><i/><i/></div>
     </div>
-    <div className="nura-health-image"><img src="https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?auto=format&fit=crop&w=1400&q=85" alt="Person checking health information on a phone"/></div>
    </section>
 
-   <section className="nura-care" id="care">
+   <section ref={introRef} id="about" className={"nura-intro nura-reveal-section "+(introVisible?"is-visible":"")}>
+    <div className="nura-overline">HEALTH SHOULD FEEL HUMAN</div>
+    <div><h2><span>Less noise.</span><br/><em>More understanding.</em></h2><p>Health generates a lot of information. Nura turns that information into something clearer — helping you move from raw signals to useful context, without adding more noise.</p></div>
+   </section>
+
+   <section ref={doctorRef} id="doctor" className={"nura-agent-section "+(doctorVisible?"is-visible":"")}>
+    <div className="nura-agent-copy"><span className="nura-overline">01 / AI DOCTOR</span><h2>A conversation<br/><em>that listens.</em></h2><p>Ask questions in plain language. Nura connects the details you share and turns them into a calm, understandable response.</p></div>
+    <div className="nura-agent-window">
+      <div className="nura-agent-top"><span><i/> Nura AI</span><small>Private session</small></div>
+      <div className="nura-chat user-chat">I've been feeling unusually tired this week.</div>
+      <div className="nura-thinking"><i/><i/><i/></div>
+      <div className="nura-chat ai-chat"><b>Let's look at the pattern together.</b><span>Sleep, activity and recent changes can help put that feeling into context. I can help you organize what you've noticed before deciding what to do next.</span></div>
+      <div className="nura-context-row"><span>Sleep <b>7h 45m</b></span><span>Activity <b>8,420</b></span><span>Trend <b>Stable</b></span></div>
+    </div>
+   </section>
+
+   <section ref={dataRef} id="health" className={"nura-data-section "+(dataVisible?"is-visible":"")}>
+    <div className="nura-data-copy"><span className="nura-overline">02 / HEALTH INTELLIGENCE</span><h2>From data<br/><em>to insight.</em></h2><p>Health signals become more useful when they connect. Nura brings measurements, routines and context together so the important patterns are easier to see.</p></div>
+    <div className="nura-network">
+      <div className="nura-network-core"><Brain size={27}/><b>NURA AI</b><small>INSIGHT ENGINE</small></div>
+      <div className="nura-node node-a"><HeartPulse size={16}/><span>Heart rate</span></div>
+      <div className="nura-node node-b"><Moon size={16}/><span>Sleep</span></div>
+      <div className="nura-node node-c"><Activity size={16}/><span>Activity</span></div>
+      <div className="nura-node node-d"><PillIcon size={16}/><span>Medication</span></div>
+      <svg className="nura-network-lines" viewBox="0 0 600 480" preserveAspectRatio="none"><path d="M70 95 C190 95 210 215 300 240"/><path d="M530 95 C410 95 390 215 300 240"/><path d="M70 385 C190 385 210 265 300 240"/><path d="M530 385 C410 385 390 265 300 240"/></svg>
+      <div className="nura-insight">Pattern detected <b>Your recent signals are staying within your personal range.</b><small>Updated from connected health data</small></div>
+    </div>
+   </section>
+
+   <section id="care" className="nura-care nura-tight-section">
+    <div className="nura-care-copy"><span className="nura-overline">03 / PERSONALIZED CARE</span><h2>Small details<br/><em>matter.</em></h2><div className="nura-feature-grid">
+      <article className="nura-feature-card"><div><PillIcon size={18}/></div><b>Medication</b><p>Keep schedules and reminders clear.</p><ArrowRight size={14}/></article>
+      <article className="nura-feature-card"><div><CalendarDays size={18}/></div><b>Appointments</b><p>Keep upcoming care in view.</p><ArrowRight size={14}/></article>
+      <article className="nura-feature-card"><div><HeartPulse size={18}/></div><b>Health history</b><p>Build a picture over time.</p><ArrowRight size={14}/></article>
+     </div></div>
     <div className="nura-care-image"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=85" alt="Healthcare professional in a bright clinic"/></div>
-    <div className="nura-care-copy"><span>03 / EVERYDAY CARE</span><h2>Small details<br/><em>matter.</em></h2><div className="nura-care-list"><article><b>Medication</b><p>Keep your medication schedule clear and easy to follow.</p></article><article><b>Appointments</b><p>Keep upcoming care and important notes together.</p></article><article><b>Health history</b><p>Build a useful picture of your health over time.</p></article></div></div>
    </section>
 
-   <section className="nura-privacy" id="privacy">
-    <div><span>04 / PRIVATE BY DESIGN</span><h2>Your health is<br/><em>your story.</em></h2><p>Nura is designed around a simple principle: your health information should feel personal, understandable, and under your control.</p><button className="nura-dark-button" onClick={goApp}>Enter your private space <ArrowRight size={14}/></button></div>
+   <section ref={ownershipRef} id="ownership" className={"nura-ownership "+(ownershipVisible?"is-visible":"")}>
+    <div className="nura-ownership-copy"><span className="nura-overline">04 / WEB3 OWNERSHIP</span><h2>Your health.<br/><em>Your control.</em></h2><p>Web3 infrastructure stays underneath the experience — supporting consent, controlled access and portability without turning your health journey into a crypto interface.</p></div>
+    <div className="nura-ownership-flow">
+      <div className="ownership-step"><span>01</span><UserRound size={19}/><b>You</b><small>Your identity</small></div><div className="ownership-link"><i/><i/><i/></div>
+      <div className="ownership-step"><span>02</span><HeartPulse size={19}/><b>Health data</b><small>Your information</small></div><div className="ownership-link"><i/><i/><i/></div>
+      <div className="ownership-step ownership-ai"><span>03</span><Brain size={19}/><b>AI insight</b><small>Useful context</small></div><div className="ownership-link"><i/><i/><i/></div>
+      <div className="ownership-step"><span>04</span><LockKeyhole size={19}/><b>Controlled access</b><small>Your permission</small></div>
+    </div>
+   </section>
+
+   <section id="privacy" className="nura-privacy">
+    <div><span className="nura-overline">05 / PRIVATE BY DESIGN</span><h2>Technology that<br/><em>respects you.</em></h2><p>Nura is designed around a simple principle: your health information should feel personal, understandable and under your control.</p><button className="nura-dark-button" onClick={goApp}>Enter your private space <ArrowRight size={14}/></button></div>
     <div className="nura-privacy-art"><div className="nura-lock"><LockKeyhole size={28}/></div><div className="nura-ring ring-a"/><div className="nura-ring ring-b"/><div className="nura-ring ring-c"/></div>
    </section>
 
-   <section className="nura-final">
+   <section ref={finalRef} className={"nura-final "+(finalVisible?"is-visible":"")}>
     <div className="nura-final-photo"><img src="https://images.unsplash.com/photo-1542884748-2b87b36c6b90?auto=format&fit=crop&w=1800&q=85" alt="Woman enjoying a healthy outdoor moment"/></div>
-    <div className="nura-final-overlay"><span>YOUR HEALTH. ONE PLACE.</span><h2>Feel more<br/><em>in control.</em></h2><button className="nura-primary" onClick={goApp}>Start with Nura <ArrowRight size={15}/></button></div>
+    <div className="nura-final-overlay"><span>YOUR HEALTH. ONE PLACE.</span><h2><span className="nura-mask"><span>Understand more.</span></span><span className="nura-mask"><span>Live with confidence.</span></span></h2><button className="nura-primary" onClick={goApp}>Start with Nura <ArrowRight size={15}/></button></div>
    </section>
   </main>
-
-  <footer className="nura-footer"><Brand/><div><a href="#doctor">AI Doctor</a><a href="#health">Health</a><a href="#care">Care</a><a href="#privacy">Privacy</a></div><span>© {new Date().getFullYear()} Nura</span></footer>
+  <footer className="nura-footer"><Brand/><div><a href="#doctor">AI Doctor</a><a href="#health">Health</a><a href="#ownership">Ownership</a><a href="#privacy">Privacy</a></div><span>© {new Date().getFullYear()} Nura</span></footer>
  </div>
 }
 function FeatureCard({icon,title,text}){return <article className="feature-card"><div className="feature-card-icon">{icon}</div><h3>{title}</h3><p>{text}</p><ChevronRight size={17}/></article>}
