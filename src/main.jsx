@@ -3,7 +3,7 @@ import { connectWallet, disconnectWallet, getSavedWallet, restoreWallet, shorten
 import { askNura } from "./api.js";
 import { getHealthData, addConversation, addMetric, deleteMetric, addAppointment, updateAppointment, deleteAppointment, addMedication, toggleMedication, deleteMedication, addCheckin, updateHealthData, clearHealthData, exportHealthData } from "./healthStore.js";
 import{createRoot}from"react-dom/client";
-import{Activity,ArrowRight,Bell,Brain,CalendarDays,ChevronRight,CircleHelp,ClipboardCheck,Droplets,HeartPulse,Home,LockKeyhole,MessageCircle,Moon,MoreHorizontal,Pill as PillIcon,ShieldCheck,SunMedium,UserRound,Wallet,Plus,Download,Trash2,AlertTriangle,Settings2,Check}from"lucide-react";
+import{Activity,ArrowRight,Bell,Brain,CalendarDays,ChevronRight,CircleHelp,ClipboardCheck,Droplets,HeartPulse,Home,LockKeyhole,MessageCircle,Moon,MoreHorizontal,Pill as PillIcon,ShieldCheck,Copy,Check,SunMedium,UserRound,Wallet,Plus,Download,Trash2,AlertTriangle,Settings2,Check}from"lucide-react";
 import"./styles.css";
 
 const chain={id:4663};
@@ -33,8 +33,9 @@ function useReveal(){
 }
 function Landing({goApp}){
  const[heroRef,heroVisible]=useReveal();
- const[navScrolled,setNavScrolled]=useState(false);
+ const[navScrolled,setNavScrolled]=useState(false),[copiedCA,setCopiedCA]=useState(false);
  React.useEffect(()=>{const onScroll=()=>setNavScrolled(window.scrollY>28);window.addEventListener("scroll",onScroll,{passive:true});onScroll();return()=>window.removeEventListener("scroll",onScroll)},[]);
+ const copyCA=async()=>{if(!CONTRACT_ADDRESS)return;try{await navigator.clipboard.writeText(CONTRACT_ADDRESS);setCopiedCA(true);setTimeout(()=>setCopiedCA(false),1800)}catch{}};
  const[introRef,introVisible]=useReveal();
  const[doctorRef,doctorVisible]=useReveal();
  const[dataRef,dataVisible]=useReveal();
@@ -44,7 +45,7 @@ function Landing({goApp}){
   <header className={"nura-nav "+(navScrolled?"nura-nav-scrolled":"")}>
    <Brand onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}/>
    <nav className="nura-nav-links"><a href="#doctor">AI Doctor</a><a href="#health">Health</a><a href="#ownership">Ownership</a><a href="#privacy">Privacy</a><a href="#about">About</a></nav>
-   <button className="nura-nav-cta" onClick={goApp}>Open Nura <ArrowRight size={14}/></button>
+   <button className="nura-ca-button" onClick={copyCA} title={CONTRACT_ADDRESS?"Copy contract address":"Contract address not configured"}>{copiedCA?<Check size={13}/>:<Copy size={13}/>} {copiedCA?"Copied":"Copy CA"}</button>
   </header>
 
   <main>
@@ -61,16 +62,16 @@ function Landing({goApp}){
     </div>
     <div className="nura-hero-scene" aria-hidden="true">
       <div className="nura-blue-haze"/>
-      <div className="nura-data-flow flow-one"><i/><i/><i/><i/></div>
-      <div className="nura-data-flow flow-two"><i/><i/><i/></div>
-      <div className="nura-device">
-       <div className="nura-device-notch"/>
-       <div className="nura-device-status">9:41 <span>••• ▰</span></div>
-       <div className="nura-device-head"><b>Nura</b><span>AI Doctor</span></div>
-       <div className="nura-device-title">How are you<br/><b>feeling today?</b></div>
-       <div className="nura-device-prompt">Tell Nura what you're experiencing <span>→</span></div>
-       <div className="nura-device-chips"><i>Symptoms</i><i>Medications</i><i>Health</i><i>Appointments</i></div>
-       <div className="nura-device-orb"><span/></div>
+      <div className="nura-hand-device">
+       <img src="https://images.pexels.com/photos/30909364/pexels-photo-30909364.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Real hand holding a smartphone with a blank screen"/>
+       <div className="nura-real-screen">
+        <div className="nura-screen-status">9:41 <span>••• ▰</span></div>
+        <div className="nura-screen-head"><b>Nura</b><span>AI Doctor</span></div>
+        <div className="nura-screen-title">How are you<br/><b>feeling today?</b></div>
+        <div className="nura-screen-prompt">Tell Nura what you're experiencing <span>→</span></div>
+        <div className="nura-screen-chips"><i>Symptoms</i><i>Medications</i><i>Health</i><i>Care</i></div>
+        <div className="nura-screen-orb"><span/></div>
+       </div>
       </div>
       <div className="nura-float nura-heart"><b>72</b><small>HEART RATE</small><i>Normal</i></div>
       <div className="nura-float nura-sleep"><b>7h 45m</b><small>SLEEP</small><i>Good</i></div>
