@@ -38,7 +38,10 @@ function Landing({goApp}){
   const onScroll=()=>{
    if(raf)return;
    raf=requestAnimationFrame(()=>{
-    root.style.setProperty("--scroll-y",String(window.scrollY||0));
+    const y=window.scrollY||0;
+    const max=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+    root.style.setProperty("--scroll-y",String(y));
+    root.style.setProperty("--scroll-progress",String(Math.min(1,y/max)));
     raf=0;
    });
   };
