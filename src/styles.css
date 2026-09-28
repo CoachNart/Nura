@@ -2529,3 +2529,69 @@ html,body,#root{width:100%;max-width:100%;overflow-x:hidden}
  .app-shell,.dashboard{background:#e7f1f8!important}
  .sidebar{background:#e1eef7!important}
 }
+
+
+/* =========================================================
+   NURA FINAL VISIBILITY + COLOR BALANCE
+   ========================================================= */
+/* The hero headline is self-contained: it must never depend on the section observer. */
+.reference-hero h1.hero-letter-headline{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+  color:#102a47!important;
+}
+.reference-hero h1.hero-letter-headline .hero-line{visibility:visible!important}
+.reference-hero h1.hero-letter-headline .hero-letter{
+  opacity:1!important;
+  visibility:visible!important;
+  animation:nura-letter-drop .72s cubic-bezier(.16,1,.3,1) var(--letter-delay) both!important;
+}
+.reference-hero h1.hero-letter-headline .hero-line-accent .hero-letter{color:#1769ff!important}
+
+/* Richer color mix — no flat grey canvas and no wall of white. */
+html,body,#root{background:#e4eef7!important;color:#18324d}
+.reference-landing,.reference-page{background:#e4eef7!important}
+.reference-landing main{background:transparent!important}
+.reference-landing .nura-ref-content{background:#dcebf6!important}
+.reference-landing .nura-ref-stats{background:linear-gradient(135deg,#cfe8f8 0%,#e1e0f7 100%)!important}
+.reference-landing .nura-ref-care{background:linear-gradient(160deg,#e7f3fb 0%,#d9e9f5 55%,#e4e0f7 100%)!important}
+.reference-landing .nura-ref-guide{background:linear-gradient(135deg,#dcebf7,#e5e1f7)!important}
+.reference-landing .nura-ref-assistant{background:linear-gradient(135deg,#d5ebf8,#dedcf5)!important}
+.reference-landing .reference-footer{background:linear-gradient(135deg,#d4e8f6,#dfdef1)!important}
+.reference-landing .nura-ref-card,
+.reference-landing .assistant-ref-layout article,
+.reference-landing .guide-steps article,
+.reference-landing .motion-metric{
+  background:linear-gradient(145deg,rgba(247,251,255,.72),rgba(224,239,248,.78))!important;
+  border-color:#b9d2e4!important;
+}
+.reference-landing .nura-ref-card:nth-child(2),
+.reference-landing .guide-steps article:nth-child(2){background:linear-gradient(145deg,rgba(243,239,255,.78),rgba(225,224,247,.8))!important}
+.reference-landing .nura-ref-card:nth-child(3){background:linear-gradient(145deg,rgba(238,249,251,.8),rgba(218,237,244,.82))!important}
+
+/* App/dashboard base: tint every major canvas and surface so white is an accent, not the environment. */
+.app-shell,.dashboard,.app-layout,.app-content,.page-shell,.main-content{background:#e4eef7!important}
+.app-shell::before,.dashboard::before{opacity:.55!important}
+.sidebar,.app-sidebar{background:linear-gradient(180deg,#d9ebf7,#e2e0f4)!important;border-color:#bfd5e5!important}
+.app-topbar,.topbar,.app-header{background:rgba(222,237,247,.9)!important;border-color:#c2d8e7!important}
+.wide-card,.card,.panel,.dashboard-card,.module-card,.record-card,.appointment-card,.metric-card,.health-card,.doctor-card,.chat-card,.profile-card{
+  background:linear-gradient(145deg,rgba(248,252,255,.78),rgba(225,239,247,.88))!important;
+  border-color:#c0d7e6!important;
+  box-shadow:0 12px 34px rgba(38,77,115,.07)!important;
+}
+.page-title,.module-heading h2,.card h2,.card h3,.panel h2,.panel h3{color:#17324e!important}
+.page-sub,.muted,.card small,.card p{color:#688198!important}
+input,textarea,select{background:rgba(247,251,255,.75)!important;border-color:#bfd5e4!important;color:#18324d!important}
+button.icon-button,.icon-button{background:rgba(244,250,254,.72)!important;border-color:#c3d8e7!important}
+
+@media(max-width:700px){
+ html,body,#root{background:#e2eef7!important}
+ .reference-hero h1.hero-letter-headline{font-size:clamp(44px,13.5vw,64px)!important}
+ .app-shell,.dashboard,.app-layout,.app-content,.page-shell,.main-content{background:#e2eef7!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .reference-hero h1.hero-letter-headline .hero-letter{animation:none!important;opacity:1!important;transform:none!important}
+}
