@@ -22,81 +22,66 @@ function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}
 
 function Landing({goApp}){
  const[open,setOpen]=useState(false);
- return <div className="landing-shell">
-  <header className="landing-nav">
-   <Brand/>
-   <nav>{["Product","AI Doctor","Care","Privacy"].map((x,i)=><a key={x} href={i===0?"#product":i===1?"#doctor":i===2?"#care":"#privacy"}>{x}</a>)}</nav>
-   <button className="nav-cta" onClick={goApp}>Start with Nura <ArrowRight size={13}/></button>
-   <button className="mobile-menu" onClick={()=>setOpen(v=>!v)}><MoreHorizontal/></button>
-  </header>
-  {open&&<div className="mobile-menu-panel">{["Product","AI Doctor","Care","Privacy"].map((x,i)=><a key={x} href={i===0?"#product":i===1?"#doctor":i===2?"#care":"#privacy"} onClick={()=>setOpen(false)}>{x}</a>)}<button onClick={goApp}>Open Nura</button></div>}
-  <main>
-   <section className="landing-hero">
-    <div className="hero-field"/>
-    <div className="hero-copy">
-     <span className="eyebrow"><Sparkles size={11}/> PRIVATE HEALTH INTELLIGENCE</span>
-     <h1>Healthcare that<br/><span>understands you.</span></h1>
-     <p>Nura brings your health records, questions, medications, care plans and AI guidance into one calm place—so every health conversation starts with context.</p>
-     <div className="hero-actions"><button className="button button-primary" onClick={goApp}>Open Nura <ArrowRight size={15}/></button><a href="#product" className="text-link">Explore Nura <ChevronRight size={14}/></a></div>
-    </div>
-    <div className="hero-device">
-     <div className="device-glow"/>
-     <div className="device-frame">
-      <div className="device-top"><span>NURA</span><span>PRIVATE HEALTH</span></div>
-      <div className="device-kicker">YOUR PERSONAL HEALTH ASSISTANT</div>
-      <h3>What would you<br/>like to understand?</h3>
-      <div className="device-prompt"><MessageCircle size={15}/><span>Ask Nura about a symptom, medication or care question…</span><ArrowRight size={14}/></div>
-      <div className="device-modules">
-       <div><FileHeart/><span>Health records</span><b>In context</b></div>
-       <div><PillIcon/><span>Medications</span><b>Up to date</b></div>
-       <div><Shield/><span>Privacy</span><b>Under your control</b></div>
-      </div>
+ const scrollTo=id=>document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
+ return <div className="landing-shell reference-landing">
+  <div className="reference-page">
+   <header className="landing-nav reference-nav">
+    <Brand/>
+    <nav>{[["Product","product"],["AI Doctor","doctor"],["Care","care"],["Privacy","privacy"]].map(([x,id])=><a key={x} href={"#"+id}>{x}</a>)}</nav>
+    <button className="nav-cta" onClick={goApp}>Start a Free Trial</button>
+    <button className="mobile-menu" onClick={()=>setOpen(v=>!v)}><MoreHorizontal/></button>
+   </header>
+   {open&&<div className="mobile-menu-panel">{[["Product","product"],["AI Doctor","doctor"],["Care","care"],["Privacy","privacy"]].map(([x,id])=><a key={x} href={"#"+id} onClick={()=>setOpen(false)}>{x}</a>)}<button onClick={goApp}>Open Nura</button></div>}
+   <main>
+    <section className="reference-hero" id="product">
+     <div className="reference-hero-glow"/>
+     <div className="reference-hero-content">
+      <div className="reference-kicker"><span>←</span><b>Nura · Patient intelligence</b><span>→</span></div>
+      <h1>Comprehensive Health<br/><span>Intelligence.</span></h1>
+      <p>Private health context, AI guidance and care preparation in one calm place.</p>
      </div>
-    </div>
-   </section>
+    </section>
 
-   <section className="signal-band" id="product">
-    <div className="stat"><strong>50K+</strong><span>Health details organized</span><small>Context you choose to keep.</small></div>
-    <div className="stat"><strong>24/7</strong><span>AI health guidance</span><small>Available when questions appear.</small></div>
-    <div className="stat"><strong>1</strong><span>Private health home</span><small>Records, care and conversation together.</small></div>
-    <div className="stat"><strong>100%</strong><span>Patient controlled</span><small>Export and delete when you choose.</small></div>
-   </section>
+    <section className="reference-structure" id="doctor">
+     <div className="reference-section-head">
+      <div className="reference-kicker"><span>←</span><b>Nura · Health platform</b><span>→</span></div>
+      <h2>Structure for you</h2>
+      <p>Everything you need to understand your health, prepare for care and keep the details that matter close.</p>
+     </div>
+     <div className="reference-grid">
+      <article className="ref-card ref-dashboard">
+       <div className="ref-card-title">Personal Health Dashboard</div>
+       <div className="ref-dashboard-screen">
+        <div className="ref-screen-top"><span>Today</span><small>Health overview</small><b>•••</b></div>
+        <div className="ref-screen-title">Good afternoon</div>
+        <div className="ref-screen-row"><div><small>Health signals</small><strong>04</strong></div><div><small>Next care</small><strong>—</strong></div></div>
+        <div className="ref-progress"><i/></div>
+        <div className="ref-screen-list"><span>♥  Health record</span><span>◌  Medication context</span><span>↗  AI Doctor</span></div>
+       </div>
+      </article>
+      <article className="ref-card ref-timer">
+       <div className="ref-ring"><div><b>24/7</b><span>Nura care</span></div></div>
+       <h3>Health Focus Timer</h3><p>Take a focused moment to record what changed, review your context or prepare for care.</p>
+      </article>
+      <article className="ref-card ref-small ref-inspiration">
+       <div className="ref-icon">✦</div><h3>Health Guidance</h3><p>Clear, calm information when questions appear.</p><div className="ref-dots">•••</div>
+      </article>
+      <article className="ref-card ref-small ref-team">
+       <div className="ref-orbit"><i/><i/><i/><b>✦</b></div><h3>Care Collaboration</h3><p>Bring organized context into conversations with clinicians.</p>
+      </article>
+      <article className="ref-card ref-small ref-account">
+       <div className="ref-mini-ui"><span>PRIVATE</span><b>My Health</b><small>Records · Care · AI</small></div><h3>My Account</h3><p>Your health details, controlled by you.</p>
+      </article>
+     </div>
+    </section>
 
-   <section className="editorial-section">
-    <div className="section-intro centered" id="product"><span className="eyebrow">NURA HEALTH PLATFORM</span><h2>Healthcare designed<br/><em>around the patient.</em></h2><p>Everything follows the real moments of care: remembering what changed, understanding what it could mean, preparing for a visit and staying connected to your own health context.</p></div>
-    <div className="feature-stage">
-     <article className="feature-surface surface-large"><div className="surface-label">HEALTH RECORDS</div><h3>One place for the details.</h3><p>Keep the readings, notes and health history you deliberately record—organized so the next question has context.</p><div className="record-visual"><span>PERSONAL HEALTH RECORD</span><b>24</b><small>saved details · chosen by you</small><div className="record-lines"><i/><i/><i/><i/></div></div></article>
-     <article className="feature-surface surface-small"><div className="surface-label">MEDICATIONS</div><h3>Know what you take.</h3><div className="pill-stack"><span><PillIcon/> Medication list</span><span><Clock3/> Schedule & reminders</span><span><ShieldCheck/> Context for AI Doctor</span></div></article>
-     <article className="feature-surface surface-small"><div className="surface-label">SECURE MESSAGING</div><h3>A private conversation with Nura.</h3><div className="appointment-mini"><ShieldCheck/><div><b>Health context protected</b><small>Your conversation stays focused on your care.</small></div></div></article>
-     <article className="feature-surface surface-wide"><div className="surface-label">VIRTUAL DOCTOR VISITS</div><h3>Prepare before you arrive.</h3><p>Turn scattered questions into a concise care brief you can carry into a real conversation with a clinician.</p><div className="visit-row"><span>SYMPTOMS</span><span>MEDICATIONS</span><span>QUESTIONS</span><span>HISTORY</span></div></article>
-     <article className="feature-surface surface-wide"><div className="surface-label">AI SYMPTOM CHECKER</div><h3>Understand before scheduling.</h3><p>Describe what you are experiencing in plain language. Nura helps organize the information and highlights when professional care may be appropriate.</p><button className="button button-soft button-small" onClick={goApp}>Talk to Nura <ArrowRight size={13}/></button></article>
-    </div>
-   </section>
-
-   <section className="beam-section" id="doctor">
-    <div className="beam-glow"/>
-    <div className="beam-copy"><span className="eyebrow">AI DOCTOR</span><h2>A conversation<br/><span>that listens.</span></h2><p>Ask in your own words. Nura connects the health context you choose to share and returns a calm, understandable response. It supports health education and preparation—not diagnosis.</p><button className="button button-primary" onClick={goApp}>Open AI Doctor <ArrowRight size={15}/></button></div>
-    <div className="conversation-card"><div className="conversation-head"><span><ShieldCheck size={13}/> Nura AI Doctor</span><small>Private conversation</small></div><div className="bubble assistant">Tell me what’s going on. You can describe the symptom exactly as you experience it.</div><div className="bubble user">I’ve had a headache since this morning and I’m sleeping badly.</div><div className="bubble assistant">Let’s organize what changed, what else you’re noticing, and what questions would be useful to take to a clinician.</div><div className="conversation-footer"><span>Health context available</span><span>Educational support</span></div></div>
-   </section>
-
-   <section className="care-section" id="care">
-    <div className="section-intro centered"><span className="eyebrow">PATIENT GUIDE</span><h2>Transforming care with<br/><em>patient-first context.</em></h2><p>Nura is built around the moments before, between and after appointments.</p></div>
-    <div className="care-steps">
-     <div className="care-step"><span>01</span><div><h3>Identify what changed.</h3><p>Capture a symptom, reading, medication change or daily check-in while the detail is still fresh.</p></div></div>
-     <div className="care-step"><span>02</span><div><h3>Prepare the right questions.</h3><p>Bring the relevant context together so your next care conversation starts with more than a blank page.</p></div></div>
-     <div className="care-step"><span>03</span><div><h3>Move forward with clarity.</h3><p>Use Nura to understand general health information and prepare for the next appropriate step.</p></div></div>
-    </div>
-   </section>
-
-   <section className="assistant-section">
-    <div className="assistant-copy"><span className="eyebrow">FOR PATIENTS</span><h2>Your personal health assistant,<br/><span>available 24/7.</span></h2><p>One calm place for the questions that appear between appointments—from “what changed?” to “what should I ask next?”</p><button className="button button-primary" onClick={goApp}>Ask Nura <ArrowRight size={15}/></button></div>
-    <div className="assistant-window"><div className="assistant-tabs"><span className="active">AI Health Assistant</span><span>Health context</span><MoreHorizontal size={15}/></div><div className="assistant-body"><div className="assistant-side"><div className="mini-module"><span>SYMPTOM ANALYSIS</span><b>Understand what you’re feeling.</b><small>Plain-language guidance</small></div><div className="mini-module"><span>HEALTH RISK CONTEXT</span><b>See the details that matter.</b><small>Built from your chosen context</small></div></div><div className="assistant-chat"><div className="chat-message nura">I’m here. Tell me what changed, and I’ll help you organize the information.</div><div className="chat-message you">I’ve been tired and my sleep has changed this week.</div><div className="chat-message nura">Let’s start with the pattern, then we can prepare what to discuss with a clinician.</div></div></div></div>
-   </section>
-
-   <section className="privacy-section" id="privacy"><div className="privacy-orbit"><div className="orbit-core"><LockKeyhole size={27}/></div></div><div><span className="eyebrow">PRIVATE BY DESIGN</span><h2>Your health stays<br/><span>under your control.</span></h2><p>Nura gives you direct controls over the health information you choose to keep, export and delete. Privacy is part of the product experience, not a footer promise.</p><div className="privacy-points"><span><ShieldCheck/> Private health context</span><span><Download/> Export your data</span><span><Trash2/> Delete local records</span></div></div></section>
-   <section className="landing-final"><span className="eyebrow">NURA</span><h2>Understand more.<br/><span>Care with context.</span></h2><button className="button button-primary" onClick={goApp}>Enter Nura <ArrowRight size={15}/></button></section>
-  </main>
-  <footer className="landing-footer"><Brand/><span>Patient-first health intelligence.</span><span>© 2026 Nura</span></footer>
+    <section className="reference-bottom" id="care">
+      <div><span className="reference-bottom-label">AI DOCTOR · PRIVATE CARE · PATIENT CONTEXT</span><h2>Health, arranged<br/><em>around you.</em></h2></div>
+      <button className="button button-primary" onClick={goApp}>Start with Nura <ArrowRight size={15}/></button>
+    </section>
+   </main>
+   <footer className="landing-footer reference-footer"><Brand/><span>Patient-first health intelligence.</span><span>© 2026 Nura</span></footer>
+  </div>
  </div>;
 }
 function NuraApp({wallet,setWallet,goHome}){
