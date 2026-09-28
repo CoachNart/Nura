@@ -28,23 +28,15 @@ function Landing({goApp}){
  React.useEffect(()=>{
   const letters=[...document.querySelectorAll(".hero-letter")];
   if(!letters.length)return;
-  const glyphs="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
   const started=performance.now();
   let raf=0;
   const tick=now=>{
    let pending=false;
    letters.forEach((el,index)=>{
     const elapsed=now-started-index*105;
-    const final=el.dataset.final||"";
     if(elapsed<0){pending=true;return}
-    const progress=Math.min(elapsed/720,1);
-    if(progress<1){
-      el.textContent=glyphs[Math.floor(Math.random()*glyphs.length)];
-      pending=true;
-    }else{
-      el.textContent=final;
-      el.classList.add("is-settled");
-    }
+    el.textContent=el.dataset.final||"";
+    el.classList.add("is-settled");
    });
    if(pending)raf=requestAnimationFrame(tick);
   };
@@ -109,7 +101,7 @@ function Landing({goApp}){
      <div className="reference-hero-glow hero-parallax-layer"/>
      <div className="reference-hero-content" data-motion-reveal="hero">
       <div className="reference-kicker motion-stagger"><span>←</span><b>Nura · Patient intelligence</b><span>→</span></div>
-      <h1 className="hero-letter-headline"><span className="hero-line hero-line-accent">{heroLetters("AI For Better Health Decisions.")}</span></h1>
+      <h1 className="hero-letter-headline"><span className="hero-line"><span className="hero-word hero-word-blue">{heroLetters("AI")}</span>{" "}<span className="hero-word hero-word-dark">{heroLetters("For")}</span>{" "}<span className="hero-word hero-word-blue">{heroLetters("Better")}</span>{" "}<span className="hero-word hero-word-dark">{heroLetters("Health")}</span>{" "}<span className="hero-word hero-word-blue">{heroLetters("Decisions.")}</span></span></h1>
       <p className="hero-rich-copy" data-motion-reveal="hero-sub">Nura brings your health information, everyday context and intelligent guidance together in one private, patient-first experience. Understand what matters, prepare for care, and get thoughtful AI guidance whenever you need it — all in one calm, beautifully simple place.</p>
       <div className="hero-actions" data-motion-reveal="hero-actions"><button className="hero-cta hero-cta-primary" onClick={goApp}>Get started <span>↗</span></button><button className="hero-cta hero-cta-secondary" onClick={()=>scrollTo("care")}>Explore care <span>↓</span></button></div>
       <div className="hero-device-stage" aria-hidden="true">
