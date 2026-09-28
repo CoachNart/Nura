@@ -22,147 +22,95 @@ function Brand({compact=false,onClick}){return <button className={"brand "+(comp
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
 function Landing({goApp}){
- const[data,setData]=useState(()=>getHealthData());
  React.useEffect(()=>{
-  const sync=()=>setData(getHealthData());
-  window.addEventListener("storage",sync);
-  const id=setInterval(sync,1000);
-  const root=document.querySelector(".nura-home");
-  if(!root)return()=>{window.removeEventListener("storage",sync);clearInterval(id)};
-  const reveals=[...root.querySelectorAll("[data-reveal]")];
-  const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("in")}),{threshold:.12,rootMargin:"0px 0px -10% 0px"});
-  reveals.forEach(el=>io.observe(el));
+  const root=document.querySelector(".ref-home"); if(!root)return;
+  const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add("is-in")),{threshold:.18});
+  root.querySelectorAll(".ref-reveal").forEach(x=>io.observe(x));
   let raf=0;
-  const tick=()=>{
-   if(raf)return;
-   raf=requestAnimationFrame(()=>{
-    const y=window.scrollY||0;
-    const max=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
-    root.style.setProperty("--sy",String(y));
-    root.style.setProperty("--sp",String(Math.min(1,y/max)));
+  const update=()=>{
+   if(raf)return; raf=requestAnimationFrame(()=>{
+    const y=window.scrollY||0,max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
+    root.style.setProperty("--scroll",Math.min(1,y/max));
+    root.style.setProperty("--sy",y);
     raf=0;
    });
   };
   const pointer=e=>{
-   root.style.setProperty("--mx",((e.clientX/window.innerWidth-.5)*2).toFixed(3));
-   root.style.setProperty("--my",((e.clientY/window.innerHeight-.5)*2).toFixed(3));
+   root.style.setProperty("--px",((e.clientX/innerWidth-.5)*2).toFixed(3));
+   root.style.setProperty("--py",((e.clientY/innerHeight-.5)*2).toFixed(3));
   };
-  window.addEventListener("scroll",tick,{passive:true});
-  window.addEventListener("pointermove",pointer,{passive:true});
-  tick();
-  return()=>{io.disconnect();window.removeEventListener("storage",sync);clearInterval(id);window.removeEventListener("scroll",tick);window.removeEventListener("pointermove",pointer);if(raf)cancelAnimationFrame(raf)};
+  addEventListener("scroll",update,{passive:true});addEventListener("pointermove",pointer,{passive:true});update();
+  return()=>{io.disconnect();removeEventListener("scroll",update);removeEventListener("pointermove",pointer);if(raf)cancelAnimationFrame(raf)}
  },[]);
- const metrics=data.metrics||[];
- const latest=key=>metrics.filter(m=>(m.label||"").toLowerCase().includes(key)).sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||""))[0];
- const hr=latest("heart"),sleep=latest("sleep");
- const val=m=>m?String(m.value??"—"):"—";
- const unit=m=>m?.unit||"";
- const appointments=(data.appointments||[]).length;
- return <div className="nura-home">
-  <div className="nura-noise" aria-hidden="true"/>
-  <div className="nura-scroll-line" aria-hidden="true"/>
-  <header className="nura-header">
+ return <div className="ref-home">
+  <div className="ref-progress"/><div className="ref-grain"/>
+  <header className="ref-nav">
    <Brand/>
-   <nav className="nura-header-links">
-    <a href="#intelligence">Intelligence</a><a href="#experience">Experience</a><a href="#care">Care</a><a href="#network">Network</a>
-   </nav>
-   <div className="nura-header-actions"><button className="nura-copy" onClick={async()=>{}} aria-label="Copy contract address">Copy CA</button><button className="nura-enter" onClick={goApp}>Enter Nura <ArrowRight size={15}/></button></div>
+   <nav><a href="#vision">Vision</a><a href="#intelligence">AI Doctor</a><a href="#health">Health</a><a href="#network">Network</a><a href="#about">About</a></nav>
+   <div className="ref-nav-actions"><button className="ref-ca" disabled={!CONTRACT_ADDRESS} onClick={async()=>{if(CONTRACT_ADDRESS)try{await navigator.clipboard.writeText(CONTRACT_ADDRESS)}catch{}}>Copy CA</button><button className="ref-open" onClick={goApp}>Open Nura <ArrowRight size={14}/></button></div>
   </header>
 
   <main>
-   <section className="nura-hero">
-    <div className="nura-hero-glow"/>
-    <div className="nura-hero-orbit orbit-one"/><div className="nura-hero-orbit orbit-two"/>
-    <div className="nura-hero-grid"/>
-    <div className="nura-hero-copy" data-reveal>
-     <div className="nura-eyebrow"><i/> AI HEALTH INTELLIGENCE</div>
-     <h1>Health,<br/><span>in motion.</span></h1>
-     <p>Nura turns your health information into a calm, intelligent experience — designed to help you understand what matters and decide what to do next.</p>
-     <div className="nura-hero-actions"><button className="nura-primary" onClick={goApp}>Explore Nura <ArrowRight size={17}/></button><a href="#intelligence" className="nura-ghost">Discover the system <ChevronRight size={16}/></a></div>
+   <section className="ref-hero" id="vision">
+    <div className="ref-hero-light"/><div className="ref-hero-grid"/>
+    <div className="ref-hero-copy">
+     <div className="ref-kicker ref-reveal"><i/> NURA AI · ROBINHOOD CHAIN</div>
+     <h1 className="ref-reveal">Health<br/><span>at your edge.</span></h1>
+     <p className="ref-reveal">A private intelligence layer for understanding your health, asking better questions, and moving with more clarity.</p>
+     <div className="ref-hero-cta ref-reveal"><button className="ref-pill-primary" onClick={goApp}>Enter Nura <ArrowRight size={15}/></button><a href="#intelligence">Explore the system <ChevronRight size={14}/></a></div>
     </div>
-    <div className="nura-hero-stage" data-reveal>
-     <div className="nura-stage-halo"/>
-     <div className="nura-core">
-      <div className="nura-core-top"><span>LIVE HEALTH CONTEXT</span><i/></div>
-      <div className="nura-core-center"><span>NURA</span><b>AI</b></div>
-      <div className="nura-core-bottom"><span>PRIVATE</span><span>PERSONAL</span><span>CONNECTED</span></div>
-     </div>
-     <div className="nura-float nura-float-a"><HeartPulse size={16}/><div><small>HEART RATE</small><b>{val(hr)} {unit(hr)}</b></div><i/></div>
-     <div className="nura-float nura-float-b"><Moon size={16}/><div><small>SLEEP</small><b>{val(sleep)} {unit(sleep)}</b></div><i/></div>
-     <div className="nura-float nura-float-c"><ShieldCheck size={15}/><span>YOUR DATA<br/><b>YOUR CONTROL</b></span></div>
+    <div className="ref-chip-art" aria-hidden="true">
+      <div className="ref-chip"><span>NURA</span><b>AI</b><i/><i/><i/><i/></div>
+      <div className="ref-ray ray-a"/><div className="ref-ray ray-b"/><div className="ref-ray ray-c"/>
     </div>
-    <div className="nura-hero-meta"><span>ROBINHOOD CHAIN</span><span>AI DOCTOR · HEALTH · CARE</span><span>2026</span></div>
+    <div className="ref-hero-foot"><span>01 / NURA</span><span>PRIVATE HEALTH INTELLIGENCE</span><span>SCROLL TO EXPLORE ↓</span></div>
    </section>
 
-   <section className="nura-marquee" aria-label="Nura capabilities">
-    <div><span>AI DOCTOR</span><i/> <span>HEALTH SIGNALS</span><i/> <span>MEDICATIONS</span><i/> <span>CARE TIMELINE</span><i/> <span>WALLET-NATIVE</span><i/> <span>AI DOCTOR</span><i/> <span>HEALTH SIGNALS</span><i/></div>
+   <section className="ref-light-section ref-intro">
+    <div className="ref-centered ref-reveal"><small>01 / A DIFFERENT KIND OF HEALTH APP</small><h2>Understand more.<br/><em>Carry less.</em></h2><p>Nura turns the information you choose to keep into a focused, intelligent health experience — without filling your screen with noise.</p></div>
    </section>
 
-   <section className="nura-statement" id="intelligence">
-    <div className="nura-section-tag" data-reveal>01 / INTELLIGENCE</div>
-    <div className="nura-statement-grid">
-     <h2 data-reveal>Your health<br/><em>deserves</em><br/>better context.</h2>
-     <div className="nura-statement-copy" data-reveal><p>Nura is built around the information you actually choose to record. No noisy dashboards. No fake readings. Just a focused layer between your questions and the health context that helps you think clearly.</p><button onClick={goApp}>Open your health space <ArrowRight size={15}/></button></div>
+   <section className="ref-dark-section" id="intelligence">
+    <div className="ref-section-head ref-reveal"><small>02 / AI DOCTOR</small><h2>Unleash your<br/><em>health intelligence.</em></h2><p>Ask in your own words. Get context that helps you decide what to explore next.</p></div>
+    <div className="ref-ai-visual ref-reveal">
+      <div className="ref-ai-orbit"/><div className="ref-ai-core">AI<span>NURA</span></div>
+      <div className="ref-ai-line l1">ASK NATURALLY</div><div className="ref-ai-line l2">PRIVATE CONTEXT</div><div className="ref-ai-line l3">CLEAR NEXT STEPS</div>
     </div>
    </section>
 
-   <section className="nura-bento" id="experience">
-    <div className="nura-section-tag" data-reveal>02 / THE EXPERIENCE</div>
-    <div className="nura-bento-grid">
-     <article className="nura-card nura-card-main" data-reveal>
-      <div className="nura-card-label">01 — AI DOCTOR</div><h3>Ask naturally.<br/><span>Understand faster.</span></h3>
-      <p>Describe symptoms in your own words and turn a messy question into a structured conversation.</p>
-      <div className="nura-chat-visual"><span className="chat-user">“I've had a headache since yesterday.”</span><span className="chat-ai">Nura can help you organize when it started, what changed, and which warning signs matter.</span><i/></div>
-     </article>
-     <article className="nura-card nura-card-signal" data-reveal>
-      <div className="nura-card-label">02 — SIGNALS</div><div className="signal-ring"><div><HeartPulse size={21}/><b>{val(hr)}</b><small>{unit(hr)||"No unit"} · heart</small></div></div><p>Only health readings you actually record appear here.</p>
-     </article>
-     <article className="nura-card nura-card-care" id="care" data-reveal>
-      <div className="nura-card-label">03 — CARE</div><h3>Everything<br/>in rhythm.</h3><div className="care-lines"><span><PillIcon size={15}/> Medications <b>{(data.medications||[]).length}</b></span><span><CalendarDays size={15}/> Appointments <b>{appointments}</b></span><span><ClipboardCheck size={15}/> Check-ins <b>{(data.checkins||[]).length}</b></span></div>
-     </article>
-     <article className="nura-card nura-card-private" data-reveal>
-      <div className="nura-card-label">04 — CONTROL</div><div className="privacy-mark"><ShieldCheck size={28}/></div><h3>Private<br/>by design.</h3><p>Your health context stays under your control. Wallet connectivity is there when you choose it.</p>
-     </article>
+   <section className="ref-light-section ref-product" id="health">
+    <div className="ref-section-head ref-reveal"><small>03 / YOUR HEALTH SPACE</small><h2>One calm place<br/>for <em>what matters.</em></h2></div>
+    <div className="ref-window ref-reveal">
+      <div className="ref-window-bar"><span>NURA / HEALTH</span><span>PRIVATE · PERSONAL · CONNECTED</span></div>
+      <div className="ref-window-body">
+       <div className="ref-window-word">NURA</div>
+       <div className="ref-window-copy"><small>HEALTH CONTEXT</small><h3>See the picture.<br/><em>Not the noise.</em></h3><p>Health records, conversations, medications and appointments — organized around you.</p><button onClick={goApp}>Open your health space <ArrowRight size={14}/></button></div>
+       <div className="ref-data-lines"><span>AI DOCTOR</span><span>HEALTH</span><span>CARE</span><span>PROFILE</span></div>
+      </div>
     </div>
    </section>
 
-   <section className="nura-bigtype">
-    <div className="nura-bigtype-line" data-reveal><span>ONE</span><b>INTELLIGENT</b></div>
-    <div className="nura-bigtype-line align-right" data-reveal><span>SPACE.</span><b>NOT</b></div>
-    <div className="nura-bigtype-line" data-reveal><span>MORE</span><b>NOISE.</b></div>
-    <div className="nura-bigtype-orb"/>
+   <section className="ref-dark-section ref-network" id="network">
+    <div className="ref-section-head ref-reveal"><small>04 / CONNECTED</small><h2>A truly connected<br/><em>health network.</em></h2><p>Built for the next generation of onchain users — with Nura at the center of the experience.</p></div>
+    <div className="ref-globe ref-reveal"><div className="ref-globe-grid"/><div className="ref-globe-ring"/><div className="ref-globe-core">NURA</div><i/><i/><i/><i/></div>
    </section>
 
-   <section className="nura-network" id="network">
-    <div className="nura-section-tag" data-reveal>03 / CONNECTED</div>
-    <div className="nura-network-grid">
-     <div data-reveal><h2>Designed for a<br/><em>connected</em> future.</h2><p>Nura brings AI health experiences together with wallet-native identity and Robinhood Chain — while keeping the core health experience useful without a wallet.</p><button onClick={goApp}>Enter the app <ArrowRight size={15}/></button></div>
-     <div className="nura-network-visual" data-reveal><div className="network-globe"><div className="globe-lat"/><div className="globe-lon"/><div className="globe-core">NURA</div><i className="node node-1"/><i className="node node-2"/><i className="node node-3"/><i className="node node-4"/></div><span className="network-label label-1">AI</span><span className="network-label label-2">HEALTH</span><span className="network-label label-3">CARE</span></div>
+   <section className="ref-light-section ref-architecture">
+    <div className="ref-section-head ref-reveal"><small>05 / THE NURA SYSTEM</small><h2>Everything you need.<br/><em>Nothing you don't.</em></h2></div>
+    <div className="ref-system ref-reveal">
+      <div><b>AI DOCTOR</b><span>Conversations built around your health context.</span></div>
+      <div><b>HEALTH</b><span>Signals and records you choose to track.</span></div>
+      <div><b>CARE</b><span>Appointments, medications and check-ins in rhythm.</span></div>
+      <div><b>IDENTITY</b><span>Wallet-native access when you choose to connect.</span></div>
     </div>
    </section>
 
-   <section className="nura-product">
-    <div className="nura-section-tag" data-reveal>04 / INSIDE NURA</div>
-    <div className="nura-product-head"><h2 data-reveal>A health interface<br/><em>that gets out of the way.</em></h2><p data-reveal>Built to feel less like a dashboard and more like a private instrument.</p></div>
-    <div className="nura-product-window" data-reveal>
-     <div className="product-top"><span>NURA / HEALTH</span><span>AI DOCTOR · HEALTH · APPOINTMENTS</span></div>
-     <div className="product-content">
-      <div className="product-sidebar"><span className="active">Overview</span><span>AI Doctor</span><span>Health</span><span>Care</span></div>
-      <div className="product-main"><small>YOUR HEALTH SPACE</small><h3>Clear context.<br/>Better conversations.</h3><div className="product-metrics"><div><HeartPulse size={15}/><b>{val(hr)}</b><small>Heart rate</small></div><div><Moon size={15}/><b>{val(sleep)}</b><small>Sleep</small></div><div><CalendarDays size={15}/><b>{appointments}</b><small>Appointments</small></div></div><button onClick={goApp}>Open Nura <ArrowRight size={14}/></button></div>
-      <div className="product-orb"><div><span>AI</span><b>NURA</b></div></div>
-     </div>
-    </div>
-   </section>
-
-   <section className="nura-final">
-    <div className="final-orb"/>
-    <div className="nura-section-tag" data-reveal>05 / START</div>
-    <h2 data-reveal>Move through<br/><em>health with clarity.</em></h2>
-    <p data-reveal>Your health context. Your conversations. Your control.</p>
-    <button className="nura-primary" data-reveal onClick={goApp}>Enter Nura <ArrowRight size={17}/></button>
+   <section className="ref-dark-section ref-cta" id="about">
+    <div className="ref-cta-glow"/>
+    <div className="ref-centered ref-reveal"><small>06 / START WITH NURA</small><h2>Move through health<br/><em>with clarity.</em></h2><p>Your health context. Your conversations. Your control.</p><button className="ref-pill-primary" onClick={goApp}>Open Nura <ArrowRight size={15}/></button></div>
    </section>
   </main>
-  <footer className="nura-footer"><Brand compact/><div><a href="#intelligence">Intelligence</a><a href="#experience">Experience</a><a href="#network">Network</a><button onClick={goApp}>App</button></div><span>© 2026 Nura AI · Educational health support, not a diagnosis.</span></footer>
+  <footer className="ref-footer"><Brand compact/><div><a href="#vision">Vision</a><a href="#intelligence">AI Doctor</a><a href="#health">Health</a><a href="#network">Network</a><button onClick={goApp}>App</button></div><span>© 2026 Nura AI · Educational health support, not a diagnosis.</span></footer>
  </div>
 }
 function FeatureCard({icon,title,text}){return <article className="feature-card"><div className="feature-card-icon">{icon}</div><h3>{title}</h3><p>{text}</p><ChevronRight size={17}/></article>}
