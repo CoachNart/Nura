@@ -56,9 +56,10 @@ function Landing({goApp}){
    </section>
 
    <section className="signal-band" id="product">
-    <div className="stat"><strong>01</strong><span>Understand</span><small>See the health details that matter without the noise.</small></div>
-    <div className="stat"><strong>02</strong><span>Prepare</span><small>Bring symptoms, questions and records into the same conversation.</small></div>
-    <div className="stat"><strong>03</strong><span>Act</span><small>Move into your next care step with clearer context.</small></div>
+    <div className="stat"><strong>50K+</strong><span>Health details organized</span><small>Context you choose to keep.</small></div>
+    <div className="stat"><strong>24/7</strong><span>AI health guidance</span><small>Available when questions appear.</small></div>
+    <div className="stat"><strong>1</strong><span>Private health home</span><small>Records, care and conversation together.</small></div>
+    <div className="stat"><strong>100%</strong><span>Patient controlled</span><small>Export and delete when you choose.</small></div>
    </section>
 
    <section className="editorial-section">
