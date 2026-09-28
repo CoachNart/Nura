@@ -54,7 +54,7 @@ function Landing({goApp}){
       </div>
       <div className="nura-float nura-heart"><b>72</b><small>HEART RATE</small><i>Normal</i></div>
       <div className="nura-float nura-sleep"><b>7h 45m</b><small>SLEEP</small><i>Good</i></div>
-      <div className="nura-float nura-call"><span><PhoneCall size={15}/></span><div><b>Care when you need it</b><small>Connected health support</small></div></div>
+      <div className="nura-float nura-call"><span><MessageCircle size={15}/></span><div><b>Care when you need it</b><small>Connected health support</small></div></div>
      </div>
    </section>
 
