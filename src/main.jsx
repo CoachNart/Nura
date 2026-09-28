@@ -3,7 +3,7 @@ import { connectWallet, disconnectWallet, getSavedWallet, restoreWallet, shorten
 import { askNura } from "./api.js";
 import { getHealthData, addConversation, addMetric, deleteMetric, addAppointment, updateAppointment, deleteAppointment, addMedication, toggleMedication, deleteMedication, addCheckin, updateHealthData, clearHealthData, exportHealthData } from "./healthStore.js";
 import{createRoot}from"react-dom/client";
-import{Activity,ArrowRight,Bell,Brain,CalendarDays,ChevronRight,CircleHelp,ClipboardCheck,Droplets,HeartPulse,Home,LockKeyhole,MessageCircle,Moon,MoreHorizontal,Pill as PillIcon,ShieldCheck,Copy,Check,SunMedium,UserRound,Wallet,Plus,Download,Trash2,AlertTriangle,Settings2,Check}from"lucide-react";
+import{Activity,ArrowRight,Bell,Brain,CalendarDays,ChevronRight,CircleHelp,ClipboardCheck,Droplets,HeartPulse,Home,LockKeyhole,MessageCircle,Moon,MoreHorizontal,Pill as PillIcon,ShieldCheck,Copy,Check,SunMedium,UserRound,Wallet,Plus,Download,Trash2,AlertTriangle,Settings2}from"lucide-react";
 import"./styles.css";
 
 const chain={id:4663};
