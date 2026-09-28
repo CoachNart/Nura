@@ -1874,7 +1874,8 @@
 @media(prefers-reduced-motion:reduce){
   .reference-hero-glow,.reference-hero::before{animation:none}
 }
-\n
+
+
 /* =========================================================
    NURA 2.0 — HEALTHCARE UI SYSTEM
    Reference-led blue / white / airy visual overhaul
