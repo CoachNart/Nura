@@ -20,6 +20,7 @@ function App(){
 function Brand({compact=false,onClick}){return <button className={"brand "+(compact?"brand-compact":"")} onClick={onClick} aria-label="Nura home"><img className="brand-logo" src="/nura-logo.png" alt="Nura"/></button>}
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
+function heroLetters(text){return [...text].map((char,i)=><span className="hero-letter" key={text+"-"+i} style={{"--letter-delay":`${i*0.028}s`}}>{char===" "?"\\u00a0":char}</span>)}
 function Landing({goApp}){
  const[caCopied,setCaCopied]=useState(false);
  const copyCA=async()=>{if(!CONTRACT_ADDRESS){return;}try{await navigator.clipboard.writeText(CONTRACT_ADDRESS);setCaCopied(true);setTimeout(()=>setCaCopied(false),1800);}catch{setCaCopied(false)}};
@@ -82,7 +83,7 @@ function Landing({goApp}){
      <div className="reference-hero-glow hero-parallax-layer"/>
      <div className="reference-hero-content" data-motion-reveal="hero">
       <div className="reference-kicker motion-stagger"><span>←</span><b>Nura · Patient intelligence</b><span>→</span></div>
-      <h1 data-motion-reveal="hero-title">Comprehensive Health<br/><span>Intelligence.</span></h1>
+      <h1 className="hero-letter-headline" data-motion-reveal="hero-title"><span className="hero-line">{heroLetters("Comprehensive Health")}</span><span className="hero-line hero-line-accent">{heroLetters("Intelligence.")}</span></h1>
       <p className="hero-rich-copy" data-motion-reveal="hero-sub">Nura brings your health information, everyday context and intelligent guidance together in one private, patient-first experience. Understand what matters, prepare for care, and get thoughtful AI guidance whenever you need it — all in one calm, beautifully simple place.</p>
       <div className="hero-actions" data-motion-reveal="hero-actions"><button className="hero-cta hero-cta-primary" onClick={goApp}>Get started <span>↗</span></button><button className="hero-cta hero-cta-secondary" onClick={()=>scrollTo("care")}>Explore care <span>↓</span></button></div>
       <div className="hero-device-stage" aria-hidden="true">
@@ -136,7 +137,14 @@ function Landing({goApp}){
     </section>
    </main>
 
-   <footer className="landing-footer reference-footer" data-motion-reveal="footer"><Brand/><span>Patient-first health intelligence.</span><span>© 2026 Nura</span></footer>
+   <footer className="landing-footer reference-footer" data-motion-reveal="footer">
+    <div className="footer-top">
+     <div className="footer-brand-block"><Brand/><p>Personal health intelligence designed to help you understand what matters, prepare for care, and move through healthcare with more clarity.</p></div>
+     <div className="footer-links"><div><b>Explore</b><a href="#product">Product</a><a href="#doctor">AI Doctor</a><a href="#care">Care</a></div><div><b>Patient</b><a href="#privacy">Health assistant</a><a href="#doctor">Health records</a><a href="#care">Care guidance</a></div></div>
+     <div className="footer-action"><span>Ready when you are.</span><button onClick={goApp}>Open Nura <ArrowRight size={13}/></button><button className="footer-ca" onClick={copyCA} disabled={!CONTRACT_ADDRESS}>{caCopied?<><Check size={12}/> Copied</>:<><Copy size={12}/> Copy CA</>}</button></div>
+    </div>
+    <div className="footer-bottom"><span>© 2026 Nura. Patient-first health intelligence.</span><span>Private by design · Built for clearer care.</span></div>
+   </footer>
   </div>
  </div>;
 }
