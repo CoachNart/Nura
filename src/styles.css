@@ -1047,3 +1047,636 @@
     filter:none!important;
   }
 }
+
+
+/* =========================================================
+   NURA FULL-WIDTH LANDING COMPOSITION
+   Removes the "website inside a frame" treatment on desktop.
+   ========================================================= */
+
+.reference-landing{
+  width:100%;
+  min-height:100vh;
+  padding:0;
+  display:block;
+  overflow-x:hidden;
+  background:#04020a;
+}
+
+.reference-page{
+  width:100%;
+  min-height:100vh;
+  margin:0;
+  border-radius:0;
+  overflow:clip;
+  background:#04020a;
+  box-shadow:none;
+}
+
+.reference-nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  width:100%;
+  height:74px;
+  padding:0 clamp(28px,5vw,76px);
+  display:flex;
+  align-items:center;
+  background:linear-gradient(180deg,rgba(4,2,10,.9),rgba(4,2,10,.48));
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.045);
+  z-index:100;
+}
+
+.reference-nav::after{
+  content:"";
+  position:absolute;
+  left:5%;
+  right:5%;
+  bottom:-1px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(163,95,255,.28),transparent);
+  pointer-events:none;
+}
+
+.reference-nav .brand{
+  font-size:12px;
+  letter-spacing:.16em;
+}
+
+.reference-nav .brand-mark{
+  width:25px;
+  height:25px;
+}
+
+.reference-nav .brand-mark i{
+  width:4px;
+  height:9px;
+}
+
+.reference-nav nav{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:34px;
+}
+
+.reference-nav nav a{
+  position:relative;
+  padding:10px 0;
+  font-size:11px;
+  color:rgba(255,255,255,.48);
+  transition:color 220ms ease;
+}
+
+.reference-nav nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:100%;
+  bottom:4px;
+  height:1px;
+  background:#a86cff;
+  transition:right 260ms var(--ease-out);
+  box-shadow:0 0 9px rgba(168,108,255,.65);
+}
+
+.reference-nav nav a:hover{
+  color:#fff;
+}
+
+.reference-nav nav a:hover::after{
+  right:0;
+}
+
+.reference-nav .nav-cta{
+  margin-left:auto;
+  height:38px;
+  padding:0 17px;
+  border-radius:8px;
+  font-size:10px;
+  background:#fff;
+  color:#09050f;
+  box-shadow:0 8px 28px rgba(255,255,255,.09);
+}
+
+.reference-hero{
+  min-height:min(860px,100vh);
+  padding:130px 30px 100px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(ellipse 52% 40% at 50% 46%,rgba(121,56,255,.23),transparent 67%),
+    radial-gradient(ellipse 34% 26% at 50% 84%,rgba(79,31,174,.18),transparent 72%),
+    #04020a;
+}
+
+.reference-hero::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-1px;
+  width:min(1000px,85vw);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(157,86,255,.3),transparent);
+}
+
+.reference-hero-glow{
+  left:-10%;
+  right:-10%;
+  top:53%;
+  height:160px;
+  filter:blur(22px);
+  opacity:.85;
+  transform:scaleY(.72);
+}
+
+.reference-hero-content{
+  width:min(920px,92vw);
+  padding-top:35px;
+}
+
+.reference-kicker{
+  font-size:10px;
+  gap:15px;
+}
+
+.reference-kicker b{
+  padding:7px 13px;
+  border-radius:12px;
+}
+
+.reference-kicker span{
+  font-size:13px;
+}
+
+.reference-hero h1{
+  margin:38px 0 18px;
+  font-size:clamp(58px,8vw,112px);
+  line-height:.9;
+  letter-spacing:-.065em;
+  font-weight:450;
+}
+
+.reference-hero p{
+  max-width:560px;
+  font-size:14px;
+  line-height:1.65;
+  color:rgba(255,255,255,.46);
+}
+
+.nura-ref-content{
+  background:
+    radial-gradient(ellipse 55% 20% at 50% 0%,rgba(101,44,205,.13),transparent 70%),
+    #04020a;
+}
+
+.nura-ref-stats{
+  width:min(1180px,calc(100% - 80px));
+  padding:80px 0 130px;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.nura-ref-stats article{
+  height:140px;
+  padding:30px 18px 0;
+  border-radius:12px;
+  background:
+    radial-gradient(circle at 85% 100%,rgba(136,62,232,.2),transparent 42%),
+    linear-gradient(145deg,#150522,#09020f 72%);
+  border:1px solid rgba(166,95,255,.11);
+  transition:transform 320ms var(--ease-out),border-color 320ms ease,box-shadow 320ms ease;
+}
+
+.nura-ref-stats strong{
+  font-size:48px;
+  letter-spacing:-.055em;
+}
+
+.nura-ref-stats span{
+  margin-top:12px;
+  font-size:10px;
+  color:rgba(255,255,255,.42);
+}
+
+.nura-ref-care{
+  width:min(1180px,calc(100% - 80px));
+}
+
+.nura-ref-heading{
+  margin-bottom:54px;
+}
+
+.nura-ref-badge{
+  padding:6px 11px;
+  border-radius:10px;
+  font-size:8px;
+  letter-spacing:.1em;
+}
+
+.nura-ref-heading h2{
+  margin-top:19px;
+  font-size:clamp(38px,4.5vw,62px);
+  line-height:.94;
+}
+
+.nura-ref-cards{
+  grid-template-columns:repeat(6,1fr);
+  gap:12px;
+  margin-top:0;
+}
+
+.nura-ref-card{
+  border-radius:12px;
+}
+
+.nura-record-card,
+.nura-rx-card,
+.nura-message-card{
+  height:310px;
+}
+
+.nura-visits-card,
+.nura-symptom-card{
+  height:300px;
+}
+
+.nura-ref-card header{
+  padding:23px 21px;
+}
+
+.nura-ref-card header h3{
+  font-size:15px;
+  margin-bottom:8px;
+}
+
+.nura-ref-card header p{
+  max-width:300px;
+  font-size:9px;
+  line-height:1.55;
+}
+
+.records-visual{
+  inset:125px 26px 20px;
+}
+
+.records-bars{
+  height:145px;
+  gap:10px;
+}
+
+.records-bars i{
+  width:22px;
+}
+
+.records-tag{
+  left:27%;
+  padding:6px 10px;
+  border-radius:9px;
+  font-size:8px;
+}
+
+.rx-visual{
+  height:170px;
+  bottom:-24px;
+}
+
+.rx-arc{
+  width:210px;
+  height:135px;
+}
+
+.rx-visual b{
+  width:45px;
+  height:45px;
+  border-radius:10px;
+  font-size:14px;
+}
+
+.rx-visual i{
+  width:28px;
+  height:28px;
+  border-radius:8px;
+  font-size:10px;
+}
+
+.message-visual{
+  left:27px;
+  right:27px;
+  bottom:35px;
+  gap:9px;
+}
+
+.message-visual span{
+  padding:9px 13px;
+  border-radius:9px;
+  font-size:8px;
+}
+
+.nura-visits-card,
+.nura-symptom-card{
+  grid-column:span 3;
+}
+
+.visits-chart{
+  left:25px;
+  right:25px;
+  bottom:24px;
+  height:135px;
+}
+
+.chart-labels{
+  font-size:7px;
+}
+
+.chart-row{
+  height:10px;
+}
+
+.symptom-visual{
+  left:55px;
+  right:28px;
+  bottom:30px;
+  gap:14px;
+}
+
+.symptom-visual div{
+  height:55px;
+  padding:10px 13px;
+  border-radius:9px;
+}
+
+.symptom-visual span{
+  font-size:8px;
+}
+
+.symptom-visual small{
+  font-size:6px;
+}
+
+.symptom-visual button{
+  font-size:7px;
+  padding:7px 11px;
+}
+
+.nura-ref-guide{
+  width:min(1180px,calc(100% - 80px));
+  min-height:900px;
+  padding-top:190px;
+}
+
+.guide-title{
+  margin-bottom:0;
+}
+
+.guide-arc{
+  left:-8%;
+  top:360px;
+  width:48%;
+  height:500px;
+}
+
+.guide-steps{
+  width:62%;
+  margin:105px 2% 0 auto;
+  gap:55px;
+}
+
+.guide-steps article{
+  min-height:125px;
+  height:auto;
+  grid-template-columns:70px 1fr 44px;
+  padding:22px 22px 22px 0;
+  border-radius:12px;
+}
+
+.guide-steps article>em{
+  font-size:28px;
+  transform:translateX(-22px);
+}
+
+.guide-steps h3{
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+.guide-steps p{
+  font-size:9px;
+  line-height:1.6;
+}
+
+.guide-steps article>b{
+  width:36px;
+  height:36px;
+  border-radius:9px;
+  font-size:13px;
+}
+
+.nura-ref-assistant{
+  width:min(1180px,calc(100% - 80px));
+  padding:90px 0 120px;
+}
+
+.assistant-title{
+  margin-bottom:54px;
+}
+
+.assistant-ref-layout{
+  grid-template-columns:1.55fr 1fr 1fr;
+  gap:12px;
+}
+
+.assistant-main-card,
+.assistant-side-card{
+  height:250px;
+  border-radius:12px;
+}
+
+.assistant-bar{
+  height:52px;
+  padding:10px 13px;
+  grid-template-columns:34px 1fr auto;
+  gap:9px;
+}
+
+.assistant-avatar{
+  width:30px;
+  height:30px;
+  font-size:10px;
+}
+
+.assistant-bar div b{
+  font-size:9px;
+}
+
+.assistant-bar div small{
+  font-size:7px;
+}
+
+.assistant-bar>strong{
+  font-size:9px;
+}
+
+.assistant-bubble{
+  margin:35px 22px;
+  padding:15px;
+  border-radius:9px;
+  font-size:8px;
+  line-height:1.65;
+}
+
+.assistant-composer{
+  left:14px;
+  right:14px;
+  bottom:14px;
+  padding:11px;
+  border-radius:8px;
+  font-size:7px;
+}
+
+.assistant-side-card{
+  padding:24px;
+}
+
+.side-icon{
+  font-size:13px;
+}
+
+.assistant-side-card h3{
+  margin:35px 0 12px;
+  font-size:15px;
+}
+
+.tag-row{
+  gap:6px;
+}
+
+.tag-row b{
+  padding:6px 8px;
+  border-radius:6px;
+  font-size:6px;
+}
+
+.risk-card>strong{
+  font-size:25px;
+}
+
+.risk-meter{
+  margin-top:20px;
+  height:6px!important;
+}
+
+.reference-footer{
+  width:min(1180px,calc(100% - 80px));
+  margin:0 auto;
+  min-height:76px;
+  padding:25px 0!important;
+  background:#04020a!important;
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+
+.reference-footer>span:last-child{
+  margin-left:auto;
+}
+
+@media(max-width:900px) and (min-width:701px){
+  .reference-nav{padding:0 28px}
+  .reference-nav nav{gap:20px}
+  .reference-hero h1{font-size:72px}
+  .nura-ref-stats,.nura-ref-care,.nura-ref-guide,.nura-ref-assistant,.reference-footer{width:calc(100% - 56px)}
+}
+
+@media(max-width:700px){
+  .reference-nav{
+    position:fixed;
+    padding:0 18px;
+    height:62px;
+  }
+  .reference-hero{
+    min-height:760px;
+    padding:110px 18px 80px;
+  }
+  .reference-hero-content{
+    width:min(100%,620px);
+    padding-top:0;
+  }
+  .reference-hero h1{
+    margin-top:30px;
+    font-size:clamp(46px,14vw,68px);
+  }
+  .reference-hero p{
+    max-width:340px;
+    font-size:11px;
+  }
+  .nura-ref-stats{
+    width:calc(100% - 36px);
+    padding:58px 0 90px;
+    gap:8px;
+  }
+  .nura-ref-stats article{
+    height:105px;
+    padding-top:22px;
+    border-radius:9px;
+  }
+  .nura-ref-stats strong{font-size:30px}
+  .nura-ref-stats span{font-size:7px}
+  .nura-ref-care,.nura-ref-guide,.nura-ref-assistant{
+    width:calc(100% - 36px);
+  }
+  .nura-ref-heading{margin-bottom:34px}
+  .nura-ref-heading h2{font-size:34px}
+  .nura-ref-cards{gap:8px}
+  .nura-ref-card header{padding:17px}
+  .nura-ref-card header h3{font-size:12px}
+  .nura-ref-card header p{font-size:7px}
+  .nura-record-card,.nura-rx-card,.nura-message-card,
+  .nura-visits-card,.nura-symptom-card{
+    height:230px;
+  }
+  .nura-ref-guide{
+    min-height:760px;
+    padding-top:120px;
+  }
+  .guide-arc{
+    left:-47%;
+    top:300px;
+    width:100%;
+    height:390px;
+  }
+  .guide-steps{
+    width:88%;
+    margin-top:65px;
+    gap:28px;
+  }
+  .guide-steps article{
+    min-height:100px;
+    grid-template-columns:48px 1fr 30px;
+    padding:15px 12px 15px 0;
+  }
+  .guide-steps article>em{font-size:18px}
+  .guide-steps h3{font-size:11px}
+  .guide-steps p{font-size:7px}
+  .guide-steps article>b{width:25px;height:25px;font-size:9px}
+  .nura-ref-assistant{padding:55px 0 75px}
+  .assistant-title{margin-bottom:32px}
+  .assistant-ref-layout{grid-template-columns:1fr 1fr;gap:8px}
+  .assistant-main-card{grid-column:1/-1}
+  .assistant-main-card,.assistant-side-card{height:190px}
+  .assistant-side-card{padding:17px}
+  .assistant-side-card h3{margin-top:22px;font-size:11px}
+  .reference-footer{
+    width:calc(100% - 36px);
+    min-height:65px;
+    padding:20px 0!important;
+    font-size:7px!important;
+  }
+}
