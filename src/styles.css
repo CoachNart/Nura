@@ -2560,7 +2560,7 @@ html,body,#root{width:100%;max-width:100%;overflow-x:hidden}
   color:#1769ff!important;
 }
 .reference-hero h1.hero-letter-headline .hero-letter.is-settled{
-  animation:nura-scramble-settle .42s cubic-bezier(.16,1,.3,1) both!important;
+  animation:nura-typewriter-settle .22s ease-out both!important;
 }
 @keyframes nura-scramble-settle{
   0%{opacity:.72;transform:translateY(3px) scale(.985);filter:blur(1px)}
@@ -2569,3 +2569,8 @@ html,body,#root{width:100%;max-width:100%;overflow-x:hidden}
 }
 /* Remove the stray white rounded streak from the hero atmosphere. */
 .reference-hero-glow:before{display:none!important}
+
+@keyframes nura-typewriter-settle{
+  0%{opacity:0;transform:translateY(2px)}
+  100%{opacity:1;transform:none}
+}
