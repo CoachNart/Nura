@@ -2574,3 +2574,18 @@ html,body,#root{width:100%;max-width:100%;overflow-x:hidden}
   0%{opacity:0;transform:translateY(2px)}
   100%{opacity:1;transform:none}
 }
+
+/* FINAL HERO TYPE TREATMENT — no clipping, blue/black mix */
+.reference-hero h1.hero-letter-headline{width:100%!important;max-width:920px!important;margin-inline:auto!important;overflow:visible!important;white-space:normal!important;overflow-wrap:anywhere!important}
+.reference-hero h1.hero-letter-headline .hero-line{display:block!important;width:100%!important;max-width:100%!important;white-space:normal!important;text-align:center!important}
+.reference-hero h1.hero-letter-headline .hero-word{display:inline!important;white-space:nowrap!important}
+.reference-hero h1.hero-letter-headline .hero-word-blue .hero-letter{color:#1769ff!important}
+.reference-hero h1.hero-letter-headline .hero-word-dark .hero-letter{color:#111827!important}
+.reference-hero h1.hero-letter-headline .hero-letter{min-width:0!important;width:auto!important}
+@media(max-width:700px){
+ .reference-hero h1.hero-letter-headline{width:100%!important;max-width:100%!important;margin-top:26px!important;padding:0!important;font-size:clamp(30px,8.7vw,50px)!important;line-height:1!important;letter-spacing:-.045em!important}
+ .reference-hero h1.hero-letter-headline .hero-line{padding-inline:0!important}
+}
+@media(max-width:380px){
+ .reference-hero h1.hero-letter-headline{font-size:clamp(27px,8.5vw,36px)!important;letter-spacing:-.04em!important}
+}
