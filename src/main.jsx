@@ -17,7 +17,7 @@ function App(){
  return route==="app"?<NuraApp wallet={wallet} setWallet={setWallet} goHome={()=>go("home")}/>:<Landing goApp={()=>go("app")}/>;
 }
 
-function Brand({compact=false,onClick}){return <button className={"brand "+(compact?"brand-compact":"")} onClick={onClick}><span className="brand-mark"><i/><i/></span><span>NURA</span></button>}
+function Brand({compact=false,onClick}){return <button className={"brand "+(compact?"brand-compact":"")} onClick={onClick} aria-label="Nura home"><img className="brand-logo" src="/nura-logo.png" alt="Nura"/></button>}
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
 function Landing({goApp}){
@@ -82,7 +82,18 @@ function Landing({goApp}){
       <div className="reference-kicker motion-stagger"><span>←</span><b>Nura · Patient intelligence</b><span>→</span></div>
       <h1 data-motion-reveal="hero-title">Comprehensive Health<br/><span>Intelligence.</span></h1>
       <p className="hero-rich-copy" data-motion-reveal="hero-sub">Nura brings your health information, everyday context and intelligent guidance together in one private, patient-first experience. Understand what matters, prepare for care, and get thoughtful AI guidance whenever you need it — all in one calm, beautifully simple place.</p>
-      <div className="hero-actions" data-motion-reveal="hero-actions"><button className="hero-cta hero-cta-primary" onClick={goApp}>Open Nura <span>↗</span></button><button className="hero-cta hero-cta-secondary" onClick={()=>scrollTo("care")}>Explore Nura <span>↓</span></button></div>
+      <div className="hero-actions" data-motion-reveal="hero-actions"><button className="hero-cta hero-cta-primary" onClick={goApp}>Get started <span>↗</span></button><button className="hero-cta hero-cta-secondary" onClick={()=>scrollTo("care")}>Explore care <span>↓</span></button></div>
+      <div className="hero-device-stage" aria-hidden="true">
+       <article className="health-phone phone-left">
+        <div className="phone-screen"><span className="phone-notch"/><div className="phone-brand">NURA</div><div className="phone-title">Your health<br/><span>journey starts here.</span></div><div className="phone-card blue"><div className="phone-label">Health journey</div><div className="phone-big">Care, with context.</div><div className="phone-line"/><div className="phone-avatar-row"><i className="phone-avatar"/><i className="phone-avatar"/><i className="phone-avatar"/></div><div className="phone-cta">Talk to Nura&nbsp; →</div></div></div>
+       </article>
+       <article className="health-phone phone-center">
+        <div className="phone-screen"><span className="phone-notch"/><div className="phone-brand">Good morning</div><div className="phone-title">Make an<br/><span>appointment.</span></div><div className="phone-card blue"><div className="phone-label">Next care</div><div className="phone-big">Specialist visit</div><div className="phone-line"/><div className="phone-doctor"><i className="doctor-avatar"/><div><b>Care provider</b><small>12:30 · Available</small></div></div></div><div className="phone-card"><div className="phone-label">Health signals</div><div className="phone-chart"><i/><i/><i/><i/><i/><i/></div></div><div className="phone-bottom"><span className="active">Home</span><span>Health</span><span>Care</span><span>Profile</span></div></div>
+       </article>
+       <article className="health-phone phone-right">
+        <div className="phone-screen"><span className="phone-notch"/><div className="phone-brand">NURA CARE</div><div className="phone-title">Your care<br/><span>at a glance.</span></div><div className="phone-card"><div className="phone-label">Care status</div><div className="phone-big">On track</div><div className="phone-line short"/><div className="phone-line"/><div className="phone-line short"/></div><div className="phone-card blue"><div className="phone-label">Visit type</div><div className="phone-big">Consultation</div><div className="phone-cta">Book session&nbsp; →</div></div></div>
+       </article>
+      </div>
      </div>
     </section>
 
