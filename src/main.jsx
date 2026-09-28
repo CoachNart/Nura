@@ -62,16 +62,15 @@ function Landing({goApp}){
     </div>
     <div className="nura-hero-scene" aria-hidden="true">
       <div className="nura-blue-haze"/>
-      <div className="nura-hand-device">
-       <img src="https://images.pexels.com/photos/30909364/pexels-photo-30909364.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Real hand holding a smartphone with a blank screen"/>
-       <div className="nura-real-screen">
-        <div className="nura-screen-status">9:41 <span>••• ▰</span></div>
-        <div className="nura-screen-head"><b>Nura</b><span>AI Doctor</span></div>
-        <div className="nura-screen-title">How are you<br/><b>feeling today?</b></div>
-        <div className="nura-screen-prompt">Tell Nura what you're experiencing <span>→</span></div>
-        <div className="nura-screen-chips"><i>Symptoms</i><i>Medications</i><i>Health</i><i>Care</i></div>
-        <div className="nura-screen-orb"><span/></div>
-       </div>
+      <img className="nura-hand-back" src="https://images.rawpixel.com/image_png_social_square/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTEwL3Jhd3BpeGVsb2ZmaWNlMl9hX2JsYWNrX2hhbmRfaG9sZGluZ19hX3Bob25lX3dpdGhfYV93aGl0ZV9zY3JlZW5fNDBmZGM1YmQtZjdkMi00ZTFjLTk1Y3QtZGQ0NjJjMzYzYjFlLnBuZw.png" alt="" />
+      <div className="nura-device">
+       <div className="nura-device-notch"/>
+       <div className="nura-device-status"><span>9:41</span><span>••• ▰</span></div>
+       <div className="nura-device-head"><b>Nura</b><span>AI Doctor</span></div>
+       <div className="nura-device-title">How are you<br/><b>feeling today?</b></div>
+       <div className="nura-device-prompt">Tell Nura what you're experiencing <span>→</span></div>
+       <div className="nura-device-chips"><i>Symptoms</i><i>Medications</i><i>Health</i><i>Care</i></div>
+       <div className="nura-device-orb"><span/></div>
       </div>
       <div className="nura-float nura-heart"><b>72</b><small>HEART RATE</small><i>Normal</i></div>
       <div className="nura-float nura-sleep"><b>7h 45m</b><small>SLEEP</small><i>Good</i></div>
