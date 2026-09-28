@@ -33,13 +33,15 @@ function useReveal(){
 }
 function Landing({goApp}){
  const[heroRef,heroVisible]=useReveal();
+ const[navScrolled,setNavScrolled]=useState(false);
+ React.useEffect(()=>{const onScroll=()=>setNavScrolled(window.scrollY>28);window.addEventListener("scroll",onScroll,{passive:true});onScroll();return()=>window.removeEventListener("scroll",onScroll)},[]);
  const[introRef,introVisible]=useReveal();
  const[doctorRef,doctorVisible]=useReveal();
  const[dataRef,dataVisible]=useReveal();
  const[ownershipRef,ownershipVisible]=useReveal();
  const[finalRef,finalVisible]=useReveal();
  return <div className="nura-site">
-  <header className="nura-nav">
+  <header className={"nura-nav "+(navScrolled?"nura-nav-scrolled":"")}>
    <Brand onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}/>
    <nav className="nura-nav-links"><a href="#doctor">AI Doctor</a><a href="#health">Health</a><a href="#ownership">Ownership</a><a href="#privacy">Privacy</a><a href="#about">About</a></nav>
    <button className="nura-nav-cta" onClick={goApp}>Open Nura <ArrowRight size={14}/></button>
