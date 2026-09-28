@@ -40,6 +40,8 @@ function Landing({goApp}){
  const[doctorRef,doctorVisible]=useReveal();
  const[dataRef,dataVisible]=useReveal();
  const[ownershipRef,ownershipVisible]=useReveal();
+ const[careRef,careVisible]=useReveal();
+ const[privacyRef,privacyVisible]=useReveal();
  const[finalRef,finalVisible]=useReveal();
  return <div className="nura-site">
   <header className={"nura-nav "+(navScrolled?"nura-nav-scrolled":"")}>
@@ -51,7 +53,7 @@ function Landing({goApp}){
   <main>
    <section ref={heroRef} className={"nura-hero "+(heroVisible?"is-visible":"")}>
     <div className="nura-hero-copy">
-     <div className="nura-kicker nura-reveal-eyebrow"><span>✦</span> AI-POWERED HEALTH × WEB3</div>
+     <div className="nura-kicker nura-reveal-eyebrow"><span className="nura-kicker-mark"><Activity size={13}/></span> AI-POWERED HEALTH</div>
      <h1 className="nura-hero-title" aria-label="Understand your health. Live better.">
       <span className="nura-mask"><span>Understand</span></span>
       <span className="nura-mask"><span>your health.</span></span>
@@ -62,7 +64,7 @@ function Landing({goApp}){
     </div>
     <div className="nura-hero-scene" aria-hidden="true">
       <div className="nura-blue-haze"/>
-      <img className="nura-hand-back" src="https://images.rawpixel.com/image_png_social_square/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTEwL3Jhd3BpeGVsb2ZmaWNlMl9hX2JsYWNrX2hhbmRfaG9sZGluZ19hX3Bob25lX3dpdGhfYV93aGl0ZV9zY3JlZW5fNDBmZGM1YmQtZjdkMi00ZTFjLTk1Y3QtZGQ0NjJjMzYzYjFlLnBuZw.png" alt="" />
+      <img className="nura-hand-back" src="https://images.unsplash.com/photo-1659079478237-3a48864e08a9?auto=format&fit=crop&w=1200&q=88" alt="" />
       <div className="nura-device">
        <div className="nura-device-notch"/>
        <div className="nura-device-status"><span>9:41</span><span>••• ▰</span></div>
@@ -80,7 +82,7 @@ function Landing({goApp}){
 
    <section ref={introRef} id="about" className={"nura-intro nura-reveal-section "+(introVisible?"is-visible":"")}>
     <div className="nura-overline">HEALTH SHOULD FEEL HUMAN</div>
-    <div><h2><span>Less noise.</span><br/><em>More understanding.</em></h2><p>Health generates a lot of information. Nura turns that information into something clearer — helping you move from raw signals to useful context, without adding more noise.</p></div>
+    <div className="nura-intro-copy"><h2><span>Less noise.</span><br/><em>More understanding.</em></h2><p>Health generates a lot of information. Nura turns that information into something clearer — helping you move from raw signals to useful context, without adding more noise.</p></div><div className="nura-intro-visual"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1400&q=88" alt="Calm healthcare consultation" /><span className="nura-intro-scan"><i/>CONNECTED CONTEXT</span></div>
    </section>
 
    <section ref={doctorRef} id="doctor" className={"nura-agent-section "+(doctorVisible?"is-visible":"")}>
@@ -107,7 +109,7 @@ function Landing({goApp}){
     </div>
    </section>
 
-   <section id="care" className="nura-care nura-tight-section">
+   <section ref={careRef} id="care" className={"nura-care nura-tight-section nura-motion-section "+(careVisible?"is-visible":"")}>
     <div className="nura-care-copy"><span className="nura-overline">03 / PERSONALIZED CARE</span><h2>Small details<br/><em>matter.</em></h2><div className="nura-feature-grid">
       <article className="nura-feature-card"><div><PillIcon size={18}/></div><b>Medication</b><p>Keep schedules and reminders clear.</p><ArrowRight size={14}/></article>
       <article className="nura-feature-card"><div><CalendarDays size={18}/></div><b>Appointments</b><p>Keep upcoming care in view.</p><ArrowRight size={14}/></article>
@@ -117,7 +119,7 @@ function Landing({goApp}){
    </section>
 
    <section ref={ownershipRef} id="ownership" className={"nura-ownership "+(ownershipVisible?"is-visible":"")}>
-    <div className="nura-ownership-copy"><span className="nura-overline">04 / WEB3 OWNERSHIP</span><h2>Your health.<br/><em>Your control.</em></h2><p>Web3 infrastructure stays underneath the experience — supporting consent, controlled access and portability without turning your health journey into a crypto interface.</p></div>
+    <div className="nura-ownership-copy"><span className="nura-overline">04 / DATA OWNERSHIP</span><h2>Your health.<br/><em>Your control.</em></h2><p>The infrastructure stays underneath the experience — supporting consent, controlled access and portability without turning your health journey into a technical interface.</p></div>
     <div className="nura-ownership-flow">
       <div className="ownership-step"><span>01</span><UserRound size={19}/><b>You</b><small>Your identity</small></div><div className="ownership-link"><i/><i/><i/></div>
       <div className="ownership-step"><span>02</span><HeartPulse size={19}/><b>Health data</b><small>Your information</small></div><div className="ownership-link"><i/><i/><i/></div>
@@ -126,7 +128,7 @@ function Landing({goApp}){
     </div>
    </section>
 
-   <section id="privacy" className="nura-privacy">
+   <section ref={privacyRef} id="privacy" className={"nura-privacy nura-motion-section "+(privacyVisible?"is-visible":"")}>
     <div><span className="nura-overline">05 / PRIVATE BY DESIGN</span><h2>Technology that<br/><em>respects you.</em></h2><p>Nura is designed around a simple principle: your health information should feel personal, understandable and under your control.</p><button className="nura-dark-button" onClick={goApp}>Enter your private space <ArrowRight size={14}/></button></div>
     <div className="nura-privacy-art"><div className="nura-lock"><LockKeyhole size={28}/></div><div className="nura-ring ring-a"/><div className="nura-ring ring-b"/><div className="nura-ring ring-c"/></div>
    </section>
