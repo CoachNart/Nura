@@ -1826,3 +1826,51 @@
     font-size:11px;
   }
 }
+
+
+/* Animated hero purple splash lighting */
+.reference-hero-glow{
+  background:
+    radial-gradient(ellipse 38% 48% at 50% 50%,rgba(184,117,255,.82) 0%,rgba(126,54,255,.58) 28%,rgba(89,32,190,.28) 52%,transparent 76%);
+  animation:nura-hero-light-drift 8s ease-in-out infinite alternate;
+  will-change:transform,opacity,filter;
+}
+.reference-hero::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:47%;
+  width:min(900px,92vw);
+  height:210px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:
+    radial-gradient(ellipse,rgba(194,135,255,.42) 0%,rgba(128,57,255,.22) 38%,transparent 72%);
+  filter:blur(30px);
+  opacity:.72;
+  pointer-events:none;
+  animation:nura-hero-splash 6.5s ease-in-out infinite alternate;
+}
+@keyframes nura-hero-light-drift{
+  0%{
+    transform:translate3d(-5%,0,0) scale(.92);
+    opacity:.58;
+    filter:blur(24px);
+  }
+  50%{
+    opacity:.9;
+  }
+  100%{
+    transform:translate3d(6%,-7px,0) scale(1.12);
+    opacity:.72;
+    filter:blur(30px);
+  }
+}
+@keyframes nura-hero-splash{
+  0%{transform:translate(-50%,-50%) scaleX(.84) scaleY(.78);opacity:.5}
+  50%{opacity:.82}
+  100%{transform:translate(-50%,-50%) scaleX(1.12) scaleY(1.06);opacity:.62}
+}
+@media(prefers-reduced-motion:reduce){
+  .reference-hero-glow,.reference-hero::before{animation:none}
+}
