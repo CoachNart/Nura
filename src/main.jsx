@@ -122,7 +122,7 @@ function Landing({goApp}){
     </section>
    </main>
 
-   <footer className="landing-footer reference-footer"><Brand/><span>Patient-first health intelligence.</span><span>© 2026 Nura</span></footer>
+   <footer className="landing-footer reference-footer" data-motion-reveal="footer"><Brand/><span>Patient-first health intelligence.</span><span>© 2026 Nura</span></footer>
   </div>
  </div>;
 }
