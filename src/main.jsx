@@ -26,7 +26,7 @@ function Landing({goApp}){
  const copyCA=async()=>{if(!CONTRACT_ADDRESS){return;}try{await navigator.clipboard.writeText(CONTRACT_ADDRESS);setCaCopied(true);setTimeout(()=>setCaCopied(false),1800);}catch{setCaCopied(false)}};
  const[open,setOpen]=useState(false);
  React.useEffect(()=>{
-  const nodes=[...document.querySelectorAll("[data-motion-reveal]")];
+  const nodes=[...document.querySelectorAll("[data-motion-reveal]")];document.querySelector(".reference-hero-content")?.classList.add("motion-visible");
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(reduced){nodes.forEach(n=>n.classList.add("motion-visible"));return}
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
