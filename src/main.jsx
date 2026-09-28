@@ -22,72 +22,40 @@ function Brand({compact=false,onClick}){return <button className={"brand "+(comp
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
 function Landing({goApp}){
- return <div className="fresh-landing">
-  <header className="fresh-nav">
-   <button className="fresh-logo" onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}>NURA</button>
-   <nav>
-    <a href="#why-nura">Why Nura</a>
-    <a href="#privacy">Privacy</a>
-   </nav>
-   <button className="fresh-nav-cta" onClick={goApp}>Enter Nura <ArrowRight size={14}/></button>
+ return <div className="ada-landing">
+  <header className="ada-nav">
+   <Brand onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}/>
+   <nav><a href="#home">Home</a><a href="#doctor">AI Doctor</a><a href="#health">Health</a><a href="#medications">Medications</a><a href="#appointments">Appointments</a><a href="#library">Library</a><a href="#about">About</a></nav>
+   <button className="ada-download" onClick={goApp}>Download App <ArrowRight size={14}/></button>
   </header>
-
-  <main>
-   <section className="fresh-hero">
-    <div className="fresh-hero-copy">
-     <span className="fresh-eyebrow">PERSONAL HEALTH INTELLIGENCE</span>
-     <h1>Health, understood<br/><i>on your terms.</i></h1>
-     <p>Nura brings your health information, conversations and everyday context into one calm, intelligent space.</p>
-     <button className="fresh-primary" onClick={goApp}>Get started <ArrowRight size={15}/></button>
+  <main id="home">
+   <section className="ada-hero">
+    <div className="ada-hero-copy">
+     <div className="ada-badge"><span>✦</span> New <b>Your AI Health Companion</b></div>
+     <h1><span>Nura AI-Powered</span><br/>for Better Health</h1>
+     <p>Get personalized health insights, symptom assessment, medication reminders, and more — all in one place.</p>
+     <div className="ada-actions"><button className="ada-download" onClick={goApp}>Download App <ArrowRight size={14}/></button><button className="ada-secondary" onClick={goApp}>Try AI Doctor <ArrowRight size={14}/></button></div>
     </div>
 
-    <div className="fresh-visual" aria-hidden="true">
-     <div className="fresh-orbit orbit-1"/>
-     <div className="fresh-orbit orbit-2"/>
-     <div className="fresh-orbit orbit-3"/>
-     <div className="fresh-core"><span>N</span></div>
-     <div className="fresh-signal signal-1">HEALTH / 01</div>
-     <div className="fresh-signal signal-2">PRIVATE / 02</div>
-     <div className="fresh-signal signal-3">INTELLIGENT / 03</div>
-    </div>
+    <div className="ada-health-card ada-stats"><div><small>Heart Rate</small><strong>72 <em>bpm</em></strong><label><i/> Normal</label></div><div><small>Sleep</small><strong>7h 45m</strong><label><i/> Quality: Good</label></div></div>
+    <div className="ada-health-card ada-emergency"><div className="ada-emergency-icon"><UserRound size={20}/></div><div><b>Emergency Call</b><small>Get instant access to medical help</small></div><span><MessageCircle size={18}/></span></div>
 
-    <div className="fresh-scroll">SCROLL TO EXPLORE <span>↓</span></div>
-   </section>
-
-   <section className="fresh-section" id="why-nura">
-    <div className="fresh-section-number">01</div>
-    <div>
-     <span className="fresh-eyebrow">A DIFFERENT KIND OF HEALTH EXPERIENCE</span>
-     <h2>Everything important.<br/><i>Nothing unnecessary.</i></h2>
-     <p>Nura is built to make health feel easier to understand — without turning your life into a wall of dashboards, charts or clutter.</p>
-     <button className="fresh-text-link" onClick={goApp}>Explore Nura <ArrowRight size={14}/></button>
+    <div className="ada-phone-wrap">
+      <div className="ada-hand ada-hand-left"/><div className="ada-hand ada-hand-right"/>
+      <div className="ada-phone">
+       <div className="ada-island"/>
+       <div className="ada-phone-top"><span>9:41</span><span>◦◦◦ ▰</span></div>
+       <div className="ada-appbar"><b><span className="ada-mini-mark"/> NURA</b><span>♙</span></div>
+       <p className="ada-greeting">Good morning,<br/><b>How can I help you today?</b></p>
+       <div className="ada-search">Ask Nura anything... <span>➤</span></div>
+       <div className="ada-tools"><span>♡ Symptoms</span><span>◉ Medications</span><span>▣ Health Records</span><span>▦ Appointments</span></div>
+       <div className="ada-orb"><i/></div>
+       <div className="ada-phone-bottom">Nura AI<br/><small>Always here for you</small></div>
+      </div>
     </div>
    </section>
-
-   <section className="fresh-dark" id="privacy">
-    <div className="fresh-dark-copy">
-     <span className="fresh-eyebrow">PRIVATE BY DESIGN</span>
-     <h2>Your health<br/><i>stays personal.</i></h2>
-     <p>Control your information, your conversations and your health context from one focused place.</p>
-     <button className="fresh-outline" onClick={goApp}>Enter Nura <ArrowRight size={14}/></button>
-    </div>
-    <div className="fresh-line-art" aria-hidden="true">
-     <span/><span/><span/>
-    </div>
-   </section>
-
-   <section className="fresh-final">
-    <span className="fresh-eyebrow">NURA</span>
-    <h2>Know more.<br/><i>Carry less.</i></h2>
-    <button className="fresh-primary" onClick={goApp}>Get started <ArrowRight size={15}/></button>
-   </section>
+   <section className="ada-after" id="doctor"><span>AI HEALTH, WITHOUT THE CLUTTER.</span><h2>A calmer way to understand<br/><i>your health.</i></h2></section>
   </main>
-
-  <footer className="fresh-footer">
-   <strong>NURA</strong>
-   <span>Personal health intelligence.</span>
-   <button onClick={goApp}>Open app <ArrowRight size={13}/></button>
-  </footer>
  </div>
 }
 function FeatureCard({icon,title,text}){return <article className="feature-card"><div className="feature-card-icon">{icon}</div><h3>{title}</h3><p>{text}</p><ChevronRight size={17}/></article>}
