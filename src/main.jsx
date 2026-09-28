@@ -22,6 +22,29 @@ function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}
 
 function Landing({goApp}){
  const[open,setOpen]=useState(false);
+ React.useEffect(()=>{
+  const nodes=[...document.querySelectorAll("[data-motion-reveal]")];
+  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduced){nodes.forEach(n=>n.classList.add("motion-visible"));return}
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+   if(entry.isIntersecting){entry.target.classList.add("motion-visible");observer.unobserve(entry.target)}
+  }),{threshold:.12,rootMargin:"0px 0px -8% 0px"});
+  nodes.forEach(n=>observer.observe(n));
+  return()=>observer.disconnect();
+ },[]);
+ React.useEffect(()=>{
+  const root=document.querySelector(".reference-landing");
+  if(!root||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  let raf=0;
+  const move=()=>{
+   const y=window.scrollY||0;
+   root.style.setProperty("--nura-scroll",Math.min(y*.18,120)+"px");
+   raf=0;
+  };
+  const onScroll=()=>{if(!raf)raf=requestAnimationFrame(move)};
+  window.addEventListener("scroll",onScroll,{passive:true});
+  return()=>{window.removeEventListener("scroll",onScroll);if(raf)cancelAnimationFrame(raf)};
+ },[]);
  const scrollTo=id=>document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
  return <div className="landing-shell reference-landing">
   <div className="reference-page">
@@ -33,47 +56,47 @@ function Landing({goApp}){
    </header>
    {open&&<div className="mobile-menu-panel">{[["Product","product"],["AI Doctor","doctor"],["Care","care"],["Privacy","privacy"]].map(([x,id])=><a key={x} href={"#"+id} onClick={()=>setOpen(false)}>{x}</a>)}<button onClick={goApp}>Open Nura</button></div>}
    <main>
-    <section className="reference-hero" id="product">
-     <div className="reference-hero-glow"/>
-     <div className="reference-hero-content">
-      <div className="reference-kicker"><span>←</span><b>Nura · Patient intelligence</b><span>→</span></div>
-      <h1>Comprehensive Health<br/><span>Intelligence.</span></h1>
-      <p>Private health context, AI guidance and care preparation in one calm place.</p>
+    <section className="reference-hero motion-hero" id="product">
+     <div className="reference-hero-glow hero-parallax-layer"/>
+     <div className="reference-hero-content" data-motion-reveal="hero">
+      <div className="reference-kicker motion-stagger"><span>←</span><b>Nura · Patient intelligence</b><span>→</span></div>
+      <h1 data-motion-reveal="hero-title">Comprehensive Health<br/><span>Intelligence.</span></h1>
+      <p data-motion-reveal="hero-sub">Private health context, AI guidance and care preparation in one calm place.</p>
      </div>
     </section>
 
     <section className="nura-ref-content" id="doctor">
-     <div className="nura-ref-stats">
-      <article><strong>50K+</strong><span>Patients Served</span></article>
-      <article><strong>500+</strong><span>Healthcare Providers</span></article>
-      <article><strong>98%</strong><span>Patient Satisfaction</span></article>
-      <article><strong>24/7</strong><span>Care Availability</span></article>
+     <div className="nura-ref-stats" data-motion-reveal="stats">
+      <article className="motion-metric"><strong data-counter="50">0K+</strong><span>Patients Served</span></article>
+      <article className="motion-metric"><strong data-counter="500">0+</strong><span>Healthcare Providers</span></article>
+      <article className="motion-metric"><strong data-counter="98">0%</strong><span>Patient Satisfaction</span></article>
+      <article className="motion-metric"><strong className="static-metric">24/7</strong><span>Care Availability</span></article>
      </div>
      <section className="nura-ref-care">
       <div className="nura-ref-heading"><span className="nura-ref-badge">✦ OUR PATIENTS</span><h2>Healthcare Designed<br/>Around Patients</h2></div>
-      <div className="nura-ref-cards">
-       <article className="nura-ref-card nura-record-card"><header><h3>Health Records</h3><p>Access your complete medical history anytime</p></header><div className="records-visual"><span className="records-tag">♡ Patient health trends</span><div className="records-bars"><i/><i/><i/><i/><i/><i/></div></div></article>
-       <article className="nura-ref-card nura-rx-card"><header><h3>Digital Prescriptions</h3><p>Receive prescriptions securely and instantly.</p></header><div className="rx-visual"><div className="rx-arc"/><i>⌂</i><i>×</i><i>♧</i><i>▣</i><b>✦</b></div></article>
-       <article className="nura-ref-card nura-message-card"><header><h3>Secure Messaging</h3><p>Stay connected with your healthcare team</p></header><div className="message-visual"><span>Patient updates</span><span>Condition Mapping</span><span>Resource Allocation</span></div></article>
-       <article className="nura-ref-card nura-visits-card"><header><h3>Virtual Doctor Visits</h3><p>Analyze treatment outcomes and forecast disease progression to improve care efficiency</p></header><div className="visits-chart"><div className="chart-grid"/><div className="chart-labels"><span>100</span><span>60</span><span>30</span><span>0</span></div><div className="chart-row r1"/><div className="chart-row r2"/><div className="chart-row r3"/><div className="chart-row r4"/></div></article>
-       <article className="nura-ref-card nura-symptom-card"><header><h3>AI Symptom Checker</h3><p>Get instant health guidance before scheduling.</p></header><div className="symptom-visual"><div><span>This week's High-Risk Loads<small>View Critical Alerts for 15 Patients</small></span><button>See Data</button></div><div><span>This week's High-Risk Loads<small>View Critical Alerts for 15 Patients</small></span><button>See Data</button></div></div></article>
+      <div className="nura-ref-cards motion-stagger-grid">
+       <article className="nura-ref-card nura-record-card" data-motion-reveal="card"><header><h3>Health Records</h3><p>Access your complete medical history anytime</p></header><div className="records-visual"><span className="records-tag">♡ Patient health trends</span><div className="records-bars"><i/><i/><i/><i/><i/><i/></div></div></article>
+       <article className="nura-ref-card nura-rx-card" data-motion-reveal="card"><header><h3>Digital Prescriptions</h3><p>Receive prescriptions securely and instantly.</p></header><div className="rx-visual"><div className="rx-arc"/><i>⌂</i><i>×</i><i>♧</i><i>▣</i><b>✦</b></div></article>
+       <article className="nura-ref-card nura-message-card" data-motion-reveal="card"><header><h3>Secure Messaging</h3><p>Stay connected with your healthcare team</p></header><div className="message-visual"><span>Patient updates</span><span>Condition Mapping</span><span>Resource Allocation</span></div></article>
+       <article className="nura-ref-card nura-visits-card" data-motion-reveal="card"><header><h3>Virtual Doctor Visits</h3><p>Analyze treatment outcomes and forecast disease progression to improve care efficiency</p></header><div className="visits-chart"><div className="chart-grid"/><div className="chart-labels"><span>100</span><span>60</span><span>30</span><span>0</span></div><div className="chart-row r1"/><div className="chart-row r2"/><div className="chart-row r3"/><div className="chart-row r4"/></div></article>
+       <article className="nura-ref-card nura-symptom-card" data-motion-reveal="card"><header><h3>AI Symptom Checker</h3><p>Get instant health guidance before scheduling.</p></header><div className="symptom-visual"><div><span>This week's High-Risk Loads<small>View Critical Alerts for 15 Patients</small></span><button>See Data</button></div><div><span>This week's High-Risk Loads<small>View Critical Alerts for 15 Patients</small></span><button>See Data</button></div></div></article>
       </div>
      </section>
-     <section className="nura-ref-guide" id="care">
+     <section className="nura-ref-guide" id="care" data-motion-reveal="section">
       <div className="nura-ref-heading guide-title"><span className="nura-ref-badge">✦ PATIENT GUIDE</span><h2>Transforming care with<br/>patient-centric ai</h2></div>
       <div className="guide-arc"><i/></div>
-      <div className="guide-steps">
-       <article><em>01</em><div><h3>Identify Patient Risk</h3><p>Instantly screen for critical conditions using AI-driven predictive modeling and patient data analysis.</p></div><b>♡</b></article>
-       <article><em>02</em><div><h3>Optimize Care Plans</h3><p>Integrate individualized therapy regimens, lab results and real-time monitoring insights effortlessly.</p></div><b>◈</b></article>
-       <article><em>03</em><div><h3>Accelerate Health Outcomes</h3><p>AI enhances early diagnosis and predicts treatment efficacy for better recovery rates and disease management.</p></div><b>♧</b></article>
+      <div className="guide-steps motion-stagger-grid">
+       <article data-motion-reveal="step"><em>01</em><div><h3>Identify Patient Risk</h3><p>Instantly screen for critical conditions using AI-driven predictive modeling and patient data analysis.</p></div><b>♡</b></article>
+       <article data-motion-reveal="step"><em>02</em><div><h3>Optimize Care Plans</h3><p>Integrate individualized therapy regimens, lab results and real-time monitoring insights effortlessly.</p></div><b>◈</b></article>
+       <article data-motion-reveal="step"><em>03</em><div><h3>Accelerate Health Outcomes</h3><p>AI enhances early diagnosis and predicts treatment efficacy for better recovery rates and disease management.</p></div><b>♧</b></article>
       </div>
      </section>
-     <section className="nura-ref-assistant" id="privacy">
+     <section className="nura-ref-assistant" id="privacy" data-motion-reveal="section">
       <div className="nura-ref-heading assistant-title"><span className="nura-ref-badge">✦ FOR PATIENTS</span><h2>Your Personal Health Assistant,<br/>Available 24/7</h2></div>
-      <div className="assistant-ref-layout">
-       <article className="assistant-main-card"><div className="assistant-bar"><span className="assistant-avatar">✦</span><div><b>AI Health Assistant</b><small>● Online · Answering</small></div><strong>•••</strong></div><div className="assistant-bubble">I have been having headaches, fatigue and trouble sleeping for the past week.</div><div className="assistant-composer">Tell Nura what you're experiencing… <ArrowRight size={10}/></div></article>
-       <article className="assistant-side-card"><span className="side-icon">◉</span><h3>Symptom Analysis</h3><div className="tag-row"><b>Headache</b><b>Fatigue</b><b>Sleep Issues</b></div></article>
-       <article className="assistant-side-card risk-card"><span className="side-icon">◌</span><h3>Health Risk Score</h3><strong>Low risk</strong><div className="risk-meter"><i/></div></article>
+      <div className="assistant-ref-layout motion-stagger-grid">
+       <article className="assistant-main-card" data-motion-reveal="card"><div className="assistant-bar"><span className="assistant-avatar">✦</span><div><b>AI Health Assistant</b><small>● Online · Answering</small></div><strong>•••</strong></div><div className="assistant-bubble">I have been having headaches, fatigue and trouble sleeping for the past week.</div><div className="assistant-composer">Tell Nura what you're experiencing… <ArrowRight size={10}/></div></article>
+       <article className="assistant-side-card" data-motion-reveal="card"><span className="side-icon">◉</span><h3>Symptom Analysis</h3><div className="tag-row"><b>Headache</b><b>Fatigue</b><b>Sleep Issues</b></div></article>
+       <article className="assistant-side-card risk-card" data-motion-reveal="card"><span className="side-icon">◌</span><h3>Health Risk Score</h3><strong>Low risk</strong><div className="risk-meter"><i/></div></article>
       </div>
      </section>
     </section>
