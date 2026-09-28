@@ -2589,3 +2589,33 @@ html,body,#root{width:100%;max-width:100%;overflow-x:hidden}
 @media(max-width:380px){
  .reference-hero h1.hero-letter-headline{font-size:clamp(27px,8.5vw,36px)!important;letter-spacing:-.04em!important}
 }
+
+/* MOBILE HERO — fit the complete headline inside the device */
+@media(max-width:700px){
+  .reference-hero h1.hero-letter-headline{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:100%!important;
+    padding:0 12px!important;
+    font-size:clamp(24px,7.4vw,38px)!important;
+    line-height:1.08!important;
+    letter-spacing:-.035em!important;
+    overflow:visible!important;
+  }
+  .reference-hero h1.hero-letter-headline .hero-line{
+    width:100%!important;
+    max-width:100%!important;
+    text-align:center!important;
+    white-space:normal!important;
+  }
+  .reference-hero h1.hero-letter-headline .hero-word{
+    white-space:nowrap!important;
+  }
+}
+@media(max-width:380px){
+  .reference-hero h1.hero-letter-headline{
+    padding:0 8px!important;
+    font-size:clamp(22px,7.1vw,30px)!important;
+    letter-spacing:-.03em!important;
+  }
+}
