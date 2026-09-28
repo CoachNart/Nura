@@ -60,7 +60,7 @@ async function connectInjected(){
 }
 
 async function connectWalletConnect(){
- const projectId=import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
+ const projectId=import.meta.env.VITE_WALLETCONNECT_PROJECT_ID||"2c1790608fb8a31c207703e33ab0f572";
  if(!projectId) throw new Error("WalletConnect is not configured yet. Add VITE_WALLETCONNECT_PROJECT_ID in Vercel.");
  const mod=await import("@walletconnect/ethereum-provider");
  const EthereumProvider=mod.default||mod.EthereumProvider;
