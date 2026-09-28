@@ -7,7 +7,7 @@ import{Activity,ArrowRight,Bell,Brain,CalendarDays,ChevronRight,CircleHelp,Dropl
 import"./styles.css";
 
 const chain={id:4663};
-const CONTRACT_ADDRESS="";
+const CONTRACT_ADDRESS=(import.meta.env.VITE_CONTRACT_ADDRESS||"").trim();
 
 function App(){
  const[route,setRoute]=useState(window.location.pathname==="/app"?"app":"home");
@@ -20,7 +20,7 @@ function App(){
 function Brand({compact=false,onClick}){return <button className={"brand "+(compact?"brand-compact":"")} onClick={onClick} aria-label="Nura home"><img className="brand-logo" src="/nura-logo.png" alt="Nura"/></button>}
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
-function Landing({goApp}){
+function Landing({goApp}){\n const[caCopied,setCaCopied]=useState(false);\n const copyCA=async()=>{if(!CONTRACT_ADDRESS){return;}try{await navigator.clipboard.writeText(CONTRACT_ADDRESS);setCaCopied(true);setTimeout(()=>setCaCopied(false),1800);}catch{setCaCopied(false)}};
  const[open,setOpen]=useState(false);
  React.useEffect(()=>{
   const nodes=[...document.querySelectorAll("[data-motion-reveal]")];
@@ -71,8 +71,8 @@ function Landing({goApp}){
    <header className="landing-nav reference-nav">
     <Brand/>
     <nav>{[["Product","product"],["AI Doctor","doctor"],["Care","care"],["Privacy","privacy"]].map(([x,id])=><a key={x} href={"#"+id}>{x}</a>)}</nav>
-    <button className="nav-cta" onClick={goApp}>Start a Free Trial</button>
-    <button className="mobile-menu" onClick={()=>setOpen(v=>!v)}><MoreHorizontal/></button>
+    <button className="nav-ca" onClick={copyCA} disabled={!CONTRACT_ADDRESS} title={CONTRACT_ADDRESS? "Copy contract address":"Contract address not configured"}>{caCopied?<><Check size={12}/> Copied</>:<><Copy size={12}/> Copy CA</>}</button>
+    <div className="nav-mobile-actions"><button className="nav-ca nav-ca-mobile" onClick={copyCA} disabled={!CONTRACT_ADDRESS}>{caCopied?<><Check size={12}/> Copied</>:<><Copy size={12}/> CA</>}</button><button className="mobile-menu" onClick={()=>setOpen(v=>!v)} aria-label="Open navigation"><MoreHorizontal/></button></div>
    </header>
    {open&&<div className="mobile-menu-panel">{[["Product","product"],["AI Doctor","doctor"],["Care","care"],["Privacy","privacy"]].map(([x,id])=><a key={x} href={"#"+id} onClick={()=>setOpen(false)}>{x}</a>)}<button onClick={goApp}>Open Nura</button></div>}
    <main>
