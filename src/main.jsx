@@ -20,11 +20,37 @@ function App(){
 function Brand({compact=false,onClick}){return <button className={"brand "+(compact?"brand-compact":"")} onClick={onClick} aria-label="Nura home"><img className="brand-logo" src="/nura-logo.png" alt="Nura"/></button>}
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
-function heroLetters(text){return [...text].map((char,i)=><span className="hero-letter" key={text+"-"+i} style={{"--letter-delay":`${i*0.028}s`}}>{char===" "?"\u00a0":char}</span>)}
+function heroLetters(text){return [...text].map((char,i)=><span className="hero-letter" data-final={char===" "?"\u00a0":char} key={text+"-"+i}>{char===" "?"\u00a0":char}</span>)}
 function Landing({goApp}){
  const[caCopied,setCaCopied]=useState(false);
  const copyCA=async()=>{if(!CONTRACT_ADDRESS){return;}try{await navigator.clipboard.writeText(CONTRACT_ADDRESS);setCaCopied(true);setTimeout(()=>setCaCopied(false),1800);}catch{setCaCopied(false)}};
  const[open,setOpen]=useState(false);
+ React.useEffect(()=>{
+  const letters=[...document.querySelectorAll(".hero-letter")];
+  if(!letters.length)return;
+  const glyphs="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+  const started=performance.now();
+  let raf=0;
+  const tick=now=>{
+   let pending=false;
+   letters.forEach((el,index)=>{
+    const elapsed=now-started-index*18;
+    const final=el.dataset.final||"";
+    if(elapsed<0){pending=true;return}
+    const progress=Math.min(elapsed/560,1);
+    if(progress<1){
+      el.textContent=glyphs[Math.floor(Math.random()*glyphs.length)];
+      pending=true;
+    }else{
+      el.textContent=final;
+      el.classList.add("is-settled");
+    }
+   });
+   if(pending)raf=requestAnimationFrame(tick);
+  };
+  raf=requestAnimationFrame(tick);
+  return()=>cancelAnimationFrame(raf);
+ },[]);
  React.useEffect(()=>{
   const nodes=[...document.querySelectorAll("[data-motion-reveal]")];
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
