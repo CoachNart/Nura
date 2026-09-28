@@ -64,7 +64,7 @@ function Landing({goApp}){
     </div>
     <div className="nura-hero-scene" aria-hidden="true">
       <div className="nura-blue-haze"/>
-      <img className="nura-hand-back" src="https://images.unsplash.com/photo-1659079478237-3a48864e08a9?auto=format&fit=crop&w=1200&q=88" alt="" />
+      <img className="nura-hand-back" src="https://images.rawpixel.com/image_png_social_square/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTEwL3Jhd3BpeGVsb2ZmaWNlMl9hX2JsYWNrX2hhbmRfaG9sZGluZ19hX3Bob25lX3dpdGhfYV93aGl0ZV9zY3JlZW5fNDBmZGM1YmQtZjdkMi00ZTFjLTk1Y3QtZGQ0NjJjMzYzYjFlLnBuZw.png" alt="" />
       <div className="nura-device">
        <div className="nura-device-notch"/>
        <div className="nura-device-status"><span>9:41</span><span>••• ▰</span></div>
