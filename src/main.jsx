@@ -43,27 +43,25 @@ function Landing({goApp}){
 
   <main>
    <section className="editorial-hero">
-    <div className="hero-noise"/>
-    <div className="hero-grid"/>
-    <div className="hero-glow hero-glow-a"/>
-    <div className="hero-glow hero-glow-b"/>
-    <div className="hero-ribbon ribbon-a"/>
-    <div className="hero-ribbon ribbon-b"/>
-    <div className="hero-platform">
-      <div className="platform-top"/>
-      <div className="platform-edge"/>
-      <div className="hero-coin"><span>N</span></div>
+    <div className="reference-speckle"/>
+    <div className="reference-lines"/>
+    <div className="reference-glow reference-glow-left"/>
+    <div className="reference-glow reference-glow-right"/>
+
+    <div className="reference-ribbon reference-ribbon-a"/>
+    <div className="reference-ribbon reference-ribbon-b"/>
+
+    <div className="reference-platform">
+      <div className="reference-platform-face"/>
+      <div className="reference-platform-edge"/>
+      <div className="reference-coin"><span>N</span></div>
     </div>
-    <div className="hero-copy-editorial">
-      <span className="editorial-kicker"><i/> NURA · PERSONAL HEALTH INTELLIGENCE</span>
-      <h1>The smarter,<br/>AI powered<br/><em>health companion.</em></h1>
-      <p>Understand your health with a calm, private AI experience built around the information that matters to you.</p>
-      <div className="hero-actions-editorial">
-       <button onClick={goApp}>Open Nura <ArrowRight size={15}/></button>
-       <a href="#approach">Explore Nura <ChevronRight size={15}/></a>
-      </div>
+
+    <div className="reference-hero-copy">
+      <h1>The Smarter,<br/>AI Powered<br/><span>Health Companion</span></h1>
+      <p>Understand your health with Nura — your private, intelligent health companion.</p>
+      <button onClick={goApp}>Get started <ArrowRight size={14}/></button>
     </div>
-    <div className="hero-foot-editorial"><span>01 / NURA</span><span>PRIVATE HEALTH INTELLIGENCE</span><span>SCROLL TO EXPLORE ↓</span></div>
    </section>
 
    <section className="editorial-intro" id="approach">
