@@ -46,6 +46,26 @@ function Landing({goApp}){
   return()=>{window.removeEventListener("scroll",onScroll);if(raf)cancelAnimationFrame(raf)};
  },[]);
  const scrollTo=id=>document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
+ React.useEffect(()=>{
+  const counters=[...document.querySelectorAll("[data-counter]")];
+  const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const animate=el=>{
+   const target=Number(el.dataset.counter||0);
+   if(reduce){el.textContent=target+(target===50?"K+":target===98?"%":"+");return}
+   const start=performance.now(),duration=720;
+   const tick=now=>{
+    const p=Math.min((now-start)/duration,1),e=1-Math.pow(1-p,4),v=Math.round(target*e);
+    el.textContent=target===50?v+"K+":target===98?v+"%":v+"+";
+    if(p<1)requestAnimationFrame(tick);
+   };
+   requestAnimationFrame(tick);
+  };
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+   if(entry.isIntersecting){animate(entry.target);observer.unobserve(entry.target)}
+  }),{threshold:.5});
+  counters.forEach(c=>observer.observe(c));
+  return()=>observer.disconnect();
+ },[]);
  return <div className="landing-shell reference-landing">
   <div className="reference-page">
    <header className="landing-nav reference-nav">
