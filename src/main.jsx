@@ -22,40 +22,76 @@ function Brand({compact=false,onClick}){return <button className={"brand "+(comp
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
 function Landing({goApp}){
- return <div className="ada-landing">
-  <header className="ada-nav">
+ return <div className="nura-site">
+  <header className="nura-nav">
    <Brand onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}/>
-   <nav><a href="#home">Home</a><a href="#doctor">AI Doctor</a><a href="#health">Health</a><a href="#medications">Medications</a><a href="#appointments">Appointments</a><a href="#library">Library</a><a href="#about">About</a></nav>
-   <button className="ada-download" onClick={goApp}>Download App <ArrowRight size={14}/></button>
+   <nav className="nura-nav-links">
+    <a href="#doctor">AI Doctor</a><a href="#health">Health</a><a href="#care">Care</a><a href="#privacy">Privacy</a><a href="#about">About</a>
+   </nav>
+   <button className="nura-nav-cta" onClick={goApp}>Open Nura <ArrowRight size={14}/></button>
   </header>
-  <main id="home">
-   <section className="ada-hero">
-    <div className="ada-hero-copy">
-     <div className="ada-badge"><span>✦</span> New <b>Your AI Health Companion</b></div>
-     <h1><span>Nura AI-Powered</span><br/>for Better Health</h1>
-     <p>Get personalized health insights, symptom assessment, medication reminders, and more — all in one place.</p>
-     <div className="ada-actions"><button className="ada-download" onClick={goApp}>Download App <ArrowRight size={14}/></button><button className="ada-secondary" onClick={goApp}>Try AI Doctor <ArrowRight size={14}/></button></div>
+
+  <main>
+   <section className="nura-hero">
+    <div className="nura-hero-copy">
+     <div className="nura-kicker"><span>✦</span> AI-powered health companion</div>
+     <h1><span>Understand</span><br/>your health.<br/><em>Live better.</em></h1>
+     <p>Nura brings intelligent health guidance, personal health information, and everyday care into one calm, private experience.</p>
+     <div className="nura-hero-actions"><button className="nura-primary" onClick={goApp}>Start with Nura <ArrowRight size={15}/></button><a href="#doctor" className="nura-quiet">See how it works <ArrowRight size={14}/></a></div>
     </div>
-
-    <div className="ada-health-card ada-stats"><div><small>Heart Rate</small><strong>72 <em>bpm</em></strong><label><i/> Normal</label></div><div><small>Sleep</small><strong>7h 45m</strong><label><i/> Quality: Good</label></div></div>
-    <div className="ada-health-card ada-emergency"><div className="ada-emergency-icon"><UserRound size={20}/></div><div><b>Emergency Call</b><small>Get instant access to medical help</small></div><span><MessageCircle size={18}/></span></div>
-
-    <div className="ada-phone-wrap">
-      <div className="ada-hand ada-hand-left"/><div className="ada-hand ada-hand-right"/>
-      <div className="ada-phone">
-       <div className="ada-island"/>
-       <div className="ada-phone-top"><span>9:41</span><span>◦◦◦ ▰</span></div>
-       <div className="ada-appbar"><b><span className="ada-mini-mark"/> NURA</b><span>♙</span></div>
-       <p className="ada-greeting">Good morning,<br/><b>How can I help you today?</b></p>
-       <div className="ada-search">Ask Nura anything... <span>➤</span></div>
-       <div className="ada-tools"><span>♡ Symptoms</span><span>◉ Medications</span><span>▣ Health Records</span><span>▦ Appointments</span></div>
-       <div className="ada-orb"><i/></div>
-       <div className="ada-phone-bottom">Nura AI<br/><small>Always here for you</small></div>
+    <div className="nura-hero-scene" aria-hidden="true">
+      <div className="nura-blue-haze"/>
+      <div className="nura-photo-card"><img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1200&q=85" alt="Doctor using a phone for digital health"/></div>
+      <div className="nura-phone-shadow"/>
+      <div className="nura-device">
+       <div className="nura-device-notch"/>
+       <div className="nura-device-status">9:41 <span>••• ▰</span></div>
+       <div className="nura-device-head"><b>Nura</b><span>AI Doctor</span></div>
+       <div className="nura-device-title">How are you<br/><b>feeling today?</b></div>
+       <div className="nura-device-prompt">Tell Nura what you're experiencing <span>→</span></div>
+       <div className="nura-device-chips"><i>Symptoms</i><i>Medications</i><i>Health</i><i>Appointments</i></div>
+       <div className="nura-device-orb"><span/></div>
       </div>
-    </div>
+      <div className="nura-float nura-heart"><b>72</b><small>HEART RATE</small><i>Normal</i></div>
+      <div className="nura-float nura-sleep"><b>7h 45m</b><small>SLEEP</small><i>Good</i></div>
+      <div className="nura-float nura-call"><span><PhoneCall size={15}/></span><div><b>Care when you need it</b><small>Connected health support</small></div></div>
+     </div>
    </section>
-   <section className="ada-after" id="doctor"><span>AI HEALTH, WITHOUT THE CLUTTER.</span><h2>A calmer way to understand<br/><i>your health.</i></h2></section>
+
+   <section className="nura-intro" id="about">
+    <div className="nura-overline">HEALTH SHOULD FEEL HUMAN</div>
+    <div><h2>Less noise.<br/><em>More understanding.</em></h2><p>From a question you can't quite answer to the information you wish you had before an appointment, Nura helps turn scattered health moments into something you can actually understand.</p></div>
+   </section>
+
+   <section className="nura-feature" id="doctor">
+    <div className="nura-feature-image"><img src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=1400&q=85" alt="Healthcare professional holding a smartphone"/></div>
+    <div className="nura-feature-copy"><span>01 / AI DOCTOR</span><h2>A conversation<br/><em>that listens.</em></h2><p>Ask questions in plain language. Describe symptoms, medications, or concerns and get structured guidance without having to translate yourself into medical jargon.</p><button onClick={goApp}>Meet AI Doctor <ArrowRight size={14}/></button></div>
+   </section>
+
+   <section className="nura-health" id="health">
+    <div className="nura-health-copy"><span>02 / YOUR HEALTH</span><h2>See the whole<br/><em>picture.</em></h2><p>Keep the details that matter close — vital signs, activity, sleep, medications, appointments, and your own health notes — in one focused place.</p>
+      <div className="nura-stat-row"><div><b>72</b><small>BPM</small><i>Heart rate</i></div><div><b>7h 45m</b><small>SLEEP</small><i>Last night</i></div><div><b>8,420</b><small>STEPS</small><i>Today</i></div></div>
+    </div>
+    <div className="nura-health-image"><img src="https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?auto=format&fit=crop&w=1400&q=85" alt="Person checking health information on a phone"/></div>
+   </section>
+
+   <section className="nura-care" id="care">
+    <div className="nura-care-image"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=85" alt="Healthcare professional in a bright clinic"/></div>
+    <div className="nura-care-copy"><span>03 / EVERYDAY CARE</span><h2>Small details<br/><em>matter.</em></h2><div className="nura-care-list"><article><b>Medication</b><p>Keep your medication schedule clear and easy to follow.</p></article><article><b>Appointments</b><p>Keep upcoming care and important notes together.</p></article><article><b>Health history</b><p>Build a useful picture of your health over time.</p></article></div></div>
+   </section>
+
+   <section className="nura-privacy" id="privacy">
+    <div><span>04 / PRIVATE BY DESIGN</span><h2>Your health is<br/><em>your story.</em></h2><p>Nura is designed around a simple principle: your health information should feel personal, understandable, and under your control.</p><button className="nura-dark-button" onClick={goApp}>Enter your private space <ArrowRight size={14}/></button></div>
+    <div className="nura-privacy-art"><div className="nura-lock"><LockKeyhole size={28}/></div><div className="nura-ring ring-a"/><div className="nura-ring ring-b"/><div className="nura-ring ring-c"/></div>
+   </section>
+
+   <section className="nura-final">
+    <div className="nura-final-photo"><img src="https://images.unsplash.com/photo-1542884748-2b87b36c6b90?auto=format&fit=crop&w=1800&q=85" alt="Woman enjoying a healthy outdoor moment"/></div>
+    <div className="nura-final-overlay"><span>YOUR HEALTH. ONE PLACE.</span><h2>Feel more<br/><em>in control.</em></h2><button className="nura-primary" onClick={goApp}>Start with Nura <ArrowRight size={15}/></button></div>
+   </section>
   </main>
+
+  <footer className="nura-footer"><Brand/><div><a href="#doctor">AI Doctor</a><a href="#health">Health</a><a href="#care">Care</a><a href="#privacy">Privacy</a></div><span>© {new Date().getFullYear()} Nura</span></footer>
  </div>
 }
 function FeatureCard({icon,title,text}){return <article className="feature-card"><div className="feature-card-icon">{icon}</div><h3>{title}</h3><p>{text}</p><ChevronRight size={17}/></article>}
