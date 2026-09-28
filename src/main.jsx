@@ -20,16 +20,6 @@ function App(){
 function Brand({compact=false,onClick}){return <button className={"brand "+(compact?"brand-compact":"")} onClick={onClick}><span className="brand-mark"><i/><i/></span><span>NURA</span></button>}
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
-function useReveal(){
- const ref=React.useRef(null);
- const[visible,setVisible]=React.useState(false);
- React.useEffect(()=>{const node=ref.current;if(!node)return;
-  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){setVisible(true);return}
-  const io=new IntersectionObserver(([entry])=>{if(entry.isIntersecting){setVisible(true);io.disconnect()}},{threshold:.14,rootMargin:"0px 0px -8% 0px"});
-  io.observe(node);return()=>io.disconnect();
- },[]);
- return [ref,visible];
-}
 function FeatureCard({icon,title,text}){return <article className="feature-card"><div className="feature-card-icon">{icon}</div><h3>{title}</h3><p>{text}</p><ChevronRight size={17}/></article>}
 
 function NuraApp({wallet,setWallet,goHome}){
