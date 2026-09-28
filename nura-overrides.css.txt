@@ -1,0 +1,1 @@
+html,body,#root{background:#06020f;color:#f7f2ff}
