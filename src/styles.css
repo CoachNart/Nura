@@ -380,3 +380,57 @@ nura-data-flow i:nth-child(1){left:8%;top:48%;animation-delay:-.4s}.nura-data-fl
 @media(max-width:900px){.nura-hand-device{width:min(680px,82vw);bottom:-80px}.nura-real-screen{left:39.5%;top:15.4%;width:23.8%;height:54%}.nura-feature-grid{gap:7px}.nura-network{height:420px}}
 @media(max-width:600px){.nura-nav{height:62px}.nura-nav.nura-nav-scrolled{height:58px}.nura-ca-button{padding:9px 12px;font-size:9px}.nura-hero{min-height:820px;padding-top:75px}.nura-hand-device{width:620px;max-width:none;bottom:-30px;left:50%;transform:translateX(-50%)}.nura-real-screen{left:39.5%;top:15.4%;width:23.8%;height:54%}.nura-float{display:none}.nura-feature-grid{grid-template-columns:1fr;gap:7px}.nura-feature-card{min-height:118px}.nura-network{height:360px}.nura-node{width:78px;height:78px}.nura-network-core{width:94px;height:94px}.nura-ownership-flow{justify-content:flex-start;overflow-x:auto;padding-bottom:5px}.nura-ownership-flow::-webkit-scrollbar{display:none}}
 @media(prefers-reduced-motion:reduce){.nura-screen-head,.nura-screen-title,.nura-screen-prompt,.nura-screen-chips,.nura-screen-orb,.nura-screen-orb span{animation:none!important}}
+
+
+/* FINAL SURGICAL POLISH — premium editorial motion / hard hero fixes */
+.nura-nav{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;align-items:center!important;column-gap:clamp(22px,4vw,64px)!important}
+.nura-nav-links{justify-content:center!important;min-width:0}
+.nura-ca-button{margin-left:auto!important;justify-self:end!important;white-space:nowrap!important}
+
+.nura-primary,.nura-dark-button,.nura-ca-button{position:relative;isolation:isolate;overflow:hidden}
+.nura-primary{min-height:48px;padding:0 19px 0 21px;border:1px solid rgba(17,129,212,.32);border-radius:15px 5px 15px 5px;background:linear-gradient(135deg,#0b8cf0 0%,#126fd2 58%,#0a5bb7 100%);color:#fff;box-shadow:0 12px 34px rgba(19,116,190,.20),inset 0 1px 0 rgba(255,255,255,.28);clip-path:polygon(0 0,calc(100% - 11px) 0,100% 11px,100% 100%,11px 100%,0 calc(100% - 11px));transition:transform .35s var(--motion-smooth),box-shadow .35s var(--motion-smooth),filter .35s var(--motion-smooth)}
+.nura-primary::before{content:"";position:absolute;inset:1px;background:linear-gradient(105deg,transparent 18%,rgba(255,255,255,.24) 48%,transparent 62%);transform:translateX(-125%);transition:transform .7s var(--motion-smooth);z-index:-1}
+.nura-primary::after{content:"";position:absolute;right:10px;top:8px;width:4px;height:4px;border-radius:50%;background:#b9ecff;box-shadow:0 0 12px #b9ecff;opacity:.9}
+.nura-primary:hover{transform:translateY(-3px) scale(1.015);box-shadow:0 18px 42px rgba(19,116,190,.30),inset 0 1px 0 rgba(255,255,255,.35);filter:saturate(1.08)}
+.nura-primary:hover::before{transform:translateX(125%)}
+.nura-primary svg{transition:transform .35s var(--motion-ease)}.nura-primary:hover svg{transform:translateX(4px)}
+.nura-quiet{position:relative;display:inline-flex!important;align-items:center;gap:10px;min-height:46px;padding:0 4px 0 14px;color:#29455f!important;border-left:1px solid #cfe1ec;transition:color .3s var(--motion-ease),gap .3s var(--motion-ease)}
+.nura-quiet::after{content:"";position:absolute;left:14px;right:0;bottom:4px;height:1px;background:#a9d5ec;transform:scaleX(.35);transform-origin:left;transition:transform .4s var(--motion-ease)}
+.nura-quiet:hover{gap:14px;color:#087dd4!important}.nura-quiet:hover::after{transform:scaleX(1)}
+.nura-ca-button{min-height:40px;padding:0 14px!important;border:1px solid #c9dce8!important;border-radius:12px 4px 12px 4px!important;background:#f8fcff!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.8),0 8px 24px rgba(37,87,116,.06)!important}
+.nura-ca-button::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(36,168,239,.10) 50%,transparent 70%);transform:translateX(-120%);transition:transform .65s var(--motion-smooth)}
+.nura-ca-button:hover::before{transform:translateX(120%)}.nura-ca-button:hover{transform:translateY(-2px)!important;border-color:#9ecce5!important;box-shadow:0 12px 28px rgba(37,126,174,.13)!important}
+
+/* Hard-fix hero hand layer: visible, oversized, behind the original phone. */
+.nura-hero-scene{overflow:visible!important;z-index:8!important}
+.nura-hand-back{position:absolute!important;left:50%!important;bottom:-205px!important;transform:translateX(-50%) rotate(-1.5deg)!important;width:min(560px,58vw)!important;height:700px!important;object-fit:cover!important;object-position:center 72%!important;z-index:6!important;display:block!important;pointer-events:none!important;border-radius:180px 180px 0 0!important;filter:saturate(.82) sepia(.08) contrast(1.02) drop-shadow(0 24px 32px rgba(45,64,78,.13))!important;mix-blend-mode:multiply!important;opacity:.96!important}
+.nura-hand-back + .nura-device{z-index:9!important}.nura-device{animation:none!important}
+.nura-float{animation:nura-float-drift 6s ease-in-out infinite!important}.nura-heart{animation-delay:-1.4s!important}.nura-sleep{animation-delay:-3.1s!important}.nura-call{animation-delay:-4.5s!important}
+@keyframes nura-float-drift{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-8px,0)}}
+
+/* "Less noise" gets a real visual anchor + layered motion. */
+.nura-intro{display:grid!important;grid-template-columns:.78fr 1.22fr!important;align-items:center!important}
+.nura-intro-copy{position:relative;z-index:2}
+.nura-intro-visual{position:relative;min-height:430px;border-radius:32px;overflow:hidden;background:#dceefa;box-shadow:0 28px 80px rgba(35,91,125,.14);transform:translateY(24px) scale(.985);opacity:0;transition:transform 1s var(--motion-smooth),opacity .9s var(--motion-ease)}
+.nura-intro.is-visible .nura-intro-visual{transform:none;opacity:1;transition-delay:.16s}
+.nura-intro-visual::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,124,210,.03),rgba(4,38,67,.22))}
+.nura-intro-visual img{width:100%;height:100%;min-height:430px;object-fit:cover;transform:scale(1.08);filter:saturate(.82) contrast(1.02);transition:transform 1.5s var(--motion-smooth),filter 1s var(--motion-ease)}
+.nura-intro.is-visible .nura-intro-visual img{transform:scale(1.01);filter:saturate(.9) contrast(1.02)}.nura-intro-visual:hover img{transform:scale(1.055)}
+.nura-intro-scan{position:absolute;z-index:3;left:18px;bottom:18px;display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid rgba(255,255,255,.38);border-radius:10px 3px 10px 3px;background:rgba(7,38,59,.38);backdrop-filter:blur(12px);color:#fff;font-size:8px;letter-spacing:.14em;font-weight:800}
+.nura-intro-scan i{width:6px;height:6px;border-radius:50%;background:#75d8ff;box-shadow:0 0 14px #75d8ff;animation:nura-pulse 1.8s ease-in-out infinite}
+
+/* Keep subsequent copy alive as it enters the viewport. */
+.nura-motion-section>* ,.nura-agent-section>* ,.nura-data-section>* ,.nura-ownership>* ,.nura-care-copy,.nura-care-image,.nura-privacy>div{will-change:transform,opacity}
+.nura-motion-section:not(.is-visible) .nura-overline,.nura-motion-section:not(.is-visible) h2,.nura-motion-section:not(.is-visible) p,.nura-motion-section:not(.is-visible) button,.nura-motion-section:not(.is-visible) .nura-feature-card{opacity:0;transform:translateY(20px)}
+.nura-motion-section.is-visible .nura-overline,.nura-motion-section.is-visible h2,.nura-motion-section.is-visible p,.nura-motion-section.is-visible button,.nura-motion-section.is-visible .nura-feature-card{opacity:1;transform:none;transition:opacity .7s var(--motion-ease),transform .75s var(--motion-smooth)}
+.nura-motion-section.is-visible h2{transition-delay:.08s}.nura-motion-section.is-visible p{transition-delay:.17s}.nura-motion-section.is-visible button{transition-delay:.24s}
+.nura-motion-section.is-visible .nura-feature-card:nth-child(1){transition-delay:.18s}.nura-motion-section.is-visible .nura-feature-card:nth-child(2){transition-delay:.28s}.nura-motion-section.is-visible .nura-feature-card:nth-child(3){transition-delay:.38s}
+.nura-agent-section.is-visible .nura-agent-copy{transition-delay:.02s}.nura-agent-section.is-visible .nura-agent-window{transition-delay:.16s}.nura-data-section.is-visible .nura-data-copy{transition-delay:.02s}.nura-data-section.is-visible .nura-network{transition-delay:.18s}.nura-ownership.is-visible .nura-ownership-copy{transition-delay:.02s}.nura-ownership.is-visible .nura-ownership-flow{transition-delay:.18s}
+.nura-agent-section.is-visible .nura-agent-copy h2,.nura-data-section.is-visible .nura-data-copy h2,.nura-ownership.is-visible .nura-ownership-copy h2{animation:nura-heading-breathe 6s ease-in-out .9s infinite}
+@keyframes nura-heading-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}@keyframes nura-pulse{0%,100%{opacity:.45;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+.nura-network-core{animation:nura-core-breathe 4.5s ease-in-out infinite}.nura-node{animation:nura-node-float 5.5s ease-in-out infinite}.node-b{animation-delay:-1.4s}.node-c{animation-delay:-2.7s}.node-d{animation-delay:-4s}
+@keyframes nura-core-breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.045)}}@keyframes nura-node-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.nura-thinking{animation:nura-thinking-glow 2.2s ease-in-out infinite}@keyframes nura-thinking-glow{0%,100%{box-shadow:0 0 0 rgba(40,168,235,0)}50%{box-shadow:0 0 24px rgba(40,168,235,.10)}}
+@media(max-width:900px){.nura-intro{grid-template-columns:1fr!important}.nura-intro-visual{min-height:330px}.nura-intro-visual img{min-height:330px}.nura-nav{grid-template-columns:auto auto!important}.nura-nav-links{display:none!important}.nura-ca-button{justify-self:end!important}}
+@media(max-width:600px){.nura-hand-back{width:460px!important;height:570px!important;bottom:-150px!important;object-position:center 70%!important}.nura-intro{padding-left:18px!important;padding-right:18px!important}.nura-intro-visual{min-height:285px;border-radius:24px}.nura-intro-visual img{min-height:285px}.nura-primary{min-height:46px;padding-left:17px;padding-right:17px}}
+@media(prefers-reduced-motion:reduce){.nura-site *{animation:none!important;transition:none!important}}
