@@ -2356,3 +2356,93 @@ html,body,#root{width:100%;max-width:100%;overflow-x:hidden}
 @media(prefers-reduced-motion:reduce){
   .hero-letter{animation:none!important;opacity:1!important;transform:none!important}
 }
+
+
+/* =========================================================
+   NURA VISUAL BALANCE + HERO VISIBILITY FIX
+   ========================================================= */
+/* Keep the healthcare direction premium, but remove the overexposed white wash. */
+.reference-landing{
+  background:#edf4fb!important;
+  color:#162b43!important;
+}
+.reference-page{
+  background:#edf4fb!important;
+}
+.reference-hero{
+  background:
+    radial-gradient(ellipse 46% 34% at 50% 48%,rgba(66,151,229,.18),transparent 70%),
+    radial-gradient(ellipse 34% 28% at 12% 10%,rgba(133,194,235,.20),transparent 72%),
+    linear-gradient(180deg,#dfeef9 0%,#edf4fb 54%,#e7f0f8 100%)!important;
+}
+.reference-hero::before{
+  opacity:.48!important;
+}
+.reference-hero-glow{
+  opacity:.55!important;
+  filter:blur(28px)!important;
+}
+.reference-hero h1{
+  color:#142c46!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.4)!important;
+}
+.reference-hero h1 span,
+.reference-hero .hero-line-accent{
+  color:#1769ff!important;
+}
+.reference-hero-content.motion-visible h1[data-motion-reveal="hero-title"]{
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+}
+.hero-letter{
+  opacity:1!important;
+  animation-play-state:running!important;
+}
+.hero-letter-headline .hero-letter{
+  opacity:0!important;
+}
+.reference-hero-content.motion-visible .hero-letter-headline .hero-letter{
+  animation:nura-letter-drop .72s cubic-bezier(.16,1,.3,1) var(--letter-delay) both!important;
+}
+.hero-line-accent .hero-letter{
+  text-shadow:0 0 24px rgba(23,105,255,.10)!important;
+}
+/* Softer surfaces throughout the landing system. */
+.nura-ref-stats,
+.nura-ref-care,
+.nura-ref-guide,
+.nura-ref-assistant{
+  background:#e8f1f8!important;
+}
+.nura-ref-content,
+.reference-footer{
+  background-color:#e8f1f8!important;
+}
+.reference-footer{
+  border-top-color:#c9dbe9!important;
+}
+/* Avoid stark white cards while retaining crisp hierarchy. */
+.reference-landing .ref-card,
+.reference-landing .feature-card,
+.reference-landing .assistant-card,
+.reference-landing .metric-card{
+  background:rgba(248,252,255,.82)!important;
+  border-color:rgba(186,207,225,.72)!important;
+  box-shadow:0 16px 45px rgba(44,82,116,.07)!important;
+}
+.reference-landing .hero-cta-secondary{
+  background:rgba(237,245,251,.78)!important;
+  border-color:#c4d7e7!important;
+  color:#28435e!important;
+}
+@media(max-width:700px){
+  .reference-hero{
+    background:
+      radial-gradient(ellipse 75% 30% at 50% 36%,rgba(54,145,226,.17),transparent 72%),
+      linear-gradient(180deg,#e1eff9 0%,#edf4fb 72%,#e7f0f8 100%)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-letter-headline .hero-letter{opacity:1!important;transform:none!important}
+}
