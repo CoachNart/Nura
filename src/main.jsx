@@ -112,6 +112,7 @@ function Landing({goApp}){
       </div>
      </section>
     </section>
+   </main>
 
    <footer className="landing-footer reference-footer"><Brand/><span>Patient-first health intelligence.</span><span>© 2026 Nura</span></footer>
   </div>
