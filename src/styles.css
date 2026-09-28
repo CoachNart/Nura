@@ -2529,3 +2529,43 @@ html,body,#root{width:100%;max-width:100%;overflow-x:hidden}
  .app-shell,.dashboard{background:#e7f1f8!important}
  .sidebar{background:#e1eef7!important}
 }
+
+/* HERO HEADLINE — deterministic visibility + scramble/decode */
+.reference-hero h1.hero-letter-headline{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+  color:#17324e!important;
+}
+.reference-hero h1.hero-letter-headline .hero-line{
+  display:block!important;
+  visibility:visible!important;
+}
+.reference-hero h1.hero-letter-headline .hero-letter{
+  display:inline-block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  transform:none!important;
+  color:#17324e!important;
+  text-shadow:none!important;
+  animation:none!important;
+  min-width:.02em;
+}
+.reference-hero h1.hero-letter-headline .hero-line-accent .hero-letter{
+  color:#1769ff!important;
+}
+.reference-hero h1.hero-letter-headline .hero-line-accent{
+  color:#1769ff!important;
+}
+.reference-hero h1.hero-letter-headline .hero-letter.is-settled{
+  animation:nura-scramble-settle .42s cubic-bezier(.16,1,.3,1) both!important;
+}
+@keyframes nura-scramble-settle{
+  0%{opacity:.72;transform:translateY(3px) scale(.985);filter:blur(1px)}
+  65%{opacity:1;transform:translateY(-1px) scale(1.015);filter:blur(0)}
+  100%{opacity:1;transform:none;filter:none}
+}
+/* Remove the stray white rounded streak from the hero atmosphere. */
+.reference-hero-glow:before{display:none!important}
