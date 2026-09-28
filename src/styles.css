@@ -2446,3 +2446,86 @@ html,body,#root{width:100%;max-width:100%;overflow-x:hidden}
 @media(prefers-reduced-motion:reduce){
   .hero-letter-headline .hero-letter{opacity:1!important;transform:none!important}
 }
+
+
+/* =========================================================
+   NURA COLOR DEPTH PASS — LESS WHITE, MORE HEALTHCARE COLOR
+   ========================================================= */
+/* Hero reveal: the observer adds motion-visible to the H1 itself. */
+.reference-hero h1.hero-letter-headline{
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+  visibility:visible!important;
+}
+.reference-hero h1.hero-letter-headline .hero-letter{opacity:0!important}
+.reference-hero h1.hero-letter-headline.motion-visible .hero-letter{
+  animation:nura-letter-drop .72s cubic-bezier(.16,1,.3,1) var(--letter-delay) both!important;
+}
+
+/* Replace the flat grey/white wash with layered blue, periwinkle and soft lavender. */
+.reference-landing,.reference-page{background:#e6f1fa!important}
+.reference-hero{
+ background:
+  radial-gradient(ellipse 38% 32% at 18% 28%,rgba(88,171,235,.25),transparent 72%),
+  radial-gradient(ellipse 36% 32% at 82% 20%,rgba(126,111,238,.13),transparent 72%),
+  radial-gradient(ellipse 44% 34% at 50% 88%,rgba(47,132,229,.18),transparent 72%),
+  linear-gradient(180deg,#dceefa 0%,#e9f3fb 48%,#e4eef8 100%)!important;
+}
+.reference-hero h1{color:#102b49!important}
+.reference-hero h1 .hero-line-accent{color:#1769ff!important}
+.nura-ref-content{background:#e4eff8!important}
+.nura-ref-stats{background:linear-gradient(135deg,#d9ecfa,#e8e7fb)!important}
+.nura-ref-care{background:linear-gradient(180deg,#e9f3fb,#e0edf7)!important}
+.nura-ref-guide{background:linear-gradient(135deg,#e1edf8,#ebeafa)!important}
+.nura-ref-assistant{background:linear-gradient(135deg,#dbeefa,#e7e4fa)!important}
+.reference-footer{background:linear-gradient(135deg,#dcecf8,#e8e6f7)!important}
+.reference-landing .nura-ref-card,
+.reference-landing .assistant-main-card,
+.reference-landing .assistant-side-card,
+.reference-landing .motion-metric,
+.reference-landing .nura-ref-guide article{
+ background:rgba(247,251,255,.72)!important;
+ border-color:rgba(169,198,222,.78)!important;
+}
+.reference-landing .nura-ref-card:nth-child(2),
+.reference-landing .assistant-side-card:nth-child(2){background:rgba(239,238,255,.72)!important}
+.reference-landing .nura-ref-card:nth-child(3){background:rgba(234,247,251,.76)!important}
+.reference-landing .nura-ref-card:nth-child(4){background:rgba(241,248,255,.78)!important}
+
+/* Dashboard/app shell: remove the all-white canvas and introduce depth. */
+.app-shell,.dashboard{background:
+ radial-gradient(circle at 85% 5%,rgba(115,177,235,.13),transparent 26%),
+ radial-gradient(circle at 5% 75%,rgba(130,119,225,.09),transparent 25%),
+ #e7f1f8!important;color:#18324e!important}
+.sidebar{
+ background:linear-gradient(180deg,#e2f0f9 0%,#e8e9f7 100%)!important;
+ border-color:#cbddeb!important;
+ box-shadow:8px 0 30px rgba(38,78,125,.07)!important}
+.side-nav button{color:#607a95!important}
+.side-nav button:hover{background:rgba(255,255,255,.58)!important;color:#1769ff!important}
+.side-nav button.selected{background:linear-gradient(135deg,#d7eaff,#e5e3fb)!important;color:#1769ff!important;box-shadow:inset 3px 0 #1769ff}
+.privacy-box{background:rgba(248,252,255,.62)!important;border-color:#cbddea!important}
+.app-topbar{background:rgba(230,241,249,.86)!important;border-color:#cadde9!important;backdrop-filter:blur(18px)!important}
+.icon-button{background:rgba(248,252,255,.7)!important;border-color:#cbdde9!important}
+.wide-card,.attention-feature,.attention-module,.care-ribbon,.record-row,.appointment-card,.side-panel,.chat-window{
+ background:linear-gradient(145deg,rgba(248,252,255,.9),rgba(235,245,252,.82))!important;
+ border-color:#c9dce9!important;
+ box-shadow:0 14px 38px rgba(39,81,124,.08)!important}
+.app-hero,.doctor-hero{
+ background:
+  radial-gradient(circle at 80% 25%,rgba(104,170,242,.25),transparent 30%),
+  linear-gradient(135deg,#d7ebfa,#e5e3f8)!important;
+ border-color:#c7dce9!important}
+.button-soft{background:rgba(248,252,255,.7)!important;border-color:#cbdde9!important}
+.page-title,.module-heading h2,.care-ribbon h2{color:#17324e!important}
+.page-sub,.card-head small{color:#6d8399!important}
+
+@media(max-width:700px){
+ .reference-hero{background:
+  radial-gradient(circle at 20% 24%,rgba(73,161,235,.22),transparent 38%),
+  radial-gradient(circle at 88% 12%,rgba(123,108,231,.14),transparent 34%),
+  linear-gradient(180deg,#deeffa,#e9f3fb)!important}
+ .app-shell,.dashboard{background:#e7f1f8!important}
+ .sidebar{background:#e1eef7!important}
+}
