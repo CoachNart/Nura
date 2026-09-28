@@ -81,7 +81,7 @@ function Landing({goApp}){
      <div className="reference-hero-content" data-motion-reveal="hero">
       <div className="reference-kicker motion-stagger"><span>←</span><b>Nura · Patient intelligence</b><span>→</span></div>
       <h1 data-motion-reveal="hero-title">Comprehensive Health<br/><span>Intelligence.</span></h1>
-      <p className="hero-rich-copy" data-motion-reveal="hero-sub">Nura brings your health information, everyday context and intelligent guidance together in one private, patient-first experience. Keep the details that matter in one calm place, understand patterns across your health record, prepare for conversations with clinicians, organize prescriptions and appointments, and ask questions in plain language whenever something feels unclear. From everyday symptoms and wellness context to care preparation and follow-up, Nura helps you make sense of the information around you without forcing you through another complicated healthcare dashboard.</p>
+      <p className="hero-rich-copy" data-motion-reveal="hero-sub">Nura brings your health information, everyday context and intelligent guidance together in one private, patient-first experience. Understand what matters, prepare for care, and get thoughtful AI guidance whenever you need it — all in one calm, beautifully simple place.</p>
       <div className="hero-actions" data-motion-reveal="hero-actions"><button className="hero-cta hero-cta-primary" onClick={goApp}>Open Nura <span>↗</span></button><button className="hero-cta hero-cta-secondary" onClick={()=>scrollTo("care")}>Explore Nura <span>↓</span></button></div>
      </div>
     </section>
