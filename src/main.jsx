@@ -22,98 +22,72 @@ function Brand({compact=false,onClick}){return <button className={"brand "+(comp
 function Pill({children,tone="blue"}){return <span className={"pill pill-"+tone}>{children}</span>}
 
 function Landing({goApp}){
- React.useEffect(()=>{
-  const root=document.querySelector(".nura-editorial");
-  if(!root)return;
-  const onMove=e=>{
-   root.style.setProperty("--mx",((e.clientX/innerWidth-.5)*2).toFixed(3));
-   root.style.setProperty("--my",((e.clientY/innerHeight-.5)*2).toFixed(3));
-  };
-  addEventListener("pointermove",onMove,{passive:true});
-  return()=>removeEventListener("pointermove",onMove);
- },[]);
- return <div className="nura-editorial">
-  <header className="editorial-nav">
-   <Brand/>
+ return <div className="fresh-landing">
+  <header className="fresh-nav">
+   <button className="fresh-logo" onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}>NURA</button>
    <nav>
-    <a href="#approach">Approach</a><a href="#intelligence">AI Doctor</a><a href="#health">Health</a><a href="#privacy">Privacy</a>
+    <a href="#why-nura">Why Nura</a>
+    <a href="#privacy">Privacy</a>
    </nav>
-   <button className="editorial-start" onClick={goApp}>Get started <ArrowRight size={14}/></button>
+   <button className="fresh-nav-cta" onClick={goApp}>Enter Nura <ArrowRight size={14}/></button>
   </header>
 
   <main>
-   <section className="editorial-hero">
-    <div className="reference-speckle"/>
-    <div className="reference-lines"/>
-    <div className="reference-glow reference-glow-left"/>
-    <div className="reference-glow reference-glow-right"/>
-
-    <div className="reference-ribbon reference-ribbon-a"/>
-    <div className="reference-ribbon reference-ribbon-b"/>
-
-    <div className="reference-platform">
-      <div className="reference-platform-face"/>
-      <div className="reference-platform-edge"/>
-      <div className="reference-coin"><span>N</span></div>
+   <section className="fresh-hero">
+    <div className="fresh-hero-copy">
+     <span className="fresh-eyebrow">PERSONAL HEALTH INTELLIGENCE</span>
+     <h1>Health, understood<br/><i>on your terms.</i></h1>
+     <p>Nura brings your health information, conversations and everyday context into one calm, intelligent space.</p>
+     <button className="fresh-primary" onClick={goApp}>Get started <ArrowRight size={15}/></button>
     </div>
 
-    <div className="reference-hero-copy">
-      <h1>The Smarter,<br/>AI Powered<br/><span>Health Companion</span></h1>
-      <p>Understand your health with Nura — your private, intelligent health companion.</p>
-      <button onClick={goApp}>Get started <ArrowRight size={14}/></button>
+    <div className="fresh-visual" aria-hidden="true">
+     <div className="fresh-orbit orbit-1"/>
+     <div className="fresh-orbit orbit-2"/>
+     <div className="fresh-orbit orbit-3"/>
+     <div className="fresh-core"><span>N</span></div>
+     <div className="fresh-signal signal-1">HEALTH / 01</div>
+     <div className="fresh-signal signal-2">PRIVATE / 02</div>
+     <div className="fresh-signal signal-3">INTELLIGENT / 03</div>
+    </div>
+
+    <div className="fresh-scroll">SCROLL TO EXPLORE <span>↓</span></div>
+   </section>
+
+   <section className="fresh-section" id="why-nura">
+    <div className="fresh-section-number">01</div>
+    <div>
+     <span className="fresh-eyebrow">A DIFFERENT KIND OF HEALTH EXPERIENCE</span>
+     <h2>Everything important.<br/><i>Nothing unnecessary.</i></h2>
+     <p>Nura is built to make health feel easier to understand — without turning your life into a wall of dashboards, charts or clutter.</p>
+     <button className="fresh-text-link" onClick={goApp}>Explore Nura <ArrowRight size={14}/></button>
     </div>
    </section>
 
-   <section className="editorial-intro" id="approach">
-    <div className="editorial-copy">
-      <span>02 / A CALMER HEALTH EXPERIENCE</span>
-      <h2>Less noise.<br/><em>More understanding.</em></h2>
-      <p>Nura brings conversations, health context, medications and appointments into one focused space — designed to feel considered rather than clinical.</p>
+   <section className="fresh-dark" id="privacy">
+    <div className="fresh-dark-copy">
+     <span className="fresh-eyebrow">PRIVATE BY DESIGN</span>
+     <h2>Your health<br/><i>stays personal.</i></h2>
+     <p>Control your information, your conversations and your health context from one focused place.</p>
+     <button className="fresh-outline" onClick={goApp}>Enter Nura <ArrowRight size={14}/></button>
     </div>
-    <div className="editorial-image editorial-image-doctor">
-      <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1400&q=85" alt="Doctor using a tablet in a bright clinical setting"/>
-    </div>
-   </section>
-
-   <section className="editorial-feature" id="intelligence">
-    <div className="editorial-feature-image">
-      <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=85" alt="Healthcare professional working with digital health information"/>
-      <span className="image-caption">AI DOCTOR / CONTEXTUAL CONVERSATIONS</span>
-    </div>
-    <div className="editorial-feature-copy">
-      <span>03 / AI DOCTOR</span>
-      <h2>Ask naturally.<br/><em>Understand clearly.</em></h2>
-      <p>Talk through symptoms, questions and health information in plain language, with your chosen context available when it helps.</p>
-      <button onClick={goApp}>Enter AI Doctor <ArrowRight size={14}/></button>
+    <div className="fresh-line-art" aria-hidden="true">
+     <span/><span/><span/>
     </div>
    </section>
 
-   <section className="editorial-split" id="health">
-    <div className="editorial-split-copy">
-      <span>04 / YOUR HEALTH SPACE</span>
-      <h2>Your health,<br/><em>beautifully organised.</em></h2>
-      <p>Keep the details that matter close without turning your everyday health into a dashboard full of noise.</p>
-      <div className="editorial-list"><div><b>Health records</b><span>One clear personal context.</span></div><div><b>Appointments</b><span>Stay ready for what comes next.</span></div><div><b>Medications</b><span>Simple, visible and easy to manage.</span></div></div>
-    </div>
-    <div className="editorial-image editorial-image-care">
-      <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1400&q=85" alt="Calm healthcare consultation"/>
-    </div>
-   </section>
-
-   <section className="editorial-privacy" id="privacy">
-    <div className="privacy-image"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=85" alt="Healthcare professional in a modern clinical environment"/></div>
-    <div className="privacy-copy"><span>05 / PRIVATE BY DESIGN</span><h2>Health is<br/><em>personal.</em></h2><p>Nura is designed around control, clarity and a quieter relationship with your health information.</p><button onClick={goApp}>Get started with Nura <ArrowRight size={14}/></button></div>
-   </section>
-
-   <section className="editorial-final">
-    <div className="final-light"/>
-    <span>06 / START WITH NURA</span>
-    <h2>Understand more.<br/><em>Carry less.</em></h2>
-    <p>Your health context. Your conversations. Your control.</p>
-    <button onClick={goApp}>Open Nura <ArrowRight size={15}/></button>
+   <section className="fresh-final">
+    <span className="fresh-eyebrow">NURA</span>
+    <h2>Know more.<br/><i>Carry less.</i></h2>
+    <button className="fresh-primary" onClick={goApp}>Get started <ArrowRight size={15}/></button>
    </section>
   </main>
-  <footer className="editorial-footer"><Brand compact/><div><a href="#approach">Approach</a><a href="#intelligence">AI Doctor</a><a href="#health">Health</a><a href="#privacy">Privacy</a><button onClick={goApp}>App</button></div><span>© 2026 Nura AI · Educational health support, not a diagnosis.</span></footer>
+
+  <footer className="fresh-footer">
+   <strong>NURA</strong>
+   <span>Personal health intelligence.</span>
+   <button onClick={goApp}>Open app <ArrowRight size={13}/></button>
+  </footer>
  </div>
 }
 function FeatureCard({icon,title,text}){return <article className="feature-card"><div className="feature-card-icon">{icon}</div><h3>{title}</h3><p>{text}</p><ChevronRight size={17}/></article>}
