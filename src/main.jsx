@@ -9,7 +9,7 @@ import"./styles.css";
 const chain={id:4663};
 const CONTRACT_ADDRESS=(import.meta.env.VITE_CONTRACT_ADDRESS||"").trim();
 
-/* visual stability */\nfunction applyNuraDark(){document.documentElement.style.setProperty("background","#06020f","important");document.body.style.setProperty("background","#06020f","important");const set=(s,p)=>document.querySelectorAll(s).forEach(e=>Object.entries(p).forEach(([k,v])=>e.style.setProperty(k,v,"important")));set(".reference-landing,.reference-page,.nura-ref-content",{background:"#06020f",color:"#fff"});set(".reference-hero",{background:"radial-gradient(ellipse 48% 34% at 50% 47%,rgba(124,45,230,.28),transparent 68%),#06020f"});set(".reference-hero h1",{color:"#fff",fontWeight:"500"});set(".reference-hero h1 .hero-line-accent",{color:"#c083ff"});set(".app-shell,.dashboard",{background:"#06020f",color:"#fff"});set(".wide-card,.attention-feature,.attention-module,.care-ribbon,.record-row,.appointment-card,.side-panel,.chat-window",{background:"linear-gradient(145deg,#13091f,#08040f)",borderColor:"rgba(255,255,255,.08)"})}\nfunction App(){\n React.useEffect(()=>{document.documentElement.scrollTop=0;document.body.scrollTop=0;applyNuraDark();requestAnimationFrame(()=>{document.documentElement.scrollTop=0;document.body.scrollTop=0})},[]);
+function App(){
  const[route,setRoute]=useState(window.location.pathname==="/app"?"app":"home");
  const[wallet,setWallet]=useState(()=>getSavedWallet());
  const go=next=>{const target=next==="app"?"/app":"/";window.history.pushState({}, "",target);setRoute(next);window.scrollTo({top:0,behavior:"smooth"})};
@@ -26,7 +26,7 @@ function Landing({goApp}){
  const copyCA=async()=>{if(!CONTRACT_ADDRESS){return;}try{await navigator.clipboard.writeText(CONTRACT_ADDRESS);setCaCopied(true);setTimeout(()=>setCaCopied(false),1800);}catch{setCaCopied(false)}};
  const[open,setOpen]=useState(false);
  React.useEffect(()=>{
-  const nodes=[...document.querySelectorAll("[data-motion-reveal]")];document.querySelector(".reference-hero-content")?.classList.add("motion-visible");
+  const nodes=[...document.querySelectorAll("[data-motion-reveal]")];
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(reduced){nodes.forEach(n=>n.classList.add("motion-visible"));return}
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
