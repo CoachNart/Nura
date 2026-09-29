@@ -1,47 +1,58 @@
 # Nura AI
 
-Nura is a wallet-native health companion for onchain users. The product now includes a responsive health dashboard, Robinhood Chain wallet connection, a server-side AI Doctor boundary, local health memory, care-plan management, medication tracking, privacy controls and an installable PWA shell.
+Nura is a patient-first health intelligence application with a production-oriented AI Doctor conversation engine, user-controlled health context, care planning, medication tracking, privacy controls and Lithosphere wallet connectivity.
 
-## Product routes
-- `/` and `/app` — responsive health dashboard.
-- **AI Doctor** — real server-backed AI conversation when `OPENAI_API_KEY` is configured.
-- **Health** — user-entered health signals and daily check-ins.
-- **Appointments** — appointment records stored on the device.
-- **Profile** — wallet identity, consent controls, export and local data deletion.
+## Lithosphere
 
-## Robinhood Chain
-- Mainnet chain ID: **4663** (`0x1237`).
-- Native gas: **ETH**.
-- RPC: `https://rpc.mainnet.chain.robinhood.com`.
-- Explorer: `https://robinhoodchain.blockscout.com`.
-- Wallets use EIP-1193 injection when available and WalletConnect for supported mobile flows.
+Nura is now aligned with the current Lithosphere EVM network.
+
+- Production network: Lithosphere Mainnet
+- EVM chain ID: 9005 (0x2325)
+- Native token: LITHO
+- Mainnet RPC: https://rpc-mainnet.litho.ai
+- Mainnet explorer: https://lithoscan.ai
+- Test network: Lithosphere Makalu
+- Makalu EVM chain ID: 700777 (0xab169)
+- Makalu RPC: https://rpc.litho.ai
+- Makalu explorer: https://makalu.litho.ai
+
+Set VITE_LITHO_NETWORK=mainnet for production or VITE_LITHO_NETWORK=makalu when explicitly testing against Makalu.
+
+Nura deliberately keeps personal health information off-chain. The wallet/network layer is for user identity and future permissioned, verifiable application actions; medical records and conversations are not written to the blockchain.
 
 ## AI Doctor
-The browser sends the current conversation plus user-controlled health context to `/api/ai/health`. The server keeps the OpenAI API key private and calls the Responses API. The endpoint has a health-safety system prompt, urgent-symptom escalation and input redaction for obvious wallet-secret phrases.
 
-Set:
-- `OPENAI_API_KEY` — **server-side only** in Vercel.
-- `NURA_AI_MODEL` — optional; defaults to `gpt-5.6-luna`.
+The AI Doctor endpoint at /api/ai/health currently runs without an external model API or OpenAI dependency.
 
-Never expose `OPENAI_API_KEY` through a `VITE_` variable.
+The health engine includes:
+- deterministic emergency-symptom triage before ordinary conversation handling
+- bounded conversation input and message history
+- topic detection across symptoms, medication, vitals, test results, sleep, wellbeing, pregnancy/menstrual questions, care preparation and general questions
+- targeted follow-up questions rather than generic one-line replies
+- medication safety boundaries that avoid inventing prescription changes or doses
+- test-result interpretation boundaries that require the reported reference range and clinical context
+- explicit escalation for potentially life-threatening symptoms
+- conversation-aware topic detection using recent user messages
+- a safe fallback if the server handler encounters an unexpected error
 
-## Health data and privacy
-The current browser app stores the health profile locally in `localStorage` so the UI can work without a database. Users can export or clear that local data.
+The engine is an information and triage assistant, not a diagnostic or emergency-care service. Production clinical deployment should still undergo clinical review, safety validation, privacy/security assessment and jurisdiction-specific regulatory review.
 
-Sensitive health information is intentionally **not put on Robinhood Chain**. The wallet is an identity/permission layer; health records should remain offchain. For a production clinical deployment, replace the browser-only store with an encrypted, authenticated health-data service, add durable consent/audit storage and complete a clinical/privacy review before launch.
+## Privacy
 
-## PWA
-Nura includes a web manifest and service worker. On supported mobile browsers it can be installed as an app. The service worker caches the shell only; it does not cache AI responses.
+Health information is user-controlled. The application supports health-data export and deletion. Sensitive health information is intentionally not placed on Lithosphere.
+
+For a clinical-grade deployment, the next infrastructure layer should be an encrypted, authenticated health-data service with durable consent/audit controls rather than browser-only persistence.
+
+## Wallet
+
+Wallet connection uses EIP-1193 injected providers and WalletConnect/Reown-compatible flows. Nura never requests seed phrases or private keys.
 
 ## Development
-1. Create a Reown/WalletConnect project and set `VITE_WALLETCONNECT_PROJECT_ID`.
-2. Set `OPENAI_API_KEY` in the Vercel/server environment.
-3. Optionally set `NURA_AI_MODEL`.
-4. Run `npm install`.
-5. Run `npm run dev`.
-6. Run `npm run build`.
 
-## Safety
-Nura provides educational health information, not diagnosis or emergency care. The UI explicitly directs users with severe or rapidly worsening symptoms to urgent professional care. AI output should be treated as informational and reviewed by an appropriate clinician when needed.
+1. Set VITE_WALLETCONNECT_PROJECT_ID.
+2. Set VITE_LITHO_NETWORK=mainnet for production.
+3. Run npm install.
+4. Run npm run dev.
+5. Run npm run build.
 
-Never place private keys, seed phrases or passwords in the repository or in Nura's health records.
+No OpenAI API key is required by the current AI Doctor engine.
