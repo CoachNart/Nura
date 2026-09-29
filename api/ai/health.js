@@ -31,22 +31,9 @@ function localFallback(messages){
 export default async function handler(req,res){
  if(req.method!=="POST")return json(res,405,{error:"Method not allowed"});
  try{
-  const body=req.body||{},messages=Array.isArray(body.messages)?body.messages.slice(-12):[],healthContext=body.healthContext&&typeof body.healthContext==="object"?body.healthContext:{};
+  const body=req.body||{},messages=Array.isArray(body.messages)?body.messages.slice(-12):[];
   if(!messages.length)return json(res,400,{error:"A conversation is required."});
-  const key=process.env.OPENAI_API_KEY;
-  if(!key)return json(res,200,{message:localFallback(messages),urgent:false,fallback:true});
-  const input=[{role:"system",content:SYSTEM_PROMPT},{role:"system",content:"User-controlled health context (may be incomplete): "+JSON.stringify(healthContext).slice(0,12000)},...messages.map(m=>({role:m.role==="assistant"?"assistant":"user",content:redact(m.content).slice(0,5000)}))];
-  const upstream=await fetch("https://api.openai.com/v1/responses",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+key},body:JSON.stringify({model:process.env.NURA_AI_MODEL||"gpt-5.6-luna",input,max_output_tokens:700})});
-  const raw=await upstream.text();
-  if(!upstream.ok){
-   let detail="AI provider error";try{detail=JSON.parse(raw)?.error?.message||detail}catch{}
-   const billing=/no credits|insufficient_quota|quota|billing|credit balance/i.test(detail);
-   if(billing)return json(res,200,{message:localFallback(messages),urgent:false,fallback:true});
-   return json(res,502,{error:detail});
-  }
-  const data=JSON.parse(raw),message=data.output_text||data.output?.flatMap(x=>x.content||[]).map(x=>x.text||"").join("").trim();
-  if(!message)return json(res,200,{message:localFallback(messages),urgent:false,fallback:true});
-  const urgent=/\b(chest pain|can't breathe|cannot breathe|difficulty breathing|trouble breathing|stroke|face droop|uncontrolled bleeding|seizure|unconscious|passed out|anaphylaxis|severe allergic|suicid|overdose)\b/i.test(messages[messages.length-1]?.content||"");
-  return json(res,200,{message,urgent});
- }catch(error){console.error("Nura AI error",error);return json(res,200,{message:localFallback(req.body?.messages||[]),urgent:false,fallback:true})}
+  const urgent=\b(chest pain|severe chest|can't breathe|cannot breathe|difficulty breathing|trouble breathing|stroke|face droop|slurred speech|uncontrolled bleeding|seizure|unconscious|passed out|anaphylaxis|severe allergic|suicid(?:e|al)|overdose|poisoning|blue lips|coughing blood|vomiting blood|black stool|severe abdominal pain|sudden worst headache|worst headache|vision loss|paralysis)\b/i.test(String(messages[messages.length-1]?.content||""));
+  return json(res,200,{message:localFallback(messages),urgent});
+ }catch(error){console.error("Nura fallback error",error);return json(res,200,{message:"I’m here to help with your health question. Tell me what you’re experiencing, when it started, and what has changed. If you have severe or rapidly worsening symptoms, seek medical care promptly.",urgent:false})}
 }
