@@ -5,7 +5,7 @@ function localFallback(messages){
  const clean=messages.filter(m=>m&&typeof m.content==="string");
  const last=String(clean[clean.length-1]?.content||"").trim(),s=last.toLowerCase();
  const history=clean.slice(-6).map(m=>String(m.content||"")).join(" ").toLowerCase();
- const urgent=/\b(chest pain|severe chest|can't breathe|cannot breathe|difficulty breathing|trouble breathing|stroke|face droop|slurred speech|uncontrolled bleeding|seizure|unconscious|passed out|anaphylaxis|severe allergic|suicid(?:e|al)|overdose|poisoning|blue lips|coughing blood|vomiting blood|black stool|severe abdominal pain|sudden worst headache|worst headache|vision loss|paralysis)\b/i.test(last);
+  const urgent=/\b(chest pain|severe chest|can't breathe|cannot breathe|difficulty breathing|trouble breathing|stroke|face droop|slurred speech|uncontrolled bleeding|seizure|unconscious|passed out|anaphylaxis|severe allergic|suicid(?:e|al)|overdose|poisoning|blue lips|coughing blood|vomiting blood|black stool|severe abdominal pain|sudden worst headache|worst headache|vision loss|paralysis)\b/i.test(String(messages[messages.length-1]?.content||""));
  if(urgent)return "What you described may need urgent medical attention. Please seek emergency medical care now or contact your local emergency service. If you are in immediate danger, do not wait for a chat response.";
  const has=(...terms)=>terms.some(t=>s.includes(t));
  const recentHeadache=/\b(headache|head pain|migraine|head ache)\b/.test(history);
