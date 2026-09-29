@@ -8,7 +8,7 @@ export default async function handler(req,res){
   const body=req.body||{},messages=Array.isArray(body.messages)?body.messages.slice(-12):[],healthContext=body.healthContext&&typeof body.healthContext==="object"?body.healthContext:{};
   if(!messages.length)return json(res,400,{error:"A conversation is required."});
   const input=[{role:"system",content:SYSTEM_PROMPT},{role:"system",content:"User-controlled health context (may be incomplete): "+JSON.stringify(healthContext).slice(0,12000)},...messages.map(m=>({role:m.role==="assistant"?"assistant":"user",content:redact(m.content).slice(0,5000)}))];
-  const upstream=await fetch("https://api.openai.com/v1/responses",{method:"POST",headers:{"Content-Type":"application/json","Authorization:"Bearer "+process.env.OPENAI_API_KEY},body:JSON.stringify({model:process.env.NURA_AI_MODEL||"gpt-5.6-luna",input,max_output_tokens:700})});
+  const upstream=await fetch("https://api.openai.com/v1/responses",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+process.env.OPENAI_API_KEY},body:JSON.stringify({model:process.env.NURA_AI_MODEL||"gpt-5.6-luna",input,max_output_tokens:700})});
   const raw=await upstream.text();if(!upstream.ok){let detail="AI provider error";try{detail=JSON.parse(raw)?.error?.message||detail}catch{}return json(res,502,{error:detail})}
   const data=JSON.parse(raw),message=data.output_text||data.output?.flatMap(x=>x.content||[]).map(x=>x.text||"").join("").trim();
   if(!message)return json(res,502,{error:"Nura returned an empty response."});
