@@ -33,7 +33,7 @@ export default async function handler(req,res){
  try{
   const body=req.body||{},messages=Array.isArray(body.messages)?body.messages.slice(-12):[];
   if(!messages.length)return json(res,400,{error:"A conversation is required."});
-  const urgent=\b(chest pain|severe chest|can't breathe|cannot breathe|difficulty breathing|trouble breathing|stroke|face droop|slurred speech|uncontrolled bleeding|seizure|unconscious|passed out|anaphylaxis|severe allergic|suicid(?:e|al)|overdose|poisoning|blue lips|coughing blood|vomiting blood|black stool|severe abdominal pain|sudden worst headache|worst headache|vision loss|paralysis)\b/i.test(String(messages[messages.length-1]?.content||""));
+  const urgent=/\b(chest pain|severe chest|can't breathe|cannot breathe|difficulty breathing|trouble breathing|stroke|face droop|slurred speech|uncontrolled bleeding|seizure|unconscious|passed out|anaphylaxis|severe allergic|suicid(?:e|al)|overdose|poisoning|blue lips|coughing blood|vomiting blood|black stool|severe abdominal pain|sudden worst headache|worst headache|vision loss|paralysis)\b/i.test(String(messages[messages.length-1]?.content||""));
   return json(res,200,{message:localFallback(messages),urgent});
  }catch(error){console.error("Nura fallback error",error);return json(res,200,{message:"I’m here to help with your health question. Tell me what you’re experiencing, when it started, and what has changed. If you have severe or rapidly worsening symptoms, seek medical care promptly.",urgent:false})}
 }
